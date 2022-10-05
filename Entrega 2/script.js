@@ -6,73 +6,74 @@ class Contenedor {
         this.archivo = nombreArchivo;
     }
 
-    getAll() {
+    async getAll() {
         try {
-            const resultado = fs.readFileSync(`./${this.archivo}`, 'utf-8');
+            const resultado = await fs.promises.readFile(`./${this.archivo}`, 'utf-8');
             return JSON.parse(resultado);
         } catch (error) {
             throw error;
         }
     }
 
-    /* async getAll() {
+    async escribirArchivo(texto) {
         try {
-            const resultado = await fs.promises.readFile(`./${this.archivo}`, "utf-8");
-            return JSON.parse(resultado);
-        } catch (error) {
-            throw error;
-        }
-    } */
-
-    escribirArchivo(texto) {
-        try {
-            fs.writeFileSync(`./${this.archivo}`, JSON.stringify(texto, null, 2));
+            await fs.promises.writeFile(`./${this.archivo}`, JSON.stringify(texto, null, 2));
+            //console.log("Contenido guardado");
         } catch (error) {
             throw error;
         }
     }
 
-    getById(id) {
-        const productos = this.getAll();
+    async getById(id) {
+        const productos = await this.getAll();
         return productos[id] || null;
     }
 
-    save(producto) {
+    async save(producto) {
         if (!producto.title || !producto.price || !producto.thumbnail || typeof producto.title !== 'string' ||
             typeof producto.price !== 'number' || typeof producto.thumbnail !== 'string') throw new Error('Datos invalidos')
 
 
-        const productos = this.getAll();
+        const productos = await this.getAll();
         producto.id = productos.length + 1;
         productos.push(producto)
         this.escribirArchivo(productos);
         return producto.id;
     }
 
-    deleteById(id) {
-        const productos = this.getAll();
+    async deleteById(id) {
+        const productos = await this.getAll();
         const index = productos.findIndex(elemento => elemento.id === id);
         if (index === -1) throw new Error("El id ingresado no existe");
         productos.splice(index, 1);
-        this.escribirArchivo(productos);
+        await this.escribirArchivo(productos);
+        console.log("Borrado con exito")
     }
 
-    deleteAll(){
-        this.escribirArchivo([]);
+    async deleteAll() {
+        await this.escribirArchivo([]);
+        console.log("contenido eliminado")
     }
 }
 
+async function main() {
+    const contenedor = new Contenedor('productos.json');
 
-const contenedor = new Contenedor('productos.json');
-console.table(contenedor.getAll());
-console.log(contenedor.getById(0));
-const productoNuevo = {
-    "title": "lapicera",
-    "price": 50.11,
-    "thumbnail": "https://cdn2.iconfinder.com/data/icons/budicon-writing/25/pen-writing-256.png",
-    "id": 1
-};
-const id = contenedor.save(productoNuevo);
-console.log(`El id asignado es ${id}`);
-contenedor.deleteById(4);
-contenedor.deleteAll();
+    console.table(await contenedor.getAll());
+    console.log(await contenedor.getById(0));
+
+    const productoNuevo = {
+        "title": "lapicera",
+        "price": 50.11,
+        "thumbnail": "https://cdn2.iconfinder.com/data/icons/budicon-writing/25/pen-writing-256.png",
+        "id": 1
+    };
+
+    const id = await contenedor.save(productoNuevo);
+    console.log(`El id asignado es ${id}`);
+
+    await contenedor.deleteById(4);
+    await contenedor.deleteAll();
+}
+
+main();
