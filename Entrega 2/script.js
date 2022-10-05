@@ -73,7 +73,7 @@ async function main() {
     console.log(`El id asignado es ${id}`);
 
     await contenedor.deleteById(4);
-    await contenedor.deleteAll();
+    //await contenedor.deleteAll();
 }
 
 main();
