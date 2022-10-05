@@ -37,7 +37,7 @@ class Contenedor {
         const productos = await this.getAll();
         producto.id = productos.length + 1;
         productos.push(producto)
-        this.escribirArchivo(productos);
+        await this.escribirArchivo(productos);
         return producto.id;
     }
 
