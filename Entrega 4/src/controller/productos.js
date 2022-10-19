@@ -68,7 +68,9 @@ class Products {
     async findByIdAndUptade(id, product) {
         const products = await this.getAll();
         const index = this.encontrarIdPorId(id, products);
-        products[index] = product;
+        products[index].title = product.title || products[index].title;
+        products[index].price = product.price || products[index].price;
+        products[index].thumbnail = product.thumbnail || products[index].thumbnail;
 
         await this.escribirArchivo(products);
     }
