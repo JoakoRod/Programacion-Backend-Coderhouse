@@ -1,0 +1,29 @@
+{{#if mostrar}}
+    <div class="container align-center">
+        <h4>Lista de Productos:</h4>
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th scope="col">title</th>
+                    <th scope="col">price</th>
+                    <th scope="col">image</th>
+                </tr>
+            </thead>
+                <tbody>
+            {{#each productos}}
+
+                <tr>
+                    <td>{{this.title}}</td>
+                    <td>{{this.price}}</td>
+                    <td><img src="{{this.thumbnail}}" class="img-fluid" width="40" height="40"></td>
+                </tr>
+
+            {{/each}}
+                </tbody>
+            </table>
+    </div>
+{{else}}
+No se encontraron productos
+{{/if}}
+{{> links }}
+{{> botonForm }}

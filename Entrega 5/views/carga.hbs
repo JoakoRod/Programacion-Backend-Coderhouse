@@ -1,0 +1,28 @@
+<div class="container align-center">
+    <div class="row ">
+        <div>
+            <h4>Form de Productos:</h4>
+            <form class="formProducto" id="formProductos" action="/productos" method="post">
+                <ul>
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" name="title">
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" step="any" class="form-control" id="price" name="price">
+                    </div>
+                    <div class="mb-3">
+                        <label for="thumbnail" class="form-label">Thumbnail</label>
+                        <input type="text" class="form-control" id="thumbnail" name="thumbnail">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </ul>
+
+            </form>
+        </div>
+    </div>
+</div>
+{{> links }}
+{{> botonVista }}
+<script src="js/vista.js"></script>

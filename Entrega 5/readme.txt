@@ -1,0 +1,1 @@
+Para esta entrega preferi utilizar el package de handlebars, debido a su popularidad y a que me es comoda su sintaxis.
