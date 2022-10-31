@@ -1,0 +1,29 @@
+{{#if mostrar}}
+<div class="container align-center mt-4">
+    <header class="chat-header">
+        <h4><i class="fas fa-smile"></i>Lista de Productos:</h4>
+    </header>
+    <table class="table table-hover align-middle cont" id="tabla">
+        <thead>
+            <tr>
+                <th scope="col">title</th>
+                <th scope="col">price</th>
+                <th scope="col">image</th>
+            </tr>
+        </thead>
+        <tbody id="tablaBody">
+            {{#each productos}}
+
+            <tr>
+                <td>{{this.title}}</td>
+                <td>{{this.price}}</td>
+                <td><img src="{{this.thumbnail}}" class="img-fluid" width="40" height="40"></td>
+            </tr>
+
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+{{else}}
+No se encontraron productos
+{{/if}}
