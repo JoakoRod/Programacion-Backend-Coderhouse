@@ -40,8 +40,6 @@ router.get('/', async (req, res) => {
     mensajes: await MensajesController.getAll()
   };
 
-  console.log(datos.mensajes);
-
   if (!Array.isArray(datos.productos) || datos.productos.length === 0) datos.mostrar = false;
 
   const wsServer = getWsServer();
