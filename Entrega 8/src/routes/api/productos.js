@@ -3,9 +3,13 @@ const { ProductsController } = require('../../controller/productos');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-  res.json({
-    msg: await ProductsController.getAll()
-  })
+  try {
+    res.json({
+      msg: await ProductsController.getAll()
+    })
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.get('/:id', async (req, res, next) => {

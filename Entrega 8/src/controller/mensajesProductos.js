@@ -1,36 +1,21 @@
-const fs = require('fs');
-const createError = require('http-errors');
+import fs from 'fs';
+import createError from 'http-errors';
+import { DBService } from '../services/db';
 
+const tableName = 'mensajes';
 
 class Mensajes {
-    constructor(nombreArchivo) {
-        this.archivo = nombreArchivo;
-    }
 
     async getAll() {
-        let resultado = await fs.promises.readFile(`./${this.archivo}`, 'utf-8');
-        const resultadoParse = JSON.parse(resultado);
-        
-        return resultadoParse;
-    }
-    async escribirArchivo(texto) {
-        try {
-            await fs.promises.writeFile(`./${this.archivo}`, JSON.stringify(texto, null, 2));
-            //console.log("Contenido guardado");
-        } catch (error) {
-            throw createError(500, 'Error al guardar archivo');;
-        }
+        return await DBService.get(tableName);
     }
 
     async save(msj) {
-        const msjs = await this.getAll();
-        msjs.push(msj);
-
-        await this.escribirArchivo(msjs);
+        await DBService.create(tableName, msj);
     }
 }
 
-const instanciaMensajes = new Mensajes('src/data/mensajes.json');
+const instanciaMensajes = new Mensajes();
 
 module.exports = {
     MensajesController: instanciaMensajes
