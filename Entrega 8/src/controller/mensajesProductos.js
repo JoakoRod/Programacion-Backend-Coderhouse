@@ -1,6 +1,7 @@
 const fs = require('fs');
 const createError = require('http-errors');
 
+
 class Mensajes {
     constructor(nombreArchivo) {
         this.archivo = nombreArchivo;
