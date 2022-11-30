@@ -1,0 +1,696 @@
+C:\Users\Joako>mongosh
+Current Mongosh Log ID: 637e6b1f99caffcff9fc98eb
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.0
+Using MongoDB:          6.0.2
+Using Mongosh:          1.6.0
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+test> show dbs
+admin      40.00 KiB
+config     72.00 KiB
+ecommerce  16.00 KiB
+local      72.00 KiB
+
+test> use ecommerce
+switched to db ecommerce
+
+ecommerce> db.createCollection("mensajes")
+{ ok: 1 }
+
+ecommerce> db.createCollection("productos")
+{ ok: 1 }
+
+ecommerce> show collections
+mensajes
+productos
+
+ecommerce> db.productos.insertMany([{id: 1, nombre:"escuadra", descripcion:"escuadra de 20 cm", codigo: 001, foto:"www.fotoescuadra.com", precio: 3250, stock:17}, {id: 2, nombre:"regla", descripcion:"regla de 20 cm", codigo: 002, foto:"www.fotoregla.com", precio: 1020, stock:5},{id: 3, nombre:"lapicera", descripcion:"lapicera de tinta azul", codigo: 003, foto:"www.fotolapicera.com", precio: 730, stock:37}, {id: 4, nombre:"goma", descripcion:"goma blanca", codigo: 004, foto:"www.fotogoma.com", precio: 120, stock:11}, {id: 5, nombre:"lapiz", descripcion:"Lapiz de grafito", codigo: 004, foto:"www.fotolapiz.com", precio: 4300, stock:90}, {id: 6, nombre:"plasticola", descripcion:"plasticola blanca escolar", codigo: 006, foto:"www.fotoplasticola.com", precio: 4900, stock:15}, {id: 7, nombre:"sacapunta", descripcion:"sacapunta para lapices, de plastico color azul", codigo: 007, foto:"www.fotosacapunta.com", precio: 900, stock:2}, {id: 8, nombre:"sacapunta", descripcion:"sacapunta metalico", codigo: 008, foto:"www.fotosacapuntametal.com", precio: 3210, stock:17}, {id: 9, nombre:"hojas rayadas", descripcion:"pack 50 hojas rayadas tamaño A4", codigo: 009, foto:"www.fotohojasrayadas.com", precio: 2150, stock:9}, {id: 10, nombre:"portamina", descripcion:"portamina 0.5mm plastico", codigo: 010, foto:"www.fotoportamina.com", precio: 1900, stock:12}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("637e2cf504225ab892f5710a"),
+    '1': ObjectId("637e2cf504225ab892f5710b"),
+    '2': ObjectId("637e2cf504225ab892f5710c"),
+    '3': ObjectId("637e2cf504225ab892f5710d"),
+    '4': ObjectId("637e2cf504225ab892f5710e"),
+    '5': ObjectId("637e2cf504225ab892f5710f"),
+    '6': ObjectId("637e2cf504225ab892f57110"),
+    '7': ObjectId("637e2cf504225ab892f57111"),
+    '8': ObjectId("637e2cf504225ab892f57112"),
+    '9': ObjectId("637e2cf504225ab892f57113")
+  }
+}
+
+ecommerce> db.productos.find()
+[
+  {
+    _id: ObjectId("637e379a04225ab892f5711f"),
+    id: 1,
+    nombre: 'escuadra',
+    descripcion: 'escuadra de 20 cm',
+    codigo: 1,
+    foto: 'www.fotoescuadra.com',
+    precio: 3250,
+    stock: 17
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57120"),
+    id: 2,
+    nombre: 'regla',
+    descripcion: 'regla de 20 cm',
+    codigo: 2,
+    foto: 'www.fotoregla.com',
+    precio: 1020,
+    stock: 5
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57121"),
+    id: 3,
+    nombre: 'lapicera',
+    descripcion: 'lapicera de tinta azul',
+    codigo: 3,
+    foto: 'www.fotolapicera.com',
+    precio: 730,
+    stock: 37
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57122"),
+    id: 4,
+    nombre: 'goma',
+    descripcion: 'goma blanca',
+    codigo: 4,
+    foto: 'www.fotogoma.com',
+    precio: 120,
+    stock: 11
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57123"),
+    id: 5,
+    nombre: 'lapiz',
+    descripcion: 'Lapiz de grafito',
+    codigo: 4,
+    foto: 'www.fotolapiz.com',
+    precio: 4300,
+    stock: 90
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57124"),
+    id: 6,
+    nombre: 'plasticola',
+    descripcion: 'plasticola blanca escolar',
+    codigo: 6,
+    foto: 'www.fotoplasticola.com',
+    precio: 4900,
+    stock: 15
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57125"),
+    id: 7,
+    nombre: 'sacapunta',
+    descripcion: 'sacapunta para lapices, de plastico color azul',
+    codigo: 7,
+    foto: 'www.fotosacapunta.com',
+    precio: 900,
+    stock: 2
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57126"),
+    id: 8,
+    nombre: 'sacapunta',
+    descripcion: 'sacapunta metalico',
+    codigo: 8,
+    foto: 'www.fotosacapuntametal.com',
+    precio: 3210,
+    stock: 17
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57127"),
+    id: 9,
+    nombre: 'hojas rayadas',
+    descripcion: 'pack 50 hojas rayadas tamaño A4',
+    codigo: 9,
+    foto: 'www.fotohojasrayadas.com',
+    precio: 2150,
+    stock: 9
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57128"),
+    id: 10,
+    nombre: 'portamina',
+    descripcion: 'portamina 0.5mm plastico',
+    codigo: 8,
+    foto: 'www.fotoportamina.com',
+    precio: 1900,
+    stock: 12
+  }
+]
+
+db.mensajes.insertMany([{usuario:"peter", msg:"hola!", fecha:"31/10/2022 20:27:26"}, {usuario:"juan", msg:"hola peter", fecha:"31/10/2022 20:30:26"}, {usuario:"peter", msg:"como te va? te consulto por la escuadra, hay en stock?", fecha:"31/10/2022 20:32:01"}, {usuario:"juan", msg:"Asi es peter, contamos con stock! podes pasar a retirar tranquilo", fecha:"31/10/2022 20:35:51"},{usuario:"pedro", msg:"hola juan, tendras lapiceras con tinta negra?", fecha:"15/11/2022 12:27:26"}, {usuario:"juan", msg:"hola pedro! lamentablemente, no tenemos ese producto en stock, para la semana que viene traemos. Saludos!", fecha:"15/11/2022 12:41:01"}, {usuario:"pedro", msg:"Genial, paso la semana que viene entonces", fecha:"15/11/2022 12:50:26"}, {usuario:"agus", msg:"hola, puede ser que antes vendian globos terraqueos?", fecha:"17/11/2022 17:30:26"}, {usuario:"juan", msg:"hola agus! si, asi es, pero nuestras distribuidoras dejaron de traerlo, ni bien consigamos te aviso", fecha:"17/11/2022 17:45:51"}, {usuario:"agus", msg:"bueno, ni bien los tengas avisame porfa.", fecha:"18/11/2022 14:15:03"}, {usuario:"juan", msg:"hola agus! pudimos conseguir globos terraqueos, podes pasar por el local a retirarlos. Saludos!!", fecha:"27/11/2022 09:00:42"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("637e349704225ab892f57114"),
+    '1': ObjectId("637e349704225ab892f57115"),
+    '2': ObjectId("637e349704225ab892f57116"),
+    '3': ObjectId("637e349704225ab892f57117"),
+    '4': ObjectId("637e349704225ab892f57118"),
+    '5': ObjectId("637e349704225ab892f57119"),
+    '6': ObjectId("637e349704225ab892f5711a"),
+    '7': ObjectId("637e349704225ab892f5711b"),
+    '8': ObjectId("637e349704225ab892f5711c"),
+    '9': ObjectId("637e349704225ab892f5711d"),
+    '10': ObjectId("637e349704225ab892f5711e")
+  }
+}
+
+ecommerce> db.mensajes.find()
+[
+  {
+    _id: ObjectId("637e349704225ab892f57114"),
+    usuario: 'peter',
+    msg: 'hola!',
+    fecha: '31/10/2022 20:27:26'
+  },
+  {
+    _id: ObjectId("637e349704225ab892f57115"),
+    usuario: 'juan',
+    msg: 'hola peter',
+    fecha: '31/10/2022 20:30:26'
+  },
+  {
+    _id: ObjectId("637e349704225ab892f57116"),
+    usuario: 'peter',
+    msg: 'como te va? te consulto por la escuadra, hay en stock?',
+    fecha: '31/10/2022 20:32:01'
+  },
+  {
+    _id: ObjectId("637e349704225ab892f57117"),
+    usuario: 'juan',
+    msg: 'Asi es peter, contamos con stock! podes pasar a retirar tranquilo',
+    fecha: '31/10/2022 20:35:51'
+  },
+  {
+    _id: ObjectId("637e349704225ab892f57118"),
+    usuario: 'pedro',
+    msg: 'hola juan, tendras lapiceras con tinta negra?',
+    fecha: '15/11/2022 12:27:26'
+  },
+  {
+    _id: ObjectId("637e349704225ab892f57119"),
+    usuario: 'juan',
+    msg: 'hola pedro! lamentablemente, no tenemos ese producto en stock, para la semana que viene traemos. Saludos!',
+    fecha: '15/11/2022 12:41:01'
+  },
+  {
+    _id: ObjectId("637e349704225ab892f5711a"),
+    usuario: 'pedro',
+    msg: 'Genial, paso la semana que viene entonces',
+    fecha: '15/11/2022 12:50:26'
+  },
+  {
+    _id: ObjectId("637e349704225ab892f5711b"),
+    usuario: 'agus',
+    msg: 'hola, puede ser que antes vendian globos terraqueos?',
+    fecha: '17/11/2022 17:30:26'
+  },
+  {
+    _id: ObjectId("637e349704225ab892f5711c"),
+    usuario: 'juan',
+    msg: 'hola agus! si, asi es, pero nuestras distribuidoras dejaron de traerlo, ni bien consigamos te aviso',
+    fecha: '17/11/2022 17:45:51'
+  },
+  {
+    _id: ObjectId("637e349704225ab892f5711d"),
+    usuario: 'agus',
+    msg: 'bueno, ni bien los tengas avisame porfa.',
+    fecha: '18/11/2022 14:15:03'
+  },
+  {
+    _id: ObjectId("637e349704225ab892f5711e"),
+    usuario: 'juan',
+    msg: 'hola agus! pudimos conseguir globos terraqueos, podes pasar por el local a retirarlos. Saludos!!',
+    fecha: '27/11/2022 09:00:42'
+  }
+]
+
+ecommerce> db.productos.find().count()
+10
+
+ecommerce> db.mensajes.find().count()
+11
+
+ecommerce> db.productos.insertOne({id:11, nombre:"microfibra", descripcion:"microfibras de colores de tamaño 0.7mm", codigo: 011, foto:"www.fotomicrofibra.com", precio: 2700, stock:15})
+{
+  acknowledged: true,
+  insertedId: ObjectId("637e3e2204225ab892f57129")
+}
+ecommerce> db.productos.find({nombre:"sacapunta"})
+[
+  {
+    _id: ObjectId("637e379a04225ab892f57125"),
+    id: 7,
+    nombre: 'sacapunta',
+    descripcion: 'sacapunta para lapices, de plastico color azul',
+    codigo: 7,
+    foto: 'www.fotosacapunta.com',
+    precio: 900,
+    stock: 2
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57126"),
+    id: 8,
+    nombre: 'sacapunta',
+    descripcion: 'sacapunta metalico',
+    codigo: 8,
+    foto: 'www.fotosacapuntametal.com',
+    precio: 3210,
+    stock: 17
+  }
+]
+
+ecommerce> db.productos.find({precio:{$lt: 1000}})
+[
+  {
+    _id: ObjectId("637e379a04225ab892f57121"),
+    id: 3,
+    nombre: 'lapicera',
+    descripcion: 'lapicera de tinta azul',
+    codigo: 3,
+    foto: 'www.fotolapicera.com',
+    precio: 730,
+    stock: 37
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57122"),
+    id: 4,
+    nombre: 'goma',
+    descripcion: 'goma blanca',
+    codigo: 4,
+    foto: 'www.fotogoma.com',
+    precio: 120,
+    stock: 11
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57125"),
+    id: 7,
+    nombre: 'sacapunta',
+    descripcion: 'sacapunta para lapices, de plastico color azul',
+    codigo: 7,
+    foto: 'www.fotosacapunta.com',
+    precio: 900,
+    stock: 2
+  }
+]
+
+
+ecommerce> db.productos.find({$and: [{precio: {$gte: 1000}}, {precio: {$lte: 3000}}]})
+[
+  {
+    _id: ObjectId("637e379a04225ab892f57120"),
+    id: 2,
+    nombre: 'regla',
+    descripcion: 'regla de 20 cm',
+    codigo: 2,
+    foto: 'www.fotoregla.com',
+    precio: 1020,
+    stock: 5
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57127"),
+    id: 9,
+    nombre: 'hojas rayadas',
+    descripcion: 'pack 50 hojas rayadas tamaño A4',
+    codigo: 9,
+    foto: 'www.fotohojasrayadas.com',
+    precio: 2150,
+    stock: 9
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57128"),
+    id: 10,
+    nombre: 'portamina',
+    descripcion: 'portamina 0.5mm plastico',
+    codigo: 8,
+    foto: 'www.fotoportamina.com',
+    precio: 1900,
+    stock: 12
+  },
+  {
+    _id: ObjectId("637e3e2204225ab892f57129"),
+    id: 11,
+    nombre: 'microfibra',
+    descripcion: 'microfibras de colores de tamaño 0.7mm',
+    codigo: 9,
+    foto: 'www.fotomicrofibra.com',
+    precio: 2700,
+    stock: 15
+  }
+]
+
+ecommerce> db.productos.find({precio:{$gt: 3000}})
+[
+  {
+    _id: ObjectId("637e379a04225ab892f5711f"),
+    id: 1,
+    nombre: 'escuadra',
+    descripcion: 'escuadra de 20 cm',
+    codigo: 1,
+    foto: 'www.fotoescuadra.com',
+    precio: 3250,
+    stock: 17
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57123"),
+    id: 5,
+    nombre: 'lapiz',
+    descripcion: 'Lapiz de grafito',
+    codigo: 4,
+    foto: 'www.fotolapiz.com',
+    precio: 4300,
+    stock: 90
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57124"),
+    id: 6,
+    nombre: 'plasticola',
+    descripcion: 'plasticola blanca escolar',
+    codigo: 6,
+    foto: 'www.fotoplasticola.com',
+    precio: 4900,
+    stock: 15
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57126"),
+    id: 8,
+    nombre: 'sacapunta',
+    descripcion: 'sacapunta metalico',
+    codigo: 8,
+    foto: 'www.fotosacapuntametal.com',
+    precio: 3210,
+    stock: 17
+  }
+]
+
+ db.productos.find({}, {nombre: 1, _id: 0}).sort({precio: 1}).skip(2).limit(1)
+[ { nombre: 'sacapunta' } ]
+
+ecommerce> db.productos.updateMany({}, {$set: {stock:100}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 11,
+  modifiedCount: 11,
+  upsertedCount: 0
+}
+
+ecommerce> db.productos.find()
+[
+  {
+    _id: ObjectId("637e379a04225ab892f5711f"),
+    id: 1,
+    nombre: 'escuadra',
+    descripcion: 'escuadra de 20 cm',
+    codigo: 1,
+    foto: 'www.fotoescuadra.com',
+    precio: 3250,
+    stock: 100
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57120"),
+    id: 2,
+    nombre: 'regla',
+    descripcion: 'regla de 20 cm',
+    codigo: 2,
+    foto: 'www.fotoregla.com',
+    precio: 1020,
+    stock: 100
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57121"),
+    id: 3,
+    nombre: 'lapicera',
+    descripcion: 'lapicera de tinta azul',
+    codigo: 3,
+    foto: 'www.fotolapicera.com',
+    precio: 730,
+    stock: 100
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57122"),
+    id: 4,
+    nombre: 'goma',
+    descripcion: 'goma blanca',
+    codigo: 4,
+    foto: 'www.fotogoma.com',
+    precio: 120,
+    stock: 100
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57123"),
+    id: 5,
+    nombre: 'lapiz',
+    descripcion: 'Lapiz de grafito',
+    codigo: 4,
+    foto: 'www.fotolapiz.com',
+    precio: 4300,
+    stock: 100
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57124"),
+    id: 6,
+    nombre: 'plasticola',
+    descripcion: 'plasticola blanca escolar',
+    codigo: 6,
+    foto: 'www.fotoplasticola.com',
+    precio: 4900,
+    stock: 100
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57125"),
+    id: 7,
+    nombre: 'sacapunta',
+    descripcion: 'sacapunta para lapices, de plastico color azul',
+    codigo: 7,
+    foto: 'www.fotosacapunta.com',
+    precio: 900,
+    stock: 100
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57126"),
+    id: 8,
+    nombre: 'sacapunta',
+    descripcion: 'sacapunta metalico',
+    codigo: 8,
+    foto: 'www.fotosacapuntametal.com',
+    precio: 3210,
+    stock: 100
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57127"),
+    id: 9,
+    nombre: 'hojas rayadas',
+    descripcion: 'pack 50 hojas rayadas tamaño A4',
+    codigo: 9,
+    foto: 'www.fotohojasrayadas.com',
+    precio: 2150,
+    stock: 100
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57128"),
+    id: 10,
+    nombre: 'portamina',
+    descripcion: 'portamina 0.5mm plastico',
+    codigo: 8,
+    foto: 'www.fotoportamina.com',
+    precio: 1900,
+    stock: 100
+  },
+  {
+    _id: ObjectId("637e3e2204225ab892f57129"),
+    id: 11,
+    nombre: 'microfibra',
+    descripcion: 'microfibras de colores de tamaño 0.7mm',
+    codigo: 9,
+    foto: 'www.fotomicrofibra.com',
+    precio: 2700,
+    stock: 100
+  }
+]
+
+ecommerce> db.productos.updateMany({precio: {$gt: 3000}}, {$set: {stock:0}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 4,
+  modifiedCount: 4,
+  upsertedCount: 0
+}
+
+ecommerce> db.productos.find({precio:{$gt: 3000}})
+[
+  {
+    _id: ObjectId("637e379a04225ab892f5711f"),
+    id: 1,
+    nombre: 'escuadra',
+    descripcion: 'escuadra de 20 cm',
+    codigo: 1,
+    foto: 'www.fotoescuadra.com',
+    precio: 3250,
+    stock: 0
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57123"),
+    id: 5,
+    nombre: 'lapiz',
+    descripcion: 'Lapiz de grafito',
+    codigo: 4,
+    foto: 'www.fotolapiz.com',
+    precio: 4300,
+    stock: 0
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57124"),
+    id: 6,
+    nombre: 'plasticola',
+    descripcion: 'plasticola blanca escolar',
+    codigo: 6,
+    foto: 'www.fotoplasticola.com',
+    precio: 4900,
+    stock: 0
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57126"),
+    id: 8,
+    nombre: 'sacapunta',
+    descripcion: 'sacapunta metalico',
+    codigo: 8,
+    foto: 'www.fotosacapuntametal.com',
+    precio: 3210,
+    stock: 0
+  }
+]
+
+ecommerce> db.productos.deleteMany({precio: {$lt:1000}})
+{ acknowledged: true, deletedCount: 3 }
+
+ecommerce> db.productos.find({precio: {$lt:1000}})
+
+ecommerce> use admin
+switched to db admin
+
+admin> db.createUser({user: "pepe", pwd: "asd456", roles: [{role: "read", db: "ecommerce"}]})
+{ ok: 1 }
+
+admin>
+
+//vuelvo a iniciar el servicio de mongo, utilizando mongod --auth
+
+C:\Users\Joako>mongosh -u pepe -p asd456
+Current Mongosh Log ID: 637e69c1a7b066cc15c5c8f5
+Connecting to:          mongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.0
+Using MongoDB:          6.0.2
+Using Mongosh:          1.6.0
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+test> show dbs
+ecommerce  112.00 KiB
+test> use ecommerce
+switched to db ecommerce
+
+ecommerce> show collections
+mensajes
+productos
+
+ecommerce> db.productos.find()
+[
+  {
+    _id: ObjectId("637e379a04225ab892f5711f"),
+    id: 1,
+    nombre: 'escuadra',
+    descripcion: 'escuadra de 20 cm',
+    codigo: 1,
+    foto: 'www.fotoescuadra.com',
+    precio: 3250,
+    stock: 0
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57120"),
+    id: 2,
+    nombre: 'regla',
+    descripcion: 'regla de 20 cm',
+    codigo: 2,
+    foto: 'www.fotoregla.com',
+    precio: 1020,
+    stock: 100
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57123"),
+    id: 5,
+    nombre: 'lapiz',
+    descripcion: 'Lapiz de grafito',
+    codigo: 4,
+    foto: 'www.fotolapiz.com',
+    precio: 4300,
+    stock: 0
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57124"),
+    id: 6,
+    nombre: 'plasticola',
+    descripcion: 'plasticola blanca escolar',
+    codigo: 6,
+    foto: 'www.fotoplasticola.com',
+    precio: 4900,
+    stock: 0
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57126"),
+    id: 8,
+    nombre: 'sacapunta',
+    descripcion: 'sacapunta metalico',
+    codigo: 8,
+    foto: 'www.fotosacapuntametal.com',
+    precio: 3210,
+    stock: 0
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57127"),
+    id: 9,
+    nombre: 'hojas rayadas',
+    descripcion: 'pack 50 hojas rayadas tamaño A4',
+    codigo: 9,
+    foto: 'www.fotohojasrayadas.com',
+    precio: 2150,
+    stock: 100
+  },
+  {
+    _id: ObjectId("637e379a04225ab892f57128"),
+    id: 10,
+    nombre: 'portamina',
+    descripcion: 'portamina 0.5mm plastico',
+    codigo: 8,
+    foto: 'www.fotoportamina.com',
+    precio: 1900,
+    stock: 100
+  },
+  {
+    _id: ObjectId("637e3e2204225ab892f57129"),
+    id: 11,
+    nombre: 'microfibra',
+    descripcion: 'microfibras de colores de tamaño 0.7mm',
+    codigo: 9,
+    foto: 'www.fotomicrofibra.com',
+    precio: 2700,
+    stock: 100
+  }
+]
+
+ecommerce> db.productos.deleteMany({})
+MongoServerError: not authorized on ecommerce to execute command { delete: "productos", deletes: [ { q: {}, limit: 0 } ], ordered: true, lsid: { id: UUID("f1b2104b-c201-43a7-ae6e-a449acabbf00") }, $db: "ecommerce" }
+
+ecommerce> db.productos.insertOne({id:11, nombre:"microfibra", descripcion:"microfibras de colores de tamaño 0.7mm", codcodigo: 011, foto:"www.fotomicrofibra.com", precio: 2700, stock:15})
+MongoServerError: not authorized on ecommerce to execute command { insert: "productos", documents: [ { id: 11, nombre: "microfibra", descripcion: "microfibras de colores de tamaño 0.7mm", codigo: 9, foto: "www.fotomicrofibra.com", precio: 2700, stock: 15, _id: ObjectId('637e6aabe338d55a1563cf12') } ], ordered: true, lsid: { id: UUID("ca505480-7cb4-44ca-90ac-7c3d6bdb054f") }, $db: "ecommerce" }
+
+ecommerce>

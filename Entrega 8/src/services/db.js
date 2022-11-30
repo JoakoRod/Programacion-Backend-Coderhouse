@@ -1,5 +1,5 @@
 import knex from 'knex';
-import dbConfig from '../../options/dbMysql';
+import dbConfig from '../../options/configDB';
 
 class DB {
   constructor() {
