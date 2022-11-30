@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 export const productosCollectionName = 'productos';
 
 export interface IProductos {
+    _id: string;
     id: number
     nombre: string;
     descripcion: string;

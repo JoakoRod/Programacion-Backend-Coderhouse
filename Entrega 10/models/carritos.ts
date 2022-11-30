@@ -14,4 +14,4 @@ const carritosSchema = new mongoose.Schema<ICarritos>({
   productos: { type: [productosSchema], required: false },
 });
 
-export const CategoryModel = mongoose.model<ICarritos>(carritosCollectionName, carritosSchema);
+export const carritosModel = mongoose.model<ICarritos>(carritosCollectionName, carritosSchema);
