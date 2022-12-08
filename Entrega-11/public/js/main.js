@@ -1,8 +1,14 @@
+const {schema, denormalize, normalize} = normalizr;
+
 const form = document.querySelector('#formProductos');
 const formChat = document.querySelector('#chat-form');
 const tablaChat = document.querySelector('#tabla-chat');
 
 const socket = io();
+
+const author = new schema.Entity('author', {}, { idAttribute: 'email' });
+const msge = new schema.Entity('message', { author: author, }, { idAttribute: '_id' });
+const finalSchema = new schema.Array(msge);
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -59,29 +65,38 @@ function agregarProductoALaTabla(producto) {
 
 formChat.addEventListener('submit', (e) => {
     e.preventDefault();
-    const [usuarioForm, msgForm] = document.querySelectorAll('.form-chat');
+
+    const [nombreForm, apellidoForm, emailForm, edadForm, aliasForm, avatarForm, msgForm] = document.querySelectorAll('.form-chat');
     const data = {
-        usuario: usuarioForm.value,
-        msg: msgForm.value
+        author: {
+            id: emailForm.value,
+            nombre: nombreForm.value,
+            apellido: apellidoForm.value,
+            edad: edadForm.value,
+            alias: aliasForm.value,
+            avatar: avatarForm.value
+        },
+        text: msgForm.value
     };
-
     socket.emit('envioMSG', data);
-    data.fecha = ' ' + moment().format("DD/MM/YYYY HH:mm:ss");
-    añadirMsg(data);
+    const fecha = ' ' + moment().format("DD/MM/YYYY HH:mm:ss");
+    añadirMsg(data, fecha);
     msgForm.value = null;
+
 })
 
-socket.on('recibioMSG', (data) => {
-    añadirMsg(data);
+socket.on('recibioMSG', async (data) => {
+    const msg = await denormalize(data.result, finalSchema, data.entities)
+    añadirMsg(msg);
 })
 
-function añadirMsg(data) {
+function añadirMsg(data, fecha) {
     const div = document.createElement('div');
     div.className += 'message';
     div.innerHTML = `
-        <p class="meta">${data.usuario}<span> ${data.fecha}</span></p>
+        <p class="meta">${data.author.id}<span> ${data.fecha || fecha}</span></p>
         <p class="text">
-            ${data.msg}
+            ${data.text}
         </p>`;
     tablaChat.appendChild(div);
 }

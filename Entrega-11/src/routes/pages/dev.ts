@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { getProductos } from '../../controllers/productosFaker';
-import { getWsServer } from '../../services/socket'
+/* import { getWsServer } from '../../services/socket' */
 const router = Router();
 
 router.get('/', async (req, res) => {
@@ -13,10 +13,11 @@ router.get('/', async (req, res) => {
 
     if (!Array.isArray(datos.productos) || datos.productos.length === 0) datos.mostrar = false;
 
-    const wsServer = getWsServer();
-    //console.log(wsServer);
-    //wsServer.emit('message', datos);
-    res.render('carga_vista', datos);
+    /* const wsServer = getWsServer();
+    console.log(wsServer);
+    wsServer.emit('message', datos); */
+
+    res.render('carga_vista_dev', datos);
 });
 
 export default router;
