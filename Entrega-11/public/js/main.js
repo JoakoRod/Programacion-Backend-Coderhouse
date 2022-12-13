@@ -1,14 +1,8 @@
-const {schema, denormalize, normalize} = normalizr;
-
 const form = document.querySelector('#formProductos');
 const formChat = document.querySelector('#chat-form');
 const tablaChat = document.querySelector('#tabla-chat');
 
 const socket = io();
-
-const author = new schema.Entity('author', {}, { idAttribute: 'email' });
-const msge = new schema.Entity('message', { author: author, }, { idAttribute: '_id' });
-const finalSchema = new schema.Array(msge);
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -86,11 +80,11 @@ formChat.addEventListener('submit', (e) => {
 })
 
 socket.on('recibioMSG', async (data) => {
-    const msg = await denormalize(data.result, finalSchema, data.entities)
-    añadirMsg(msg);
+    añadirMsg(data);
 })
 
 function añadirMsg(data, fecha) {
+    console.log(data);
     const div = document.createElement('div');
     div.className += 'message';
     div.innerHTML = `

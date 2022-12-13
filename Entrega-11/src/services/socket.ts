@@ -1,7 +1,9 @@
 import { Server } from "socket.io";
 import { createKnex } from '../controllers/knex';
 import http from 'http';
+import * as util from 'util'
 import { normalizar, save } from "../controllers/mensajes";
+import moment from "moment";
 
 let io: Server;
 
@@ -22,9 +24,9 @@ export function initWsServer(server: http.Server) {
       //guardar mensaje
       save(data);
 
+      data.fecha = moment().format("DD/MM/YYYY HH:mm:ss");
       //envio msj
-      const dataNormalizada = normalizar(data);
-      socket.broadcast.emit('recibioMSG', (dataNormalizada));
+      socket.broadcast.emit('recibioMSG', (data));
     });
 
   });

@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import * as productosController from '../../controllers/knex';
-import { getAll, getAllNormal } from '../../controllers/mensajes';
+import { getAllNormal } from '../../controllers/mensajes';
 /* import { getWsServer } from '../../services/socket' */
 const router = Router();
 
