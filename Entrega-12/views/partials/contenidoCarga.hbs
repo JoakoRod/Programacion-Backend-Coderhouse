@@ -1,0 +1,42 @@
+<div class="container align-center mt-3">
+    <div class="row">
+        <div>
+            <header class="chat-header">
+                <h4><i class="fas fa-smile"></i>Form de Productos:</h4>
+            </header>
+            <form class="formProducto cont pb-1" id="formProductos" action="{{ruta}}" method="post">
+                <ul>
+                    <div class="mb-3 pt-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control form-producto" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripcion</label>
+                        <input type="text" step="any" class="form-control form-producto" id="descripcion" name="descripcion">
+                    </div>
+                    <div class="mb-3">
+                        <label for="codigo" class="form-label">Codigo</label>
+                        <input type="number" class="form-control form-producto" id="codigo" name="codigo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="foto" class="form-label">Url Foto</label>
+                        <input type="text" class="form-control form-producto" id="foto" name="foto">
+                    </div>
+                    <div class="mb-3">
+                        <label for="precio" class="form-label">Precio</label>
+                        <input type="number" class="form-control form-producto" id="precio" name="precio" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="stock" class="form-label">Stock</label>
+                        <input type="number" class="form-control form-producto" id="stock" name="stock" required>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn">Agregar</button>
+                    </div>
+
+                </ul>
+
+            </form>
+        </div>
+    </div>
+</div>
