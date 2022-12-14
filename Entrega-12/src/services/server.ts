@@ -45,12 +45,11 @@ app.engine('hbs', handlebars.engine({
     partialsDir: partialDirPath
 }));
 
+app.use(cookieParser());
+app.use(session(StoreOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
-
-app.use(cookieParser());
-app.use(session(StoreOptions));
 
 app.use('/', mainRouter);
 
@@ -60,9 +59,7 @@ app.use((req: express.Request, res: express.Response, next: express.NextFunction
     next(createError(501, `ruta '${ruta}' método '${metodo}' no implementada`));
 })
 
-initWsServer(server);
-
-app.use((err: { status: number; message: string; stack: string; }, req: express.Request, res: express.Response) => {
+app.use((err: { status: number; message: string; stack: string; }, req:express.Request, res:express.Response, next: express.NextFunction) => {
     const status = err.status || 500;
     const message = err.message || 'internal server err';
 
@@ -71,5 +68,7 @@ app.use((err: { status: number; message: string; stack: string; }, req: express.
         stack: err.stack
     })
 });
+
+initWsServer(server);
 
 export default server;
