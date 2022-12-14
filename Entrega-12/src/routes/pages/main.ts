@@ -1,12 +1,26 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import * as productosController from '../../controllers/knex';
 import { getAllNormal } from '../../controllers/mensajes';
+import { validateLogIn, validateAdmin, login } from '../../controllers/sessions'
 /* import { getWsServer } from '../../services/socket' */
 const router = Router();
 
 const tableName = 'productos';
 
-router.get('/', async (req: Request, res: Response, next: NextFunction) => {
+function middlewareLogIn(req: Request, res: Response, next: NextFunction) {
+    const { username, password } = req.query
+    if (username && password) {
+        login(username.toString(), password.toString(), req);
+        res.redirect('/'); //no es necesario, pero de esta manera el usuario y contraseña no quedan en la URL
+    }
+    if (validateLogIn(req)) {
+        next()
+    } else {
+        res.render('login', { layout: 'layoutLogin' })
+    }
+}
+
+router.get('/', middlewareLogIn, async (req: Request, res: Response, next: NextFunction) => {
     try {
         const datos = {
             productos: await productosController.getKnex(tableName),
