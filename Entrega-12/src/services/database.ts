@@ -1,14 +1,11 @@
 import mongoose from 'mongoose';
 import knex from 'knex';
-import dbConfig from '../../options/configDB';
-
-//const connectionString = 'mongodb+srv://admin:admin@coderhouse.dahey8p.mongodb.net/Entrega11?retryWrites=true&w=majority';
-const connectionString = 'mongodb://127.0.0.1:27017/Entrega11';
+import config from '../config/index';
 
 export async function initMongoDB() {
     try {
         console.log('conectando a la db');
-        await mongoose.connect(connectionString);
+        await mongoose.connect(config.MONGO_ATLAS_URL);
 
         console.log('conexion funcionando!');
     } catch (error) {
@@ -18,11 +15,7 @@ export async function initMongoDB() {
 }
 
 
-const useProducts = 'products';
-const optionsProducts = dbConfig[useProducts];
-export const connectionProducts = knex(optionsProducts);
-
-
+export const connectionProducts = knex(config.SQL_CONNECTION);
 
 export function initKnex() {
     connectionProducts.schema.hasTable('productos').then((exists) => {

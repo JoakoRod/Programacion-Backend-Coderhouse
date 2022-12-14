@@ -5,6 +5,25 @@ import createError from 'http-errors';
 import { initWsServer } from './socket';
 import path from 'path';
 import * as handlebars from 'express-handlebars';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import MongoStore from 'connect-mongo';
+import config from '../config/index';
+
+/* const StoreOptions = {
+    store: MongoStore.create({
+      mongoUrl: config.MONGO_ATLAS_URL,
+      crypto: {
+        secret: 'squirrel',
+      },
+    }),
+    secret: 'shhhhhhhhhhhhhhhhhhhhh',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: ttlSeconds * 1000,
+    },
+  }; */
 
 const app = express();
 const server = new http.Server(app);
