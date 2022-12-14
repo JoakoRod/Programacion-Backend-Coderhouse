@@ -10,20 +10,22 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import config from '../config/index';
 
-/* const StoreOptions = {
+const ttlSeconds = 180;
+
+const StoreOptions = {
     store: MongoStore.create({
-      mongoUrl: config.MONGO_ATLAS_URL,
-      crypto: {
-        secret: 'squirrel',
-      },
+        mongoUrl: config.MONGO_ATLAS_URL,
+        crypto: {
+            secret: config.secret2,
+        },
     }),
-    secret: 'shhhhhhhhhhhhhhhhhhhhh',
+    secret: config.secret,
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: ttlSeconds * 1000,
+        maxAge: ttlSeconds * 1000,
     },
-  }; */
+};
 
 const app = express();
 const server = new http.Server(app);
@@ -46,6 +48,9 @@ app.engine('hbs', handlebars.engine({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+
+app.use(cookieParser());
+app.use(session(StoreOptions));
 
 app.use('/', mainRouter);
 

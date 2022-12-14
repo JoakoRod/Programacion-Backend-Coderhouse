@@ -17,4 +17,6 @@ export default {
             database: 'backend',
         },
     },
+    secret: process.env.secret || 'asd123',
+    secret2: process.env.secret2 || 'fgh456' 
 };
