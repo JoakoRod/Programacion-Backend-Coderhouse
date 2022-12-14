@@ -1,8 +1,13 @@
 const form = document.querySelector('#formProductos');
 const formChat = document.querySelector('#chat-form');
 const tablaChat = document.querySelector('#tabla-chat');
+const botonLogout = document.querySelector('#logout');
 
 const socket = io();
+
+botonLogout.onclick = () => {
+    document.location.href="/logout";
+}
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
