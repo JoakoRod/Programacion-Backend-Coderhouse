@@ -1,15 +1,17 @@
 import { createKnex, deleteKnex, getKnex, updateKnex } from '../../controllers/knex';
+import { validateAdmin } from '../../controllers/sessions';
+import createError from 'http-errors';
 import { Router, Request, Response, NextFunction } from 'express';
+
 const router = Router();
 
 const tableName = 'productos';
 
 function comprobarAdmin(req: Request, res: Response, next: NextFunction) {
-    const admin = false; //CONTROL DE ADMIN
-    if (!admin) {
-        return res.status(401).json({ error: "Not authorized" })
+    if (validateAdmin(req)) {
+        next()
     } else {
-        next();
+        throw createError(401, 'No estas autorizado!');
     }
 }
 

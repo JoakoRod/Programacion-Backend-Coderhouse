@@ -1,4 +1,4 @@
-import { login } from '../../controllers/sessions';
+import { login, validateLogIn } from '../../controllers/sessions';
 import { Router, Request, Response, NextFunction } from 'express';
 import createError from 'http-errors';
 const router = Router();
@@ -14,29 +14,33 @@ router.get('/login', async (req: Request, res: Response, next: NextFunction) => 
     } catch (error) {
         next(error)
     }
-
-
-
 })
 
-/* const validateLogIn = (req: Request, res: Response, next: NextFunction) => {
-    if (req.session.info && req.session.info.loggedIn) next();
-    else res.status(401).json({ msg: 'no estas autorizado' });
-};
+function validateLogInApi(req: Request, res: Response, next: NextFunction) {
+    if (validateLogIn(req)) {
+        next()
+    } else {
+        throw createError(401, 'No estas autorizado!');
+    }
+}
 
-router.get('/info', validateLogIn, (req: any, res: Response) => {
+router.get('/info', validateLogInApi, (req: Request, res: Response) => {
     res.send({
         session: req.session,
         sessionId: req.sessionID,
         cookies: req.cookies,
     });
-}); */
+});
 
-router.post('/logout', (req, res) => {
-    req.session.destroy((err) => {
-        if (!err) res.send('Logout ok!');
-        else res.send({ status: 'Logout ERROR', body: err });
-    });
+router.post('/logout', (req: Request, res: Response, next: NextFunction) => {
+    try {
+        req.session.destroy((err) => {
+            if (!err) res.send('Logout ok!');
+            else throw createError(500, 'Logout ERROR')
+        });
+    } catch (error) {
+        next(error)
+    }
 });
 
 export default router;

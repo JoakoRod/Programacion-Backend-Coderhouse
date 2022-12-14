@@ -1,3 +1,5 @@
+import {Request} from 'express';
+
 const users = [
     {
         username: 'admin',
@@ -26,4 +28,12 @@ export function login(username: string, password: string, req: Request | any) {
         };
         return true
     }
+}
+
+export function validateLogIn(req: Request | any) {
+    return (req.session.info && req.session.info.loggedIn) //true or false
+}
+
+export function validateAdmin(req: Request | any) {
+    return (req.session.info && req.session.info.loggedIn && req.session.info.admin) //true or false
 }

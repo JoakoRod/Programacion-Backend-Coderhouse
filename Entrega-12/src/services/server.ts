@@ -10,7 +10,7 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import config from '../config/index';
 
-const ttlSeconds = 180;
+const ttlSeconds = 600;
 
 const StoreOptions = {
     store: MongoStore.create({
@@ -40,8 +40,8 @@ app.set('views', viewsFolderPath);
 
 app.engine('hbs', handlebars.engine({
     extname: ".hbs",
-    defaultLayout: defaultLayerPath,
     layoutsDir: layoutDirPath,
+    defaultLayout: defaultLayerPath,
     partialsDir: partialDirPath
 }));
 
