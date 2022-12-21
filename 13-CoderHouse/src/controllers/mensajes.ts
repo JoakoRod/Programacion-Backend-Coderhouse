@@ -1,4 +1,4 @@
-import { Imensajes, mensajesModel } from '../../models/mensajes';
+import { Imensajes, mensajesModel } from '../models/mensajes';
 import { denormalize, normalize, schema } from 'normalizr';
 import fs from 'fs';
 import path from 'path'

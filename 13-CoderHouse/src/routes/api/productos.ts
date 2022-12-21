@@ -1,19 +1,11 @@
 import { createKnex, deleteKnex, getKnex, updateKnex } from '../../controllers/knex';
-import { validateAdmin } from '../../controllers/sessions';
+import { isAdmin } from '../../middlewares/auth';
 import createError from 'http-errors';
 import { Router, Request, Response, NextFunction } from 'express';
 
 const router = Router();
 
 const tableName = 'productos';
-
-function comprobarAdmin(req: Request, res: Response, next: NextFunction) {
-    if (validateAdmin(req)) {
-        next()
-    } else {
-        throw createError(401, 'No estas autorizado!');
-    }
-}
 
 router.get('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -35,7 +27,7 @@ router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
     }
 });
 
-router.post('/', comprobarAdmin, async (req: Request, res: Response, next: NextFunction) => {
+router.post('/', isAdmin, async (req: Request, res: Response, next: NextFunction) => {
     try {
         const product = req.body;
         await createKnex(tableName, product);
@@ -46,7 +38,7 @@ router.post('/', comprobarAdmin, async (req: Request, res: Response, next: NextF
     }
 });
 
-router.put('/:id', comprobarAdmin, async (req: Request, res: Response, next: NextFunction) => {
+router.put('/:id', isAdmin, async (req: Request, res: Response, next: NextFunction) => {
     try {
         const id = req.params.id;
         const product = req.body;
@@ -60,7 +52,7 @@ router.put('/:id', comprobarAdmin, async (req: Request, res: Response, next: Nex
 
 });
 
-router.delete('/:id', comprobarAdmin, async (req: Request, res: Response, next: NextFunction) => {
+router.delete('/:id', isAdmin, async (req: Request, res: Response, next: NextFunction) => {
     try {
         const id = req.params.id;
         await deleteKnex(tableName, id);

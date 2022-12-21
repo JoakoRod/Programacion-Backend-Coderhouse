@@ -5,19 +5,20 @@ import createError from 'http-errors';
 import { initWsServer } from './socket';
 import path from 'path';
 import * as handlebars from 'express-handlebars';
-import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import config from '../config/index';
+import passport from 'passport';
+import { signUpFunc, loginFunc } from './auth';
 
 const ttlSeconds = 600;
 
 const StoreOptions = {
     store: MongoStore.create({
         mongoUrl: config.MONGO_ATLAS_URL,
-        crypto: {
+        /* crypto: {
             secret: config.secret2,
-        },
+        }, */
     }),
     secret: config.secret,
     resave: false,
@@ -45,11 +46,17 @@ app.engine('hbs', handlebars.engine({
     partialsDir: partialDirPath
 }));
 
-app.use(cookieParser());
+
+
 app.use(session(StoreOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use('login', loginFunc);
+passport.use('signup', signUpFunc);
 
 app.use('/', mainRouter);
 

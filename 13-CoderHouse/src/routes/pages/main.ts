@@ -1,34 +1,45 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import * as productosController from '../../controllers/knex';
 import { getAllNormal } from '../../controllers/mensajes';
-import { validateLogIn, login } from '../../controllers/sessions'
 import createError from 'http-errors';
-/* import { getWsServer } from '../../services/socket' */
+import passport from 'passport';
+import { isLoggedInPage } from '../../middlewares/auth';
+
 const router = Router();
 
 const tableName = 'productos';
+const passportOptions = { failureRedirect: '/login' };
 
-function middlewareLogIn(req: Request, res: Response, next: NextFunction) {
-    const { username, password } = req.query
-    if (username && password) {
-        login(username.toString(), password.toString(), req);
-        res.redirect('/'); //no es necesario, pero de esta manera el usuario y contraseña no quedan en la URL
-    }
-    if (validateLogIn(req)) {
-        next()
-    } else {
-        res.render('login', { layout: 'layoutLogin' })
-    }
-}
+router.get('/login', (req: Request | any, res: Response, next: NextFunction) => {
+    res.render('login', { layout: 'layoutLogin' });
+})
 
-router.get('/', middlewareLogIn, async (req: Request | any, res: Response, next: NextFunction) => {
+router.post('/login', passport.authenticate('login', passportOptions), (req: Request | any, res: Response, next: NextFunction) => {
+    res.redirect('/');
+})
+
+router.post('/signUp',passport.authenticate('signup', passportOptions), (req: Request | any, res: Response, next: NextFunction) => {
+    res.render('login', { layout: 'layoutLogin' });
+})
+
+router.get('/logout', (req: Request, res: Response, next: NextFunction) => {
+    try {
+        req.session.destroy((err) => {
+            if (!err) res.redirect('/');
+            else throw createError(500, 'Logout ERROR')
+        });
+    } catch (error) {
+        next(error)
+    }
+});
+
+router.get('/', isLoggedInPage, async (req: Request | any, res: Response, next: NextFunction) => {
     try {
         const datos = {
             productos: await productosController.getKnex(tableName),
             mostrar: true,
             ruta: '/',
-            mensajes: await getAllNormal(),
-            nombre: req.session.info.username.toString()
+            mensajes: await getAllNormal()
         };
 
         if (!Array.isArray(datos.productos) || datos.productos.length === 0) datos.mostrar = false;
@@ -41,17 +52,6 @@ router.get('/', middlewareLogIn, async (req: Request | any, res: Response, next:
         next(error);
     }
 
-});
-
-router.get('/logout', middlewareLogIn, (req: Request, res: Response, next: NextFunction) => {
-    try {
-        req.session.destroy((err) => {
-            if (!err) res.redirect('/');
-            else throw createError(500, 'Logout ERROR')
-        });
-    } catch (error) {
-        next(error)
-    }
 });
 
 router.post('/', async (req: Request, res: Response, next: NextFunction) => {

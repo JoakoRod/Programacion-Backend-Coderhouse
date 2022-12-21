@@ -1,8 +1,7 @@
 import { Server } from "socket.io";
 import { createKnex } from '../controllers/knex';
 import http from 'http';
-import * as util from 'util'
-import { normalizar, save } from "../controllers/mensajes";
+import { save } from "../controllers/mensajes";
 import moment from "moment";
 
 let io: Server;

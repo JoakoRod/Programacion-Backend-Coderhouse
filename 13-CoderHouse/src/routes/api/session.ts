@@ -1,30 +1,26 @@
-import { login, validateLogIn } from '../../controllers/sessions';
 import { Router, Request, Response, NextFunction } from 'express';
 import createError from 'http-errors';
+import passport from 'passport';
+import { isLoggedIn } from '../../middlewares/auth';
 const router = Router();
 
-router.get('/login', async (req: Request, res: Response, next: NextFunction) => {
+router.post('/login', passport.authenticate('login'), async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { username, password } = req.body;
-        if (login(username, password, req)) {
-            res.json({ msg: 'Bienvenido!!' })
-        } else {
-            throw createError(401, 'No estas autorizado!')
-        }
+        res.json({ msg: 'Bienvenido!!' })
     } catch (error) {
         next(error)
     }
 })
 
-function validateLogInApi(req: Request, res: Response, next: NextFunction) {
-    if (validateLogIn(req)) {
-        next()
-    } else {
-        throw createError(401, 'No estas autorizado!');
+router.post('/signup', passport.authenticate('signup'), async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        res.json({ msg: 'Bienvenido!!' })
+    } catch (error) {
+        next(error)
     }
-}
+})
 
-router.get('/info', validateLogInApi, (req: Request, res: Response) => {
+router.get('/info', isLoggedIn, (req: Request, res: Response) => {
     res.send({
         session: req.session,
         sessionId: req.sessionID,
