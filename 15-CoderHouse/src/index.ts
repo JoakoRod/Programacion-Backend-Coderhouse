@@ -1,6 +1,10 @@
 import server from './services/server';
 import { initMongoDB, initKnex } from './services/database';
 import minimist from 'minimist';
+import cluster from 'cluster';
+import os from 'os';
+
+const numCPUs = os.cpus().length;
 
 const optionalArgsObject = {
   alias: {
@@ -18,10 +22,11 @@ const optionalArgsObject = {
 };
 
 const args = minimist(process.argv, optionalArgsObject);
+export const puerto = args.port;
 
 
 async function init() {
-  const puerto = args.port;
+  
   initKnex();
   await initMongoDB();
 
@@ -30,4 +35,20 @@ async function init() {
   httpServer.on('error', (err) => console.log('ERROR (posiblemente puerto ocupado)', err));
 }
 
-init();
+if (cluster.isPrimary && args.cluster) {
+  console.log('MODO CLUSTER!');
+  console.log(`NUMERO DE CPUS ===> ${numCPUs}`);
+  console.log(`PID MASTER ${process.pid}`);
+
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+
+  cluster.on('exit', (worker, code) => {
+    console.log(`Worker ${worker.process.pid} died with code ${code} at ${Date()}`);
+    cluster.fork();
+  });
+} else {
+  console.log('salida normal');
+  init();
+}

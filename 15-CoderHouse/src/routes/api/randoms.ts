@@ -7,7 +7,7 @@ const router = Router();
 
 router.get('/randoms', (req: Request, res: Response, next: NextFunction) => {
     const arrayNums = fork(scriptPath);
-    const cant = req.query.cant || 1000000; //100.000.000 es mucho
+    const cant = req.query.cant || 100; //100.000.000 es mucho
 
     arrayNums.send({msg: 'random', cant: cant});
     arrayNums.on('message', array => {
