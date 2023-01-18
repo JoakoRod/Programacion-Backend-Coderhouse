@@ -1,0 +1,4 @@
+{"level":"warn","message":"Se intento acceder a /api/randomsa con el metodo GET","timestamp":"2023-01-18T15:00:08.118Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/api/randomsa' método 'GET' no implementada","timestamp":"2023-01-18T15:00:08.122Z"}
+{"level":"warn","message":"Se intento acceder a /api/randomsa con el metodo GET","timestamp":"2023-01-18T15:01:47.886Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/api/randomsa' método 'GET' no implementada","timestamp":"2023-01-18T15:01:47.887Z"}
