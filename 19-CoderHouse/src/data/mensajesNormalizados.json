@@ -1,0 +1,40 @@
+{
+  "entities": {
+    "authors": {
+      "222joaignaciorodriguez222@gmail.com": {
+        "id": "222joaignaciorodriguez222@gmail.com",
+        "nombre": "Joaquín Ignacio",
+        "apellido": "Rodriguez",
+        "edad": 20,
+        "alias": "joako",
+        "avatar": "www.foto.com"
+      },
+      "peter@gmail.com": {
+        "id": "peter@gmail.com",
+        "nombre": "peter",
+        "apellido": "parker",
+        "edad": 29,
+        "alias": "peter",
+        "avatar": "www.fotopeter.com"
+      }
+    }
+  },
+  "result": [
+    {
+      "_id": "6398e0683a8b0ccb07a16c5f",
+      "author": "222joaignaciorodriguez222@gmail.com",
+      "text": "Hola!",
+      "createdAt": "2022-12-13T20:28:24.199Z",
+      "updatedAt": "2022-12-13T20:28:24.199Z",
+      "__v": 0
+    },
+    {
+      "_id": "6398e1843a8b0ccb07a16c64",
+      "author": "peter@gmail.com",
+      "text": "Hola joako",
+      "createdAt": "2022-12-13T20:33:08.809Z",
+      "updatedAt": "2022-12-13T20:33:08.809Z",
+      "__v": 0
+    }
+  ]
+}
