@@ -1,0 +1,18 @@
+{"level":"error","message":"ERROR 501 \n ruta '/api/randomsa' método 'GET' no implementada","timestamp":"2023-01-18T15:00:08.122Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/api/randomsa' método 'GET' no implementada","timestamp":"2023-01-18T15:01:47.887Z"}
+{"level":"error","message":"ERROR 500 \n Cannot read properties of undefined (reading 'role')","timestamp":"2023-01-22T22:09:07.564Z"}
+{"level":"error","message":"ERROR 500 \n Cannot read properties of undefined (reading 'role')","timestamp":"2023-01-22T22:09:38.562Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/api/auth/signin' método 'POST' no implementada","timestamp":"2023-01-22T22:09:51.712Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-22T22:10:30.343Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/www.fotocompas.com' método 'GET' no implementada","timestamp":"2023-01-22T22:10:36.650Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/api/carrito' método 'POST' no implementada","timestamp":"2023-01-22T22:14:08.946Z"}
+{"level":"error","message":"ERROR 500 \n Cannot read properties of undefined (reading 'role')","timestamp":"2023-01-22T22:27:33.321Z"}
+{"level":"error","message":"ERROR 500 \n E11000 duplicate key error collection: Entrega12.productos index: nombre_1 dup key: { nombre: \"compás\" }","timestamp":"2023-01-22T22:28:57.618Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/api/productos/' método 'POST' no implementada","timestamp":"2023-01-22T22:29:10.912Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/api/productos/' método 'POST' no implementada","timestamp":"2023-01-22T22:29:16.841Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/api/productos/' método 'POST' no implementada","timestamp":"2023-01-22T22:29:44.738Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/api/productos/' método 'POST' no implementada","timestamp":"2023-01-22T22:30:06.034Z"}
+{"level":"error","message":"ERROR 500 \n Cannot read properties of undefined (reading 'role')","timestamp":"2023-01-22T22:30:12.793Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/api/productos/' método 'POST' no implementada","timestamp":"2023-01-22T22:30:20.613Z"}
+{"level":"error","message":"ERROR 500 \n E11000 duplicate key error collection: Entrega12.productos index: nombre_1 dup key: { nombre: \"compás\" }","timestamp":"2023-01-22T22:31:49.092Z"}
+{"level":"error","message":"ERROR 500 \n E11000 duplicate key error collection: Entrega12.productos index: codigo_1 dup key: { codigo: 11 }","timestamp":"2023-01-22T22:31:58.832Z"}
