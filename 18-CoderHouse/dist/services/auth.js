@@ -16,14 +16,13 @@ exports.signUpFunc = exports.loginFunc = void 0;
 const passport_1 = __importDefault(require("passport"));
 const passport_local_1 = require("passport-local");
 const usuarios_1 = require("../models/usuarios");
-const logger_1 = require("../services/logger");
 const strategyOptions = {
-    usernameField: 'username',
+    usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true,
 };
-const login = (req, username, password, done) => __awaiter(void 0, void 0, void 0, function* () {
-    const user = yield usuarios_1.UserModel.findOne({ username });
+const login = (req, email, password, done) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield usuarios_1.UserModel.findOne({ email });
     //si no encuentra el username o si su contrasena (encriptada) no es encontrada
     if (!user || (yield user.isValidPassword(password)) == false) {
         return done(null, false, { message: 'Invalid Username/Password' });
@@ -32,24 +31,28 @@ const login = (req, username, password, done) => __awaiter(void 0, void 0, void 
 });
 const signup = (req, username, password, done) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { username, password, email } = req.body;
+        const { email, password, firstName, lastName, address, age, phone } = req.body;
         // Nota: Username y password no se verifica porque ya lo hace passport.
-        if (!email) {
+        if (!email || !firstName || !lastName || !address || !age || !phone) {
             return done(null, false, { message: 'Invalid Body Fields' });
         }
         const query = {
-            $or: [{ username: username }, { email: email }],
+            $or: [{ email: email }, { phone: phone }],
         };
         const user = yield usuarios_1.UserModel.findOne(query);
         if (user) {
-            logger_1.logger.info('User already exists');
+            //logger.info('User already exists');
             return done(null, false, { message: 'User already exists' });
         }
         else {
             const userData = {
-                username,
-                password,
                 email,
+                password,
+                firstName,
+                lastName,
+                address,
+                age,
+                phone,
                 role: 'user'
             };
             const newUser = yield usuarios_1.UserModel.create(userData);

@@ -75,3 +75,20 @@
 {"level":"error","message":"ERROR 501 \n ruta '/signUp' método 'GET' no implementada","timestamp":"2023-01-30T14:22:14.274Z"}
 {"level":"warn","message":"Se intento acceder a /favicon.ico con el metodo GET","timestamp":"2023-01-30T14:22:18.739Z"}
 {"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T14:22:18.740Z"}
+{"level":"error","message":"ERROR 500 \n E11000 duplicate key error collection: Entrega18.users index: username_1 dup key: { username: null }","timestamp":"2023-01-30T16:12:53.997Z"}
+{"level":"warn","message":"Se intento acceder a /favicon.ico con el metodo GET","timestamp":"2023-01-30T16:12:54.119Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T16:12:54.120Z"}
+{"level":"error","message":"ERROR 500 \n E11000 duplicate key error collection: Entrega18.users index: username_1 dup key: { username: null }","timestamp":"2023-01-30T16:14:06.262Z"}
+{"level":"warn","message":"Se intento acceder a /favicon.ico con el metodo GET","timestamp":"2023-01-30T16:14:06.346Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T16:14:06.347Z"}
+{"level":"error","message":"ERROR 500 \n Cannot read properties of null (reading 'headers')","timestamp":"2023-01-30T16:43:06.380Z"}
+{"level":"warn","message":"Se intento acceder a /favicon.ico con el metodo GET","timestamp":"2023-01-30T16:43:06.536Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T16:43:06.536Z"}
+{"level":"error","message":"ERROR 500 \n Cannot read properties of null (reading 'headers')","timestamp":"2023-01-30T16:43:25.301Z"}
+{"level":"warn","message":"Se intento acceder a /favicon.ico con el metodo GET","timestamp":"2023-01-30T16:43:25.431Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T16:43:25.431Z"}
+{"level":"error","message":"ERROR 500 \n Cannot read properties of null (reading 'headers')","timestamp":"2023-01-30T16:43:45.776Z"}
+{"level":"warn","message":"Se intento acceder a /favicon.ico con el metodo GET","timestamp":"2023-01-30T16:43:45.910Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T16:43:45.910Z"}
+{"level":"warn","message":"Se intento acceder a /favicon.ico con el metodo GET","timestamp":"2023-01-30T17:29:12.071Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T17:29:12.072Z"}

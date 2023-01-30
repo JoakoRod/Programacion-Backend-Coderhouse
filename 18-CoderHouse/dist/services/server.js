@@ -26,6 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const body_parser_1 = __importDefault(require("body-parser"));
 const express_1 = __importDefault(require("express"));
 const http_1 = __importDefault(require("http"));
 const index_1 = __importDefault(require("../routes/index"));
@@ -41,6 +42,9 @@ const auth_1 = require("./auth");
 //import morgan from 'morgan';
 const compression_1 = __importDefault(require("compression"));
 const logger_1 = require("./logger");
+//avatars and files
+const multer_1 = __importDefault(require("multer"));
+const upload = (0, multer_1.default)({ dest: './public/avatars/' });
 const ttlSeconds = 600;
 const StoreOptions = {
     store: connect_mongo_1.default.create({
@@ -70,9 +74,8 @@ app.engine('hbs', handlebars.engine({
     defaultLayout: defaultLayerPath,
     partialsDir: partialDirPath
 }));
+app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use((0, express_session_1.default)(StoreOptions));
-app.use(express_1.default.json());
-app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.static('public'));
 //app.use(morgan('dev'));
 app.use((0, compression_1.default)());

@@ -2,7 +2,6 @@ import passport from 'passport';
 import { Request } from 'express';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { UserModel } from '../models/usuarios';
-import { logger } from '../services/logger';
 
 interface IStrategyOptionsWithRequest {
     usernameField?: string | undefined;
@@ -12,13 +11,13 @@ interface IStrategyOptionsWithRequest {
 }
 
 const strategyOptions: IStrategyOptionsWithRequest = {
-    usernameField: 'username',
+    usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true,
 };
 
-const login = async (req: Request, username: string, password: string, done: Function) => {
-    const user: any = await UserModel.findOne({ username });
+const login = async (req: Request, email: string, password: string, done: Function) => {
+    const user: any = await UserModel.findOne({ email });
     //si no encuentra el username o si su contrasena (encriptada) no es encontrada
     if (!user || await user.isValidPassword(password) == false) {
         return done(null, false, { message: 'Invalid Username/Password' });
@@ -28,27 +27,31 @@ const login = async (req: Request, username: string, password: string, done: Fun
 
 const signup = async (req: Request, username: string, password: string, done: Function) => {
     try {
-        const { username, password, email } = req.body;
-    
+        const { email, password, firstName, lastName, address, age, phone } = req.body;
+
         // Nota: Username y password no se verifica porque ya lo hace passport.
-        if (!email) {
+        if (!email || !firstName || !lastName || !address || !age || !phone) {
             return done(null, false, { message: 'Invalid Body Fields' });
         }
 
         const query = {
-            $or: [{ username: username }, { email: email }],
+            $or: [{ email: email }, { phone: phone }],
         };
 
         const user = await UserModel.findOne(query);
 
         if (user) {
-            logger.info('User already exists');
+            //logger.info('User already exists');
             return done(null, false, { message: 'User already exists' });
         } else {
             const userData = {
-                username,
-                password,
                 email,
+                password,
+                firstName,
+                lastName,
+                address,
+                age,
+                phone,
                 role: 'user'
             };
 

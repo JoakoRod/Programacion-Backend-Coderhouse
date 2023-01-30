@@ -1,3 +1,4 @@
+import bodyParser from "body-parser";
 import express from 'express';
 import http from 'http';
 import mainRouter from '../routes/index';
@@ -13,6 +14,10 @@ import { signUpFunc, loginFunc } from './auth';
 //import morgan from 'morgan';
 import compression from 'compression';
 import { logger } from './logger';
+//avatars and files
+import multer from 'multer';
+const upload = multer({ dest: './public/avatars/' });
+
 
 const ttlSeconds = 600;
 
@@ -49,10 +54,10 @@ app.engine('hbs', handlebars.engine({
     partialsDir: partialDirPath
 }));
 
-
+app.use(bodyParser.urlencoded(
+    { extended: true }
+))
 app.use(session(StoreOptions));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 //app.use(morgan('dev'));
 app.use(compression());
@@ -65,14 +70,14 @@ passport.use('signup', signUpFunc);
 app.use('/', mainRouter);
 
 app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
-    
+
     const ruta = req.path;
     const metodo = req.method;
     logger.warn(`Se intento acceder a ${ruta} con el metodo ${metodo}`);
     next(createError(501, `ruta '${ruta}' método '${metodo}' no implementada`));
 })
 
-app.use((err: { status: number; message: string; stack: string; }, req:express.Request, res:express.Response, next: express.NextFunction) => {
+app.use((err: { status: number; message: string; stack: string; }, req: express.Request, res: express.Response, next: express.NextFunction) => {
     const status = err.status || 500;
     const message = err.message || 'internal server err';
     logger.error(`ERROR ${status} \n ${message}`);

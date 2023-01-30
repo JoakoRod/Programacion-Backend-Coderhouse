@@ -19,6 +19,8 @@ const passport_1 = __importDefault(require("passport"));
 const auth_1 = require("../../middlewares/auth");
 const logger_1 = require("../../services/logger");
 const productos_1 = require("../../models/productos");
+const multer_1 = __importDefault(require("multer"));
+const upload = (0, multer_1.default)({ dest: '../../../public/avatars' });
 const router = (0, express_1.Router)();
 //const tableName = 'productos';
 //const passportOptions = { failureRedirect: '/login' };
@@ -77,7 +79,7 @@ router.get('/', auth_1.isLoggedInPage, (req, res, next) => __awaiter(void 0, voi
             mostrar: true,
             ruta: '/',
             mensajes: yield (0, mensajes_1.getAllNormal)(),
-            user: req.user.username
+            user: `${req.user.firstName} ${req.user.lastName}`
         };
         if (!Array.isArray(datos.productos) || datos.productos.length === 0)
             datos.mostrar = false;

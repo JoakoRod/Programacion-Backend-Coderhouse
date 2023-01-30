@@ -17,7 +17,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const Schema = mongoose_1.default.Schema;
 const UserSchema = new Schema({
-    username: {
+    email: {
         type: String,
         required: true,
         unique: true,
@@ -26,11 +26,31 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
-    email: {
+    firstName: {
         type: String,
         required: true,
-        unique: true,
     },
+    lastName: {
+        type: String,
+        required: true,
+    },
+    address: {
+        type: String,
+        required: true,
+    },
+    age: {
+        type: Number,
+        require: true
+    },
+    phone: {
+        type: Number,
+        require: true
+    },
+    /*   avatar: {
+        data: Buffer,
+        contentType: String,
+        require: false
+      }, */
     role: {
         type: String,
         default: 'user'

@@ -1,17 +1,23 @@
 <div class="login-page">
   <div class="form">
     <form class="register-form" method="post" action="/signUp" >
-      <input type="text" placeholder="username" name="username" required/>
-      <input type="password" placeholder="password" name="password" required/>
       <input type="email" placeholder="email address" name="email" required/>
+      <input type="password" placeholder="password" name="password" required/>
+      <input type="text" placeholder="firstName" name="firstName" required/>
+      <input type="text" placeholder="lastName" name="lastName" required/>
+      <input type="text" placeholder="address" name="address" required/>
+      <input type="number" placeholder="age" name="age" required/>
+      <input type="number" placeholder="phone" name="phone" required/>
+      <input type="file" placeholder="avatar" accept="image/*" name="avatar"/>
       <button type="submit">create</button>
       <p class="message">Already registered? <a href="#">Sign In</a></p>
     </form>
     <form class="login-form" method="post">
-      <input type="text" placeholder="username" name="username" required/>
+      <input type="email" placeholder="email address" name="email" required/>
       <input type="password" placeholder="password" name="password" required/>
       <button type="submit">login</button>
       <p class="message">Not registered? <a href="#">Create an account</a></p>
     </form>
   </div>
 </div>
+

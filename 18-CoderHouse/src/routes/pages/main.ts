@@ -5,6 +5,8 @@ import passport from 'passport';
 import { isLoggedInPage } from '../../middlewares/auth';
 import { logger } from '../../services/logger';
 import { productosModel } from '../../models/productos';
+import multer from 'multer';
+const upload = multer({ dest: '../../../public/avatars' })
 
 const router = Router();
 
@@ -17,12 +19,13 @@ router.get('/login', (req: Request | any, res: Response, next: NextFunction) => 
     res.render('login', { layout: 'layoutLogin' });
 })
 
-router.post('/login', passport.authenticate('login', { failureRedirect: '/errorLogin'} ), (req: Request | any, res: Response, next: NextFunction) => {
-    logger.info('POST /login');
-    res.redirect('/');
-})
+router.post('/login', passport.authenticate('login', { failureRedirect: '/errorLogin' }),
+    (req: Request | any, res: Response, next: NextFunction) => {
+        logger.info('POST /login');
+        res.redirect('/');
+    })
 
-router.post('/signUp',passport.authenticate('signup', { failureRedirect: '/errorSignUp'} ), (req: Request | any, res: Response, next: NextFunction) => {
+router.post('/signUp', passport.authenticate('signup', { failureRedirect: '/errorSignUp' }), (req: Request | any, res: Response, next: NextFunction) => {
     logger.info('POST /signUp');
     res.redirect('/');
 })
@@ -40,19 +43,19 @@ router.get('/logout', (req: Request, res: Response, next: NextFunction) => {
 });
 
 //errores
-router.get('/errorLogin',  (req: Request | any, res: Response, next: NextFunction) => {
+router.get('/errorLogin', (req: Request | any, res: Response, next: NextFunction) => {
     logger.info('GET /errorLogin');
     try {
-        res.render('error', {layout: 'error', error: 'Error en el login'});
+        res.render('error', { layout: 'error', error: 'Error en el login' });
     } catch (error) {
         next(error);
     }
 });
 
-router.get('/errorSignUp',  (req: Request | any, res: Response, next: NextFunction) => {
+router.get('/errorSignUp', (req: Request | any, res: Response, next: NextFunction) => {
     logger.info('GET /errorSignUp');
     try {
-        res.render('error', {layout: 'error', error: 'Error en la creacion de usuario'});
+        res.render('error', { layout: 'error', error: 'Error en la creacion de usuario' });
     } catch (error) {
         next(error);
     }
@@ -67,7 +70,7 @@ router.get('/', isLoggedInPage, async (req: Request | any, res: Response, next: 
             mostrar: true,
             ruta: '/',
             mensajes: await getAllNormal(),
-            user: req.user.username
+            user: `${req.user.firstName} ${req.user.lastName}`
         };
 
         if (!Array.isArray(datos.productos) || datos.productos.length === 0) datos.mostrar = false;
