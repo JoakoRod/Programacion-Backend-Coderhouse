@@ -123,3 +123,5 @@
 {"code":21211,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21211","status":400,"timestamp":"2023-01-31T22:07:18.108Z"}
 {"code":21608,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21608","status":400,"timestamp":"2023-01-31T22:08:40.067Z"}
 {"code":21608,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21608","status":400,"timestamp":"2023-01-31T22:12:24.858Z"}
+{"code":21608,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21608","status":400,"timestamp":"2023-01-31T22:14:01.369Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/robots.txt' método 'GET' no implementada","timestamp":"2023-01-31T22:17:00.007Z"}
