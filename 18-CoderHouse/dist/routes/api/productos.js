@@ -12,10 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const productos_1 = require("../../models/productos");
 const auth_1 = require("../../middlewares/auth");
 const express_1 = require("express");
-const logger_1 = require("../../services/logger");
 const router = (0, express_1.Router)();
 router.get('/', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    logger_1.logger.info('GET /api/productos/');
     try {
         const data = yield productos_1.productosModel.find().lean();
         (data === null || data === void 0 ? void 0 : data.length) != 0 ? res.json(data) : res.json({ msg: 'No se encontraron productos' });
@@ -25,7 +23,6 @@ router.get('/', (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
     }
 }));
 router.get('/:id', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    logger_1.logger.info('GET /api/productos/:id');
     try {
         const id = req.params.id;
         const data = yield productos_1.productosModel.findById(id);
@@ -36,7 +33,6 @@ router.get('/:id', (req, res, next) => __awaiter(void 0, void 0, void 0, functio
     }
 }));
 router.post('/', auth_1.isAdmin, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    logger_1.logger.info('POST /api/productos/');
     try {
         const product = req.body;
         yield productos_1.productosModel.create(product);
@@ -47,7 +43,6 @@ router.post('/', auth_1.isAdmin, (req, res, next) => __awaiter(void 0, void 0, v
     }
 }));
 router.put('/:id', auth_1.isAdmin, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    logger_1.logger.info('PUT /api/productos/:id');
     try {
         const id = req.params.id;
         const product = req.body;
@@ -59,7 +54,6 @@ router.put('/:id', auth_1.isAdmin, (req, res, next) => __awaiter(void 0, void 0,
     }
 }));
 router.delete('/:id', auth_1.isAdmin, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    logger_1.logger.info('DELETE /api/productos/:id');
     try {
         const id = req.params.id;
         yield productos_1.productosModel.deleteOne({ _id: id });

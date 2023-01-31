@@ -51,3 +51,75 @@
 {"level":"error","message":"ERROR 500 \n Cannot read properties of null (reading 'headers')","timestamp":"2023-01-30T16:43:45.776Z"}
 {"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T16:43:45.910Z"}
 {"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T17:29:12.072Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T17:32:13.238Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T17:46:04.379Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T17:46:32.557Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T17:46:49.642Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T17:47:02.783Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T17:47:50.855Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T17:48:03.708Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T17:48:26.605Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T17:59:48.483Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/public/avatars' método 'GET' no implementada","timestamp":"2023-01-30T18:19:50.492Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T18:19:50.624Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/avatars/' método 'GET' no implementada","timestamp":"2023-01-30T18:19:56.145Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T18:19:56.272Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T18:21:59.369Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T18:22:10.114Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/api/avatars/123@123' método 'GET' no implementada","timestamp":"2023-01-30T18:22:51.299Z"}
+{"code":"EAUTH","command":"API","level":"error","timestamp":"2023-01-30T20:10:57.054Z"}
+{"code":"EAUTH","command":"API","level":"error","timestamp":"2023-01-30T20:15:06.050Z"}
+{"code":"EAUTH","command":"API","level":"error","timestamp":"2023-01-30T20:16:56.556Z"}
+{"code":"EAUTH","command":"API","level":"error","timestamp":"2023-01-30T20:45:00.707Z"}
+{"level":"error","message":"ERROR 500 \n Cannot convert object to primitive value","timestamp":"2023-01-30T20:57:33.570Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-30T20:57:33.802Z"}
+{"level":"error","message":"ERROR 500 \n user validation failed: carrito: Tried to set nested object field `carrito` to array ``","timestamp":"2023-01-31T01:25:11.401Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-31T01:25:11.502Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/www.fotolapiz.com' método 'GET' no implementada","timestamp":"2023-01-31T16:56:50.794Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/www.fotolapiz.com' método 'GET' no implementada","timestamp":"2023-01-31T16:56:53.465Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/www.fotolapiz.com' método 'GET' no implementada","timestamp":"2023-01-31T16:57:29.224Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/www.fotolapiz.com' método 'GET' no implementada","timestamp":"2023-01-31T17:39:20.811Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/www.fotolapiz.com' método 'GET' no implementada","timestamp":"2023-01-31T17:39:32.210Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/www.fotolapiz.com' método 'GET' no implementada","timestamp":"2023-01-31T17:39:36.886Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/asdasd' método 'GET' no implementada","timestamp":"2023-01-31T17:39:54.965Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/asdasd' método 'GET' no implementada","timestamp":"2023-01-31T17:39:55.077Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/asdasd' método 'GET' no implementada","timestamp":"2023-01-31T17:39:55.172Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/www.fotolapiz.com' método 'GET' no implementada","timestamp":"2023-01-31T17:40:20.225Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/asdasd' método 'GET' no implementada","timestamp":"2023-01-31T17:40:20.464Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/123123sad' método 'GET' no implementada","timestamp":"2023-01-31T17:46:09.670Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/123123sad' método 'GET' no implementada","timestamp":"2023-01-31T17:46:09.765Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/123123sad' método 'GET' no implementada","timestamp":"2023-01-31T17:46:09.858Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/123123' método 'GET' no implementada","timestamp":"2023-01-31T18:30:48.216Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/123123' método 'GET' no implementada","timestamp":"2023-01-31T18:31:06.313Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/123' método 'GET' no implementada","timestamp":"2023-01-31T18:31:14.152Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/123123' método 'GET' no implementada","timestamp":"2023-01-31T18:31:22.669Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/123' método 'GET' no implementada","timestamp":"2023-01-31T18:31:22.678Z"}
+{"level":"error","message":"ERROR 501 \n ruta '//carrito' método 'POST' no implementada","timestamp":"2023-01-31T19:36:27.357Z"}
+{"level":"error","message":"ERROR 400 \n Unexpected token o in JSON at position 1","timestamp":"2023-01-31T19:47:59.658Z"}
+{"code":21211,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21211","status":400,"timestamp":"2023-01-31T20:52:12.770Z"}
+{"code":21211,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21211","status":400,"timestamp":"2023-01-31T20:55:42.407Z"}
+{"code":21211,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21211","status":400,"timestamp":"2023-01-31T20:56:31.229Z"}
+{"code":21211,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21211","status":400,"timestamp":"2023-01-31T20:57:01.518Z"}
+{"code":21211,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21211","status":400,"timestamp":"2023-01-31T21:00:11.614Z"}
+{"code":21211,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21211","status":400,"timestamp":"2023-01-31T21:00:52.270Z"}
+{"code":21211,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21211","status":400,"timestamp":"2023-01-31T21:14:57.030Z"}
+{"code":21211,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21211","status":400,"timestamp":"2023-01-31T21:17:22.302Z"}
+{"code":21211,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21211","status":400,"timestamp":"2023-01-31T21:18:01.829Z"}
+{"code":21211,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21211","status":400,"timestamp":"2023-01-31T21:18:25.152Z"}
+{"code":21211,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21211","status":400,"timestamp":"2023-01-31T21:18:44.249Z"}
+{"code":21211,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21211","status":400,"timestamp":"2023-01-31T21:19:56.604Z"}
+{"code":21211,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21211","status":400,"timestamp":"2023-01-31T21:20:34.321Z"}
+{"code":21211,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21211","status":400,"timestamp":"2023-01-31T21:23:46.301Z"}
+{"code":21211,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21211","status":400,"timestamp":"2023-01-31T21:24:33.963Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/whatsapp' método 'POST' no implementada","timestamp":"2023-01-31T21:26:22.828Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/whatsapp' método 'POST' no implementada","timestamp":"2023-01-31T21:26:55.341Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/whatsapp' método 'POST' no implementada","timestamp":"2023-01-31T21:27:28.332Z"}
+{"level":"error","timestamp":"2023-01-31T21:28:10.818Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-31T21:44:23.629Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-31T21:44:43.494Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-31T21:44:45.998Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-31T21:44:50.056Z"}
+{"code":21606,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21606","status":400,"timestamp":"2023-01-31T22:03:33.476Z"}
+{"code":21211,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21211","status":400,"timestamp":"2023-01-31T22:07:18.108Z"}
+{"code":21608,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21608","status":400,"timestamp":"2023-01-31T22:08:40.067Z"}
+{"code":21608,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21608","status":400,"timestamp":"2023-01-31T22:12:24.858Z"}

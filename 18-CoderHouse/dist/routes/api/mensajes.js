@@ -11,10 +11,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const mensajes_1 = require("../../controllers/mensajes");
-const logger_1 = require("../../services/logger");
 const router = (0, express_1.Router)();
 router.get('/normalizado', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    logger_1.logger.info('GET /api/mensajes/normalizado');
     try {
         const mensajesNormalizados = yield (0, mensajes_1.getAll)();
         res.json(mensajesNormalizados);
@@ -24,7 +22,6 @@ router.get('/normalizado', (req, res, next) => __awaiter(void 0, void 0, void 0,
     }
 }));
 router.get('/denormalizado', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    logger_1.logger.info('GET /api/mensajes/denormalizado');
     try {
         const mensajes = yield (0, mensajes_1.getAllNormal)();
         res.json(mensajes);
@@ -34,7 +31,6 @@ router.get('/denormalizado', (req, res, next) => __awaiter(void 0, void 0, void 
     }
 }));
 router.get('/normalizarEnArchivo', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    logger_1.logger.info('GET /api/mensajes/normalizarEnArchivo');
     try {
         yield (0, mensajes_1.escribirNormalizado)();
         res.json({ msg: 'ok' });
@@ -44,7 +40,6 @@ router.get('/normalizarEnArchivo', (req, res, next) => __awaiter(void 0, void 0,
     }
 }));
 router.get('/denormalizarDesdeArchivo', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    logger_1.logger.info('GET /api/mensajes/denormalizarDesdeArchivo');
     try {
         res.json(yield (0, mensajes_1.leerDenormalizadoDesdeArchivo)());
     }
@@ -53,7 +48,6 @@ router.get('/denormalizarDesdeArchivo', (req, res, next) => __awaiter(void 0, vo
     }
 }));
 router.post('/', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    logger_1.logger.info('POST /api/mensajes/');
     try {
         const msg = req.body;
         yield (0, mensajes_1.save)(msg);

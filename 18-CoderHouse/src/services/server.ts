@@ -18,7 +18,6 @@ import { logger } from './logger';
 import multer from 'multer';
 const upload = multer({ dest: './public/avatars/' });
 
-
 const ttlSeconds = 600;
 
 const StoreOptions = {
@@ -54,6 +53,7 @@ app.engine('hbs', handlebars.engine({
     partialsDir: partialDirPath
 }));
 
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded(
     { extended: true }
 ))
@@ -64,8 +64,14 @@ app.use(compression());
 
 app.use(passport.initialize());
 app.use(passport.session());
+
 passport.use('login', loginFunc);
 passport.use('signup', signUpFunc);
+
+app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
+    logger.info(`Request ${req.method} ${req.url}`);
+    next();
+})
 
 app.use('/', mainRouter);
 

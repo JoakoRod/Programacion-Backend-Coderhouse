@@ -6,8 +6,11 @@ import apiProductos from './api/productos'
 import session from './api/session'
 import info from './api/info';
 import randoms from './api/randoms';
+import wsp from './wsp'
 
 const router = Router();
+
+router.use('/whatsapp', wsp);
 
 //pages
 router.use('/', paginaRouter);

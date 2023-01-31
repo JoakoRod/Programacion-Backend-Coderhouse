@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserModel = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const productos_1 = require("./productos");
 const Schema = mongoose_1.default.Schema;
 const UserSchema = new Schema({
     email: {
@@ -43,7 +44,7 @@ const UserSchema = new Schema({
         require: true
     },
     phone: {
-        type: Number,
+        type: String,
         require: true
     },
     /*   avatar: {
@@ -51,6 +52,10 @@ const UserSchema = new Schema({
         contentType: String,
         require: false
       }, */
+    carrito: {
+        type: [productos_1.productosSchema],
+        default: []
+    },
     role: {
         type: String,
         default: 'user'

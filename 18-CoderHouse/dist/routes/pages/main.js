@@ -17,28 +17,35 @@ const mensajes_1 = require("../../controllers/mensajes");
 const http_errors_1 = __importDefault(require("http-errors"));
 const passport_1 = __importDefault(require("passport"));
 const auth_1 = require("../../middlewares/auth");
-const logger_1 = require("../../services/logger");
-const productos_1 = require("../../models/productos");
+const productos_1 = require("../../controllers/productos");
+const email_1 = require("../../services//email");
 const multer_1 = __importDefault(require("multer"));
-const upload = (0, multer_1.default)({ dest: '../../../public/avatars' });
+const index_1 = __importDefault(require("../../config/index"));
+const twilio_1 = require("../../services/twilio");
 const router = (0, express_1.Router)();
+const storage = multer_1.default.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, './public/avatars');
+    },
+    filename: function (req, file, callback) {
+        callback(null, req.body.email);
+    }
+});
+const upload = (0, multer_1.default)({ storage: storage });
 //const tableName = 'productos';
 //const passportOptions = { failureRedirect: '/login' };
 //Login, logout y signup
 router.get('/login', (req, res, next) => {
-    logger_1.logger.info('GET /login');
     res.render('login', { layout: 'layoutLogin' });
 });
 router.post('/login', passport_1.default.authenticate('login', { failureRedirect: '/errorLogin' }), (req, res, next) => {
-    logger_1.logger.info('POST /login');
     res.redirect('/');
 });
-router.post('/signUp', passport_1.default.authenticate('signup', { failureRedirect: '/errorSignUp' }), (req, res, next) => {
-    logger_1.logger.info('POST /signUp');
+router.post('/signUp', upload.single('avatar'), passport_1.default.authenticate('signup', { failureRedirect: '/errorSignUp' }), (req, res, next) => {
+    (0, email_1.mandarMail)(index_1.default.user, 'nuevo registro', String(JSON.stringify(req.body, null, 2)));
     res.redirect('/');
 });
 router.get('/logout', (req, res, next) => {
-    logger_1.logger.info('GET /logout');
     try {
         req.session.destroy((err) => {
             if (!err)
@@ -53,7 +60,6 @@ router.get('/logout', (req, res, next) => {
 });
 //errores
 router.get('/errorLogin', (req, res, next) => {
-    logger_1.logger.info('GET /errorLogin');
     try {
         res.render('error', { layout: 'error', error: 'Error en el login' });
     }
@@ -62,7 +68,6 @@ router.get('/errorLogin', (req, res, next) => {
     }
 });
 router.get('/errorSignUp', (req, res, next) => {
-    logger_1.logger.info('GET /errorSignUp');
     try {
         res.render('error', { layout: 'error', error: 'Error en la creacion de usuario' });
     }
@@ -72,14 +77,14 @@ router.get('/errorSignUp', (req, res, next) => {
 });
 //main
 router.get('/', auth_1.isLoggedInPage, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    logger_1.logger.info('GET /');
     try {
         const datos = {
-            productos: yield productos_1.productosModel.find().lean(),
+            productos: yield (0, productos_1.getAllProducts)(),
             mostrar: true,
             ruta: '/',
             mensajes: yield (0, mensajes_1.getAllNormal)(),
-            user: `${req.user.firstName} ${req.user.lastName}`
+            user: `${req.user.firstName} ${req.user.lastName}`,
+            admin: req.user.role == 'admin'
         };
         if (!Array.isArray(datos.productos) || datos.productos.length === 0)
             datos.mostrar = false;
@@ -90,15 +95,24 @@ router.get('/', auth_1.isLoggedInPage, (req, res, next) => __awaiter(void 0, voi
     }
 }));
 router.post('/', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    logger_1.logger.info('POST /');
     try {
         const producto = req.body;
-        yield productos_1.productosModel.create(producto);
+        yield (0, productos_1.saveProduct)(producto);
         res.redirect('/');
     }
     catch (error) {
         next(error);
     }
+}));
+router.get('/carrito', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    //render pagina de carrito
+}));
+router.post('/carrito', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    //realizar proceso de compra (encontrar los productos, restar stock y demas)
+    (0, email_1.mandarMail)(index_1.default.user, `nuevo pedido de ${req.user.email} - ${req.user.firstName} ${req.user.lastName}`, String(JSON.stringify(req.body, null, 2)));
+    (0, twilio_1.mandarWsp)(`nuevo pedido de ${req.user.email} - ${req.user.firstName} ${req.user.lastName}`);
+    (0, twilio_1.mandarMsg)('Su pedido ha sido reccibido y sera enviado a la brevedad', req.user.phone);
+    res.send({ msg: "ok" });
 }));
 exports.default = router;
 //# sourceMappingURL=main.js.map

@@ -4,8 +4,8 @@ import minimist from 'minimist';
 import cluster from 'cluster';
 import os from 'os';
 
-
 const numCPUs = os.cpus().length;
+
 
 const optionalArgsObject = {
   alias: {

@@ -17,5 +17,13 @@ export default {
         },
     }, */
     secret: process.env.secret || 'asd123',
-    secret2: process.env.secret2 || 'fgh456' 
+    secret2: process.env.secret2 || 'fgh456',
+    user: process.env.user || 'rahul5@ethereal.email',
+    pass: process.env.pass,
+    accountSid: process.env.TWILIO_ACCOUNT_SID,
+    authToken: process.env.TWILIO_AUTH_TOKEN,
+    myPhone: process.env.myPhone,
+    myPhoneWSP: process.env.myPhoneWSP,
+    twilioPhoneWSP: process.env.twilioPhoneWSP,
+    twilioPhone: process.env.twilioPhone
 };

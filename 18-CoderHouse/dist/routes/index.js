@@ -11,7 +11,9 @@ const productos_1 = __importDefault(require("./api/productos"));
 const session_1 = __importDefault(require("./api/session"));
 const info_1 = __importDefault(require("./api/info"));
 const randoms_1 = __importDefault(require("./api/randoms"));
+const wsp_1 = __importDefault(require("./wsp"));
 const router = (0, express_1.Router)();
+router.use('/whatsapp', wsp_1.default);
 //pages
 router.use('/', main_1.default);
 router.use('/api/productos-test', dev_1.default);

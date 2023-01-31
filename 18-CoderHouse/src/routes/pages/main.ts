@@ -3,35 +3,45 @@ import { getAllNormal } from '../../controllers/mensajes';
 import createError from 'http-errors';
 import passport from 'passport';
 import { isLoggedInPage } from '../../middlewares/auth';
-import { logger } from '../../services/logger';
-import { productosModel } from '../../models/productos';
+import { getAllProducts, saveProduct } from '../../controllers/productos';
+import { mandarMail } from '../../services//email';
+import { Iproductos } from '../../models/productos';
 import multer from 'multer';
-const upload = multer({ dest: '../../../public/avatars' })
+import config from '../../config/index';
+import { mandarMsg, mandarWsp } from '../../services/twilio';
 
 const router = Router();
+
+const storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, './public/avatars');
+    },
+    filename: function (req, file, callback) {
+        callback(null, req.body.email);
+    }
+});
+
+const upload = multer({ storage: storage });
 
 //const tableName = 'productos';
 //const passportOptions = { failureRedirect: '/login' };
 
 //Login, logout y signup
 router.get('/login', (req: Request | any, res: Response, next: NextFunction) => {
-    logger.info('GET /login');
     res.render('login', { layout: 'layoutLogin' });
 })
 
-router.post('/login', passport.authenticate('login', { failureRedirect: '/errorLogin' }),
-    (req: Request | any, res: Response, next: NextFunction) => {
-        logger.info('POST /login');
-        res.redirect('/');
-    })
-
-router.post('/signUp', passport.authenticate('signup', { failureRedirect: '/errorSignUp' }), (req: Request | any, res: Response, next: NextFunction) => {
-    logger.info('POST /signUp');
+router.post('/login', passport.authenticate('login', { failureRedirect: '/errorLogin' }), (req: Request | any, res: Response, next: NextFunction) => {
     res.redirect('/');
 })
 
+router.post('/signUp', upload.single('avatar'), passport.authenticate('signup', { failureRedirect: '/errorSignUp' }),
+    (req: Request | any, res: Response, next: NextFunction) => {
+        mandarMail(config.user, 'nuevo registro', String(JSON.stringify(req.body, null, 2)));
+        res.redirect('/');
+    })
+
 router.get('/logout', (req: Request, res: Response, next: NextFunction) => {
-    logger.info('GET /logout');
     try {
         req.session.destroy((err) => {
             if (!err) res.redirect('/');
@@ -44,7 +54,6 @@ router.get('/logout', (req: Request, res: Response, next: NextFunction) => {
 
 //errores
 router.get('/errorLogin', (req: Request | any, res: Response, next: NextFunction) => {
-    logger.info('GET /errorLogin');
     try {
         res.render('error', { layout: 'error', error: 'Error en el login' });
     } catch (error) {
@@ -53,7 +62,6 @@ router.get('/errorLogin', (req: Request | any, res: Response, next: NextFunction
 });
 
 router.get('/errorSignUp', (req: Request | any, res: Response, next: NextFunction) => {
-    logger.info('GET /errorSignUp');
     try {
         res.render('error', { layout: 'error', error: 'Error en la creacion de usuario' });
     } catch (error) {
@@ -63,14 +71,14 @@ router.get('/errorSignUp', (req: Request | any, res: Response, next: NextFunctio
 
 //main
 router.get('/', isLoggedInPage, async (req: Request | any, res: Response, next: NextFunction) => {
-    logger.info('GET /');
     try {
         const datos = {
-            productos: await productosModel.find().lean(),
+            productos: await getAllProducts(),
             mostrar: true,
             ruta: '/',
             mensajes: await getAllNormal(),
-            user: `${req.user.firstName} ${req.user.lastName}`
+            user: `${req.user.firstName} ${req.user.lastName}`,
+            admin: req.user.role == 'admin'
         };
 
         if (!Array.isArray(datos.productos) || datos.productos.length === 0) datos.mostrar = false;
@@ -81,16 +89,27 @@ router.get('/', isLoggedInPage, async (req: Request | any, res: Response, next: 
 });
 
 router.post('/', async (req: Request, res: Response, next: NextFunction) => {
-    logger.info('POST /');
     try {
         const producto = req.body;
-        await productosModel.create(producto);
+        await saveProduct(producto);
 
         res.redirect('/')
 
     } catch (error) {
         next(error);
     }
+})
+
+router.get('/carrito', async (req: Request, res: Response, next: NextFunction) => {
+    //render pagina de carrito
+})
+
+router.post('/carrito', async (req: Request | any, res: Response, next: NextFunction) => {
+    //realizar proceso de compra (encontrar los productos, restar stock y demas)
+    mandarMail(config.user, `nuevo pedido de ${req.user.email} - ${req.user.firstName} ${req.user.lastName}`, String(JSON.stringify(req.body, null, 2)));
+    mandarWsp(`nuevo pedido de ${req.user.email} - ${req.user.firstName} ${req.user.lastName}`);
+    mandarMsg('Su pedido ha sido reccibido y sera enviado a la brevedad', req.user.phone)
+    res.send({msg: "ok"});
 })
 
 export default router;

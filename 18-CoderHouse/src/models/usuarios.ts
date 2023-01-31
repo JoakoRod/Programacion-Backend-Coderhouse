@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import { productosSchema } from './productos';
 
 const Schema = mongoose.Schema;
 
@@ -30,7 +31,7 @@ const UserSchema = new Schema({
     require: true
   },
   phone: {
-    type: Number,
+    type: String,
     require: true
   },
 /*   avatar: {
@@ -38,6 +39,10 @@ const UserSchema = new Schema({
     contentType: String,
     require: false
   }, */
+  carrito: {
+    type: [productosSchema],
+    default: []
+  },
   role: {
     type: String,
     default: 'user'

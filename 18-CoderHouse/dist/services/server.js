@@ -74,6 +74,7 @@ app.engine('hbs', handlebars.engine({
     defaultLayout: defaultLayerPath,
     partialsDir: partialDirPath
 }));
+app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use((0, express_session_1.default)(StoreOptions));
 app.use(express_1.default.static('public'));
@@ -83,6 +84,10 @@ app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());
 passport_1.default.use('login', auth_1.loginFunc);
 passport_1.default.use('signup', auth_1.signUpFunc);
+app.use((req, res, next) => {
+    logger_1.logger.info(`Request ${req.method} ${req.url}`);
+    next();
+});
 app.use('/', index_1.default);
 app.use((req, res, next) => {
     const ruta = req.path;

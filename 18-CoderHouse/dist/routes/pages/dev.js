@@ -11,11 +11,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const productosFaker_1 = require("../../controllers/productosFaker");
-const logger_1 = require("../../services/logger");
 /* import { getWsServer } from '../../services/socket' */
 const router = (0, express_1.Router)();
 router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    logger_1.logger.info('GET /api/productos-test/');
     const datos = {
         productos: (0, productosFaker_1.getProductos)(),
         mostrar: true,

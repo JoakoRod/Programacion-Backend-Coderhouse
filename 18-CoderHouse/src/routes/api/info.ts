@@ -1,11 +1,9 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import os from 'os';
 import { puerto } from '../../index';
-import { logger } from '../../services/logger';
 const router = Router();
 
 router.get('/info', (req: Request, res: Response, next: NextFunction) => {
-    logger.info('GET /info');
     res.json({
         "Cantidad de CPUs:": os.cpus().length,
         "Argumentos de entrada: ": process.argv.slice(2),
@@ -20,7 +18,6 @@ router.get('/info', (req: Request, res: Response, next: NextFunction) => {
 })
 
 router.get('/info2', (req: Request, res: Response, next: NextFunction) => {
-    logger.info('GET /info2');
     res.json({
         "Cantidad de CPUs:": os.cpus().length,
         "Argumentos de entrada: ": process.argv.slice(2),
