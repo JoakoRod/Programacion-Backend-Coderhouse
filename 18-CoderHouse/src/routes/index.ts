@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import paginaRouter from './pages/main';
+import msg from './pages/msg';
 import test from './pages/dev';
 import apiMensajes from './api/mensajes'
 import apiProductos from './api/productos'
@@ -14,6 +15,7 @@ router.use('/whatsapp', wsp);
 
 //pages
 router.use('/', paginaRouter);
+router.use('/msg', msg);
 router.use('/api/productos-test', test);
 
 //apiREST
