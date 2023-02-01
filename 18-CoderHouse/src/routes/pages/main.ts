@@ -75,7 +75,6 @@ router.get('/', isLoggedInPage, async (req: Request | any, res: Response, next: 
     mensajes.forEach((mensaje: any) => {
         mensaje.createdAt = moment(mensaje.createdAt).format("DD/MM/YYYY HH:mm:ss")
     });
-    console.log(mensajes);
     try {
         const datos = {
             productos: await getAllProducts(),

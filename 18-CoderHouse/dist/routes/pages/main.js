@@ -82,7 +82,6 @@ router.get('/', auth_1.isLoggedInPage, (req, res, next) => __awaiter(void 0, voi
     mensajes.forEach((mensaje) => {
         mensaje.createdAt = (0, moment_1.default)(mensaje.createdAt).format("DD/MM/YYYY HH:mm:ss");
     });
-    console.log(mensajes);
     try {
         const datos = {
             productos: yield (0, productos_1.getAllProducts)(),
