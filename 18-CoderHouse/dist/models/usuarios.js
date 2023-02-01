@@ -12,12 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserModel = void 0;
+exports.UserModel = exports.UserSchema = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
-const productos_1 = require("./productos");
 const Schema = mongoose_1.default.Schema;
-const UserSchema = new Schema({
+;
+exports.UserSchema = new Schema({
     email: {
         type: String,
         required: true,
@@ -52,16 +52,12 @@ const UserSchema = new Schema({
         contentType: String,
         require: false
       }, */
-    carrito: {
-        type: [productos_1.productosSchema],
-        default: []
-    },
     role: {
         type: String,
         default: 'user'
     }
 });
-UserSchema.pre('save', function (next) {
+exports.UserSchema.pre('save', function (next) {
     return __awaiter(this, void 0, void 0, function* () {
         const user = this;
         const hash = yield bcrypt_1.default.hash(user.password, 10);
@@ -69,12 +65,12 @@ UserSchema.pre('save', function (next) {
         next();
     });
 });
-UserSchema.methods.isValidPassword = function (password) {
+exports.UserSchema.methods.isValidPassword = function (password) {
     return __awaiter(this, void 0, void 0, function* () {
         const user = this;
         const compare = yield bcrypt_1.default.compare(password, user.password);
         return compare;
     });
 };
-exports.UserModel = mongoose_1.default.model('user', UserSchema);
+exports.UserModel = mongoose_1.default.model('users', exports.UserSchema);
 //# sourceMappingURL=usuarios.js.map

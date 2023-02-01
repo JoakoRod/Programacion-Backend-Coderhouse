@@ -8,14 +8,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 exports.mensajesCollectionName = 'mensajes';
 ;
 exports.mensajesSchema = new mongoose_1.default.Schema({
-    author: {
-        id: { type: String, required: true },
-        nombre: { type: String, required: true },
-        apellido: { type: String, required: true },
-        edad: { type: Number, required: true },
-        alias: { type: String, required: true },
-        avatar: { type: String, required: true }
-    },
+    user: { type: mongoose_1.default.Schema.Types.ObjectId, ref: 'users' },
     text: { type: String, required: true }
 }, {
     timestamps: true

@@ -1,10 +1,25 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
-import { productosSchema } from './productos';
 
 const Schema = mongoose.Schema;
 
-const UserSchema = new Schema({
+export interface Iuser {
+  email: String,
+  password: String,
+  firstName: String,
+  lastName: String,
+  address: String,
+  age: Number,
+  phone: String,
+  /*   avatar: {
+      data: Buffer,
+      contentType: String,
+      require: false
+    }, */
+  role: String
+};
+
+export const UserSchema = new Schema({
   email: {
     type: String,
     required: true,
@@ -34,15 +49,11 @@ const UserSchema = new Schema({
     type: String,
     require: true
   },
-/*   avatar: {
-    data: Buffer,
-    contentType: String,
-    require: false
-  }, */
-  carrito: {
-    type: [productosSchema],
-    default: []
-  },
+  /*   avatar: {
+      data: Buffer,
+      contentType: String,
+      require: false
+    }, */
   role: {
     type: String,
     default: 'user'
@@ -63,4 +74,4 @@ UserSchema.methods.isValidPassword = async function (password: string) {
   return compare;
 };
 
-export const UserModel = mongoose.model('user', UserSchema);
+export const UserModel = mongoose.model<Iuser>('users', UserSchema);

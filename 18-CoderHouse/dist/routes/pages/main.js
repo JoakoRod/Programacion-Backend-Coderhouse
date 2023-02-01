@@ -22,6 +22,7 @@ const email_1 = require("../../services//email");
 const multer_1 = __importDefault(require("multer"));
 const index_1 = __importDefault(require("../../config/index"));
 const twilio_1 = require("../../services/twilio");
+const moment_1 = __importDefault(require("moment"));
 const router = (0, express_1.Router)();
 const storage = multer_1.default.diskStorage({
     destination: function (req, file, callback) {
@@ -77,12 +78,17 @@ router.get('/errorSignUp', (req, res, next) => {
 });
 //main
 router.get('/', auth_1.isLoggedInPage, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const mensajes = yield (0, mensajes_1.getAllPopulate)();
+    mensajes.forEach((mensaje) => {
+        mensaje.createdAt = (0, moment_1.default)(mensaje.createdAt).format("DD/MM/YYYY HH:mm:ss");
+    });
+    console.log(mensajes);
     try {
         const datos = {
             productos: yield (0, productos_1.getAllProducts)(),
             mostrar: true,
             ruta: '/',
-            mensajes: yield (0, mensajes_1.getAllNormal)(),
+            mensajes: mensajes,
             user: `${req.user.firstName} ${req.user.lastName}`,
             admin: req.user.role == 'admin'
         };

@@ -1,14 +1,14 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import { getAllNormal } from '../../controllers/mensajes';
+import { getAllPopulate } from '../../controllers/mensajes';
 import createError from 'http-errors';
 import passport from 'passport';
 import { isLoggedInPage } from '../../middlewares/auth';
 import { getAllProducts, saveProduct } from '../../controllers/productos';
 import { mandarMail } from '../../services//email';
-import { Iproductos } from '../../models/productos';
 import multer from 'multer';
 import config from '../../config/index';
 import { mandarMsg, mandarWsp } from '../../services/twilio';
+import moment from 'moment';
 
 const router = Router();
 
@@ -71,16 +71,20 @@ router.get('/errorSignUp', (req: Request | any, res: Response, next: NextFunctio
 
 //main
 router.get('/', isLoggedInPage, async (req: Request | any, res: Response, next: NextFunction) => {
+    const mensajes: any = await getAllPopulate();
+    mensajes.forEach((mensaje: any) => {
+        mensaje.createdAt = moment(mensaje.createdAt).format("DD/MM/YYYY HH:mm:ss")
+    });
+    console.log(mensajes);
     try {
         const datos = {
             productos: await getAllProducts(),
             mostrar: true,
             ruta: '/',
-            mensajes: await getAllNormal(),
+            mensajes: mensajes,
             user: `${req.user.firstName} ${req.user.lastName}`,
             admin: req.user.role == 'admin'
         };
-
         if (!Array.isArray(datos.productos) || datos.productos.length === 0) datos.mostrar = false;
         res.render('carga_vista', datos);
     } catch (error) {
@@ -109,7 +113,7 @@ router.post('/carrito', async (req: Request | any, res: Response, next: NextFunc
     mandarMail(config.user, `nuevo pedido de ${req.user.email} - ${req.user.firstName} ${req.user.lastName}`, String(JSON.stringify(req.body, null, 2)));
     mandarWsp(`nuevo pedido de ${req.user.email} - ${req.user.firstName} ${req.user.lastName}`);
     mandarMsg('Su pedido ha sido reccibido y sera enviado a la brevedad', req.user.phone)
-    res.send({msg: "ok"});
+    res.send({ msg: "ok" });
 })
 
 export default router;

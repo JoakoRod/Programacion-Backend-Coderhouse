@@ -125,3 +125,28 @@
 {"code":21608,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21608","status":400,"timestamp":"2023-01-31T22:12:24.858Z"}
 {"code":21608,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21608","status":400,"timestamp":"2023-01-31T22:14:01.369Z"}
 {"level":"error","message":"ERROR 501 \n ruta '/robots.txt' método 'GET' no implementada","timestamp":"2023-01-31T22:17:00.007Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-01-31T23:13:23.672Z"}
+{"level":"error","message":"ERROR 400 \n Unexpected token \" in JSON at position 0","timestamp":"2023-01-31T23:16:37.045Z"}
+{"level":"error","message":"ERROR 400 \n Unexpected token \" in JSON at position 0","timestamp":"2023-01-31T23:19:03.033Z"}
+{"level":"error","message":"ERROR 400 \n Unexpected token h in JSON at position 0","timestamp":"2023-01-31T23:20:31.171Z"}
+{"level":"error","message":"ERROR 400 \n Unexpected token o in JSON at position 1","timestamp":"2023-01-31T23:21:29.494Z"}
+{"level":"error","message":"ERROR 400 \n Unexpected token o in JSON at position 1","timestamp":"2023-01-31T23:21:50.358Z"}
+{"level":"error","message":"ERROR 400 \n Unexpected token o in JSON at position 1","timestamp":"2023-01-31T23:23:11.371Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-01T14:27:46.676Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/msg' método 'POST' no implementada","timestamp":"2023-02-01T14:57:01.891Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/admin@gmail.com' método 'GET' no implementada","timestamp":"2023-02-01T15:46:33.397Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/admin@gmail.com' método 'GET' no implementada","timestamp":"2023-02-01T15:47:12.254Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/admin@gmail.com' método 'GET' no implementada","timestamp":"2023-02-01T15:47:27.489Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/admin@gmail.com' método 'GET' no implementada","timestamp":"2023-02-01T15:47:48.886Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-01T15:47:49.201Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/avatars/' método 'GET' no implementada","timestamp":"2023-02-01T16:19:42.679Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/avatars/' método 'GET' no implementada","timestamp":"2023-02-01T16:52:40.427Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/avatars/' método 'GET' no implementada","timestamp":"2023-02-01T16:55:24.205Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/avatars/' método 'GET' no implementada","timestamp":"2023-02-01T16:55:45.706Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/avatars/' método 'GET' no implementada","timestamp":"2023-02-01T16:56:07.813Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-01T19:13:32.667Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/avatars/' método 'GET' no implementada","timestamp":"2023-02-01T19:24:31.700Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/avatars/' método 'GET' no implementada","timestamp":"2023-02-01T19:37:41.310Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/avatars/' método 'GET' no implementada","timestamp":"2023-02-01T19:37:43.374Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/avatars/' método 'GET' no implementada","timestamp":"2023-02-01T19:37:51.135Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/avatars/' método 'GET' no implementada","timestamp":"2023-02-01T19:39:08.719Z"}

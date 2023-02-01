@@ -17,6 +17,7 @@ const socket_io_1 = require("socket.io");
 const productos_1 = require("../controllers/productos");
 const mensajes_1 = require("../controllers/mensajes");
 const moment_1 = __importDefault(require("moment"));
+const usuarios_1 = require("../models/usuarios");
 let io;
 function initWsServer(server) {
     io = new socket_io_1.Server(server);
@@ -27,13 +28,20 @@ function initWsServer(server) {
             yield (0, productos_1.saveProduct)(producto);
             socket.broadcast.emit('agregarProducto', (producto));
         }));
-        socket.on('envioMSG', (data) => __awaiter(this, void 0, void 0, function* () {
+        socket.on('envioMSG', (msg) => __awaiter(this, void 0, void 0, function* () {
             //console.log('llego un mensaje!');
             //guardar mensaje
-            (0, mensajes_1.save)(data);
-            data.fecha = (0, moment_1.default)().format("DD/MM/YYYY HH:mm:ss");
-            //envio msj
-            socket.broadcast.emit('recibioMSG', (data));
+            (0, mensajes_1.save)(msg);
+            const user = yield usuarios_1.UserModel.findById(msg.user);
+            const res = {
+                email: user.email,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                date: (0, moment_1.default)().format("DD/MM/YYYY HH:mm:ss"),
+                msg: msg.text
+            };
+            //envio msj A TODOS
+            io.emit('recibioMSG', (res));
         }));
     });
     return io;

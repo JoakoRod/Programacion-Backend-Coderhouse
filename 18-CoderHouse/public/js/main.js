@@ -1,5 +1,5 @@
-const form = document.querySelector('#formProductos');
-const formChat = document.querySelector('#chat-form');
+const form = document.querySelector('#formProductos') || null;
+const inputMsg = document.querySelector('#msg');
 const tablaChat = document.querySelector('#tabla-chat');
 const botonLogout = document.querySelector('#logout');
 const botonesAgregarAlCarrito = document.querySelectorAll('.botonAgregarAlCarrito');
@@ -13,23 +13,26 @@ botonLogout.onclick = () => {
     document.location.href = "/logout";
 }
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const [nombre, descripcion, codigo, foto, precio, stock] = document.querySelectorAll('.form-producto');
-    const producto = {
-        nombre: nombre.value,
-        descripcion: descripcion.value,
-        codigo: codigo.value,
-        foto: foto.value,
-        precio: precio.value,
-        stock: stock.value
-    }
-    console.log(producto);
-    agregarProductoALaTabla(producto);
-    socket.emit('seAgregoProducto', producto);
-    form.reset()
-    return false;
-})
+if (form) {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const [nombre, descripcion, codigo, foto, precio, stock] = document.querySelectorAll('.form-producto');
+        const producto = {
+            nombre: nombre.value,
+            descripcion: descripcion.value,
+            codigo: codigo.value,
+            foto: foto.value,
+            precio: precio.value,
+            stock: stock.value
+        }
+        console.log(producto);
+        agregarProductoALaTabla(producto);
+        socket.emit('seAgregoProducto', producto);
+        form.reset()
+        return false;
+    })
+}
+
 
 socket.on('agregarProducto', (producto) => {
     agregarProductoALaTabla(producto);
@@ -76,40 +79,41 @@ function agregarProductoALaTabla(producto) {
     tabla.appendChild(tr);
 }
 
-formChat.addEventListener('submit', (e) => {
-    e.preventDefault();
+function mandarMsg() {
+    const msg = inputMsg.value;
+    fetch('/msg/id', {
+        method: 'GET'
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Success');
+            socket.emit('envioMSG', { user: data, text: msg });
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    inputMsg.value = null;
+}
 
-    const [nombreForm, apellidoForm, emailForm, edadForm, aliasForm, avatarForm, msgForm] = document.querySelectorAll('.form-chat');
-    const data = {
-        author: {
-            id: emailForm.value,
-            nombre: nombreForm.value,
-            apellido: apellidoForm.value,
-            edad: edadForm.value,
-            alias: aliasForm.value,
-            avatar: avatarForm.value
-        },
-        text: msgForm.value
-    };
-    socket.emit('envioMSG', data);
-    const fecha = ' ' + moment().format("DD/MM/YYYY HH:mm:ss");
-    añadirMsg(data, fecha);
-    msgForm.value = null;
 
-})
 
 socket.on('recibioMSG', async (data) => {
+
+    /*     email: 
+        firstName: 
+        lastName: 
+        date:
+        msg */
     añadirMsg(data);
 })
 
-function añadirMsg(data, fecha) {
-    console.log(data);
+function añadirMsg(data) {
     const div = document.createElement('div');
     div.className += 'message';
     div.innerHTML = `
-        <p class="meta">${data.author.id}<span> ${data.fecha || fecha}</span></p>
+        <p class="meta"><img class="img" src="${document.location.href}avatars/${data.email}" alt="${data.firstName} ${data.lastName}"> ${data.firstName} ${data.lastName}<span> ${data.date}</span></p>
         <p class="text">
-            ${data.text}
+            ${data.msg}
         </p>`;
     tablaChat.appendChild(div);
 }

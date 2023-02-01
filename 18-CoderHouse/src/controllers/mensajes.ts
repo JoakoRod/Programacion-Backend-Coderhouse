@@ -18,6 +18,10 @@ export async function getAllNormal() {
     return await mensajesModel.find().lean();
 }
 
+export async function getAllPopulate() {
+    return await mensajesModel.find().populate('user').lean();
+}
+
 export async function save(msg: any) {
     await mensajesModel.create(msg)
 }
