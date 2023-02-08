@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import { mandarWspARemitente} from '../services/twilio';
+import { mandarWspARemitente} from '../../services/twilio';
 
 const router = Router();
 

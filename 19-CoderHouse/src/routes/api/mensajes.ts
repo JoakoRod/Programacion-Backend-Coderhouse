@@ -1,5 +1,5 @@
-import { Router, Request, Response, NextFunction } from 'express';
-import { escribirNormalizado, getAll, getAllNormal, leerDenormalizadoDesdeArchivo, save } from '../../controllers/mensajes';
+/* import { Router, Request, Response, NextFunction } from 'express';
+import { escribirNormalizado, getAll, getAllNormal, leerDenormalizadoDesdeArchivo, save } from '../../api/mensajes';
 const router = Router();
 
 router.get('/normalizado', async (req: Request, res: Response, next: NextFunction) => {
@@ -47,4 +47,4 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     }
 });
 
-export default router;
+export default router; */

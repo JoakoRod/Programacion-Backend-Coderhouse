@@ -1,4 +1,4 @@
-import { Router, Request, Response, NextFunction } from 'express';
+/* import { Router, Request, Response, NextFunction } from 'express';
 import { fork } from 'child_process';
 //import path from 'path';
 import { listaRandom } from '../../controllers/randoms';
@@ -15,8 +15,8 @@ router.get('/randoms', (req: Request, res: Response, next: NextFunction) => {
     /* arrayNums.send({ msg: 'random', cant: cant });
     arrayNums.on('message', array => {
         res.json(array);
-    }) */
+    }) //*
     res.json(arrayNums);
 })
 
-export default router;
+export default router; */

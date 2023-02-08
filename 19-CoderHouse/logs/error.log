@@ -151,3 +151,46 @@
 {"level":"error","message":"ERROR 501 \n ruta '/avatars/' método 'GET' no implementada","timestamp":"2023-02-01T19:37:51.135Z"}
 {"level":"error","message":"ERROR 501 \n ruta '/avatars/' método 'GET' no implementada","timestamp":"2023-02-01T19:39:08.719Z"}
 {"code":21608,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21608","status":400,"timestamp":"2023-02-01T20:13:50.461Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T13:58:34.054Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T14:21:34.512Z"}
+{"level":"error","message":"ERROR 500 \n Failed to lookup view \"errorLogin\" in views directory \"D:\\CoderHouse\\CursoBackend\\Entregas\\Programacion-Backend-Coderhouse\\19-CoderHouse\\views\"","timestamp":"2023-02-08T14:26:11.013Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T14:26:11.111Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T14:28:10.847Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T14:32:46.838Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T14:33:09.117Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T14:33:59.987Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T14:37:49.178Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T14:39:42.096Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T14:49:19.376Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T14:49:34.872Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T14:49:49.910Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T14:50:06.038Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T16:34:48.325Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T16:35:02.196Z"}
+{"level":"error","message":"ERROR 500 \n mensajes.forEach is not a function","timestamp":"2023-02-08T16:35:13.471Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T16:35:13.569Z"}
+{"level":"error","message":"ERROR 500 \n Cannot read properties of undefined (reading 'firstName')","timestamp":"2023-02-08T16:37:44.246Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T16:37:44.360Z"}
+{"level":"error","message":"ERROR 500 \n Cannot read properties of undefined (reading 'firstName')","timestamp":"2023-02-08T16:37:56.446Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T16:37:56.655Z"}
+{"level":"error","message":"ERROR 500 \n Cannot read properties of undefined (reading 'firstName')","timestamp":"2023-02-08T16:38:05.242Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T16:38:05.320Z"}
+{"level":"error","message":"ERROR 500 \n Cannot read properties of undefined (reading 'firstName')","timestamp":"2023-02-08T16:38:06.201Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T16:38:06.292Z"}
+{"level":"error","message":"ERROR 500 \n Cannot read properties of undefined (reading 'firstName')","timestamp":"2023-02-08T16:38:11.590Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T16:38:11.697Z"}
+{"level":"error","message":"ERROR 500 \n Cannot read properties of undefined (reading 'firstName')","timestamp":"2023-02-08T16:38:16.196Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T16:38:16.295Z"}
+{"level":"error","message":"ERROR 500 \n Cannot read properties of undefined (reading 'firstName')","timestamp":"2023-02-08T16:38:33.455Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T16:38:33.660Z"}
+{"level":"error","message":"ERROR 500 \n Cannot read properties of undefined (reading 'firstName')","timestamp":"2023-02-08T16:39:30.503Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T16:39:30.570Z"}
+{"level":"error","message":"ERROR 500 \n Cannot read properties of undefined (reading 'firstName')","timestamp":"2023-02-08T16:39:38.796Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T16:39:38.843Z"}
+{"level":"error","message":"ERROR 500 \n Cannot read properties of undefined (reading 'firstName')","timestamp":"2023-02-08T16:40:01.959Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T16:40:02.119Z"}
+{"level":"error","message":"ERROR 500 \n Cannot read properties of undefined (reading 'firstName')","timestamp":"2023-02-08T16:41:57.964Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T16:41:58.119Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T16:44:06.087Z"}
+{"code":21608,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21608","status":400,"timestamp":"2023-02-08T16:46:01.330Z"}
+{"level":"error","message":"ERROR 501 \n ruta '/favicon.ico' método 'GET' no implementada","timestamp":"2023-02-08T18:21:02.733Z"}

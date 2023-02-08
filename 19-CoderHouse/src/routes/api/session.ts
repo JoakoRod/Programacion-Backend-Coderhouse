@@ -1,4 +1,4 @@
-import { Router, Request, Response, NextFunction } from 'express';
+/* import { Router, Request, Response, NextFunction } from 'express';
 import createError from 'http-errors';
 import passport from 'passport';
 import { isLoggedIn } from '../../middlewares/auth';
@@ -39,4 +39,4 @@ router.post('/logout', (req: Request, res: Response, next: NextFunction) => {
     }
 });
 
-export default router;
+export default router; */

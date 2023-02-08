@@ -1,9 +1,10 @@
-import { Router, Request, Response, NextFunction } from 'express';
+import { Router } from 'express';
+import { pageController } from '../../controllers';
+import Handler from 'express-async-handler'
 import { isLoggedInPage } from '../../middlewares/auth';
+
 const router = Router();
 
-router.get('/id', isLoggedInPage, async (req: Request | any, res: Response, next: NextFunction) => {
-    res.send(req.user._id);
-})
+router.get('/id',isLoggedInPage, Handler(pageController.userId));
 
 export default router;

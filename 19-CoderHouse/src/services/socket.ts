@@ -1,7 +1,6 @@
 import { Server } from "socket.io";
-import { saveProduct } from '../controllers/productos';
+import { mensajesAPI, productosAPI } from '../api';
 import http from 'http';
-import { save } from "../controllers/mensajes";
 import moment from "moment";
 import { UserModel, Iuser } from "../models/usuarios";
 
@@ -15,14 +14,14 @@ export function initWsServer(server: http.Server) {
 
     socket.on('seAgregoProducto', async (producto) => {
       //console.log('se carga un producto');
-      await saveProduct(producto);
+      await productosAPI.saveProduct(producto);
       socket.broadcast.emit('agregarProducto', (producto));
     });
 
     socket.on('envioMSG', async (msg) => {
       //console.log('llego un mensaje!');
       //guardar mensaje
-      save(msg);
+      mensajesAPI.save(msg);
       const user: Iuser | any = await UserModel.findById(msg.user);
       
       const res = {

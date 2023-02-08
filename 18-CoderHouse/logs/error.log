@@ -151,3 +151,4 @@
 {"level":"error","message":"ERROR 501 \n ruta '/avatars/' método 'GET' no implementada","timestamp":"2023-02-01T19:37:51.135Z"}
 {"level":"error","message":"ERROR 501 \n ruta '/avatars/' método 'GET' no implementada","timestamp":"2023-02-01T19:39:08.719Z"}
 {"code":21608,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21608","status":400,"timestamp":"2023-02-01T20:13:50.461Z"}
+{"code":21608,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/21608","status":400,"timestamp":"2023-02-07T23:18:21.421Z"}

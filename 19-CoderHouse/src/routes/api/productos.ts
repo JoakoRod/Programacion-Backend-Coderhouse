@@ -1,4 +1,4 @@
-import { Iproductos, productosModel } from '../../models/productos';
+/* import { Iproductos, productosModel } from '../../models/productos';
 import { isAdmin } from '../../middlewares/auth';
 import { Router, Request, Response, NextFunction } from 'express';
 
@@ -60,4 +60,4 @@ router.delete('/:id', isAdmin, async (req: Request, res: Response, next: NextFun
 
 });
 
-export default router;
+export default router; */

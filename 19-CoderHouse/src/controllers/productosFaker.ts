@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import { Request, Response, NextFunction } from 'express';
 
 function generarProductos(cantidad: Number) {
     const arrayProductos = [];
@@ -12,6 +13,22 @@ function generarProductos(cantidad: Number) {
     return arrayProductos;
 }
 
-export function getProductos() {
+function getProductos() {
     return generarProductos(5);
 }
+
+
+const load = async (req: Request | any, res: Response, next: NextFunction) => {
+    const datos = {
+        productos: getProductos(),
+        mostrar: true,
+        ruta: '/',
+        mensajes: null //agregar
+    };
+    
+    res.render('carga_vista_dev', datos);
+};
+
+export default {
+    load
+};
