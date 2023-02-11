@@ -4,16 +4,23 @@ import { productosAPI, mensajesAPI } from '../api';
 import { mandarMsg, mandarWsp } from '../services/twilio';
 import { mandarMail } from '../services/email';
 import config from '../config'
+import createError from 'http-errors';
+
+let productosDao: productosAPI;
+
+productosAPI.getInstance().then((instance) => {
+    productosDao = instance;
+});
 
 const load = async (req: Request | any, res: Response, next: NextFunction) => {
 
-    const mensajes =  await mensajesAPI.getAllPopulate();
+    const mensajes = await mensajesAPI.getAllPopulate();
     mensajes.forEach((mensaje: any) => {
         mensaje.createdAt = moment(mensaje.createdAt).format("DD/MM/YYYY HH:mm:ss")
     });
 
     const datos = {
-        productos: await productosAPI.getAllProducts(),
+        productos: await productosDao.getProduct(),
         mostrar: true,
         ruta: '/',
         mensajes: mensajes,
@@ -28,9 +35,13 @@ const load = async (req: Request | any, res: Response, next: NextFunction) => {
 const guardarProducto = async (req: Request | any, res: Response, next: NextFunction) => {
     try {
         const producto = req.body;
-        await productosAPI.saveProduct(producto);
-        res.redirect('/')
-
+        const result = productosDao.validateSchema(producto);
+        if (result.errors) {
+            throw createError(500, result.errors.map((a) => a.message));
+        } else {
+            await productosDao.addProduct(producto);
+            res.redirect('/')
+        };
     } catch (error) {
         next(error);
     }

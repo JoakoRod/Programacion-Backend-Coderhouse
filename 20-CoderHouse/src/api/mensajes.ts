@@ -1,4 +1,4 @@
-import { Imensajes, mensajesModel } from '../database/daos/mongo/schemas/mensajes';
+import { Imensajes, mensajesModel } from '../models/products/DAOs/mongo/schemas/mensajes';
 import { denormalize, normalize, schema } from 'normalizr';
 import createError from 'http-errors';
 import fs from 'fs';

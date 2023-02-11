@@ -1,7 +1,7 @@
 import passport from 'passport';
 import { Request } from 'express';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { UserModel } from '../database/daos/mongo/schemas/usuarios';
+import { UserModel } from '../models/products/DAOs/mongo/schemas/usuarios';
 
 interface IStrategyOptionsWithRequest {
     usernameField?: string | undefined;

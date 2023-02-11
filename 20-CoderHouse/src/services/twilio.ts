@@ -1,5 +1,5 @@
 import config from '../config/index'
-import { logger } from './logger'
+import { Logger } from './logger'
 
 const accountSid = config.accountSid;
 const authToken = config.authToken
@@ -15,9 +15,9 @@ export async function mandarWsp(msg: string) {
             from: config.twilioPhoneWSP!,
             to: config.myPhoneWSP!
         })
-        logger.info(message);
+        Logger.info(message);
     } catch (error) {
-        logger.error(error);
+        Logger.error(error);
     }
 }
 
@@ -29,7 +29,7 @@ export async function mandarWspARemitente(msg:string, senderID:string) {
             from: config.twilioPhoneWSP!
         })
     } catch (error) {
-        logger.error(error);
+        Logger.error(error);
     }
 }
 
@@ -40,8 +40,8 @@ export async function mandarMsg(msg: string, num: number) {
             from: config.twilioPhone!,
             to: config.myPhone
         })
-        logger.info(message);
+        Logger.info(message);
     } catch (error) {
-        logger.error(error);
+        Logger.error(error);
     }
 }

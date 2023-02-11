@@ -1,4 +1,5 @@
 import bodyParser from "body-parser";
+import { ErrorRequestHandler } from 'express';
 import express from 'express';
 import http from 'http';
 import mainRouter from '../routes/index';
@@ -13,7 +14,7 @@ import passport from 'passport';
 import { signUpFunc, loginFunc } from './auth';
 //import morgan from 'morgan';
 import compression from 'compression';
-import { logger } from './logger';
+import { Logger } from './logger';
 //avatars and files
 import multer from 'multer';
 const upload = multer({ dest: './public/avatars/' });
@@ -69,7 +70,7 @@ passport.use('login', loginFunc);
 passport.use('signup', signUpFunc);
 
 app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
-    logger.info(`Request ${req.method} ${req.url}`);
+    Logger.info(`Request ${req.method} ${req.url}`);
     next();
 })
 
@@ -79,20 +80,20 @@ app.use((req: express.Request, res: express.Response, next: express.NextFunction
 
     const ruta = req.path;
     const metodo = req.method;
-    logger.warn(`Se intento acceder a ${ruta} con el metodo ${metodo}`);
+    Logger.warn(`Se intento acceder a ${ruta} con el metodo ${metodo}`);
     next(createError(501, `ruta '${ruta}' método '${metodo}' no implementada`));
 })
 
-app.use((err: { status: number; message: string; stack: string; }, req: express.Request, res: express.Response, next: express.NextFunction) => {
-    const status = err.status || 500;
-    const message = err.message || 'internal server err';
-    logger.error(`ERROR ${status} \n ${message}`);
+const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
+    Logger.error(`HUBO UN ERROR ${err.message}`);
+    const status = err.statusCode || 500;
+    const msg = err.message || 'Internal Server Error';
+    const stack = err.stack;
+    Logger.error(err);
+    res.status(status).send({ msg, stack });
+};
 
-    res.status(status).json({
-        message,
-        stack: err.stack
-    })
-});
+app.use(errorHandler);
 
 initWsServer(server);
 

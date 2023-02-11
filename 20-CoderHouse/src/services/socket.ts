@@ -2,7 +2,7 @@ import { Server } from "socket.io";
 import { mensajesAPI, productosAPI } from '../api';
 import http from 'http';
 import moment from "moment";
-import { UserModel, Iuser } from "../database/daos/mongo/schemas/usuarios";
+import { UserModel, Iuser } from "../models/products/DAOs/mongo/schemas/usuarios";
 
 let io: Server;
 
