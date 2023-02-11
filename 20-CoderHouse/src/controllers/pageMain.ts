@@ -7,17 +7,27 @@ import config from '../config'
 import createError from 'http-errors';
 
 let productosDao: productosAPI;
+let messagesDao: mensajesAPI;
 
 productosAPI.getInstance().then((instance) => {
     productosDao = instance;
 });
 
+mensajesAPI.getInstance().then((instance) => {
+    messagesDao = instance;
+});
+
 const load = async (req: Request | any, res: Response, next: NextFunction) => {
 
-    const mensajes = await mensajesAPI.getAllPopulate();
-    mensajes.forEach((mensaje: any) => {
-        mensaje.createdAt = moment(mensaje.createdAt).format("DD/MM/YYYY HH:mm:ss")
-    });
+    const mensajes: any = await messagesDao.getMessagePopulate('users');
+    if (Array.isArray(mensajes)) {
+        mensajes.forEach((mensaje: any) => {
+            mensaje.createdAt = moment(mensaje.createdAt).format("DD/MM/YYYY HH:mm:ss");
+        });
+    } else {
+        mensajes.createdAt = moment(mensajes.createdAt).format("DD/MM/YYYY HH:mm:ss");
+    }
+
 
     const datos = {
         productos: await productosDao.getProduct(),
