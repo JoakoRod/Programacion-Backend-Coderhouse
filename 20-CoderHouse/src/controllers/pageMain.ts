@@ -28,7 +28,6 @@ const load = async (req: Request | any, res: Response, next: NextFunction) => {
         mensajes.createdAt = moment(mensajes.createdAt).format("DD/MM/YYYY HH:mm:ss");
     }
 
-
     const datos = {
         productos: await productosDao.getProduct(),
         mostrar: true,
