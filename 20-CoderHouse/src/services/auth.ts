@@ -1,7 +1,12 @@
 import passport from 'passport';
 import { Request } from 'express';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { UserModel } from '../models/products/DAOs/mongo/schemas/usuarios';
+import { usersAPI } from '../api';
+
+let usersDao: usersAPI;
+usersAPI.getInstance().then((instance) => {
+    usersDao = instance;
+});
 
 interface IStrategyOptionsWithRequest {
     usernameField?: string | undefined;
@@ -17,7 +22,7 @@ const strategyOptions: IStrategyOptionsWithRequest = {
 };
 
 const login = async (req: Request, email: string, password: string, done: Function) => {
-    const user: any = await UserModel.findOne({ email });
+    const user: any = await usersDao.queryUser({ email: email });
     //si no encuentra el username o si su contrasena (encriptada) no es encontrada
     if (!user || await user.isValidPassword(password) == false) {
         return done(null, false, { message: 'Invalid Username/Password' });
@@ -34,11 +39,7 @@ const signup = async (req: Request, username: string, password: string, done: Fu
             return done(null, false, { message: 'Invalid Body Fields' });
         }
 
-        const query = {
-            $or: [{ email: email }, { phone: phone }],
-        };
-
-        const user = await UserModel.findOne(query);
+        const user = await usersDao.validateUser(email, phone);
 
         if (user) {
             //logger.info('User already exists');
@@ -55,7 +56,7 @@ const signup = async (req: Request, username: string, password: string, done: Fu
                 role: 'user'
             };
 
-            const newUser = await UserModel.create(userData);
+            const newUser = await usersDao.addUser(userData);
 
             return done(null, newUser);
         }
@@ -83,10 +84,10 @@ passport.serializeUser((user: any, done) => {
 /**
  * DeserializeUser Permite tomar la info que mandamos con el serializeUser para crear el objeto req.user 
  */
-passport.deserializeUser((userId: string | number, done) => {
+passport.deserializeUser((userId: string, done) => {
     //Notar que recibimos el userId en la funcion (que es lo que mandamos en el done del serializedUser)
     //Buscamos el usuario con ese id y lo retornamos. El resultado va a estar en req.user
-    UserModel.findById(userId).then((user) => {
+    usersDao.getUser(userId).then((user) => {
         return done(null, user);
     })
 });
