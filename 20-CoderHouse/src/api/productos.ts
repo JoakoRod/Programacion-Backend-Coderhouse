@@ -1,7 +1,8 @@
 import { ValidationResult } from 'joi';
 import Config from '../config';
 import { Logger } from '../services/logger';
-import { ProductsFactoryDAO, ProductsDAO} from '../models/products/products.factory';
+import { ProductsFactoryDAO} from '../models/products/products.factory';
+import { ProductsDAO} from '../models/products/products.factory';
 import { ProductI, ProductsDTO } from '../models/products/products.interfaces';
 import { ProductJoiSchema } from '../models/products/products.schemas';
 

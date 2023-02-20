@@ -21,7 +21,7 @@ export default class MessagesAPI {
         if (!this.instance) {
             Logger.info('Inicializando api de mensajes');
             const dao = await MessagesFactoryDAO.get(Config.PERSISTENCIA);
-            MessagesAPI.instance = new MessagesAPI(dao);
+            this.instance = new MessagesAPI(dao);
         }
 
         return MessagesAPI.instance;
