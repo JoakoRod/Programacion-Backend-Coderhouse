@@ -17,7 +17,7 @@ export default class UsersAPI {
         if (!this.instance) {
             Logger.info('Inicializando api de Users');
             const dao = await UsersFactoryDAO.get(Config.PERSISTENCIA);
-            this.instance = new UsersAPI(dao);
+            UsersAPI.instance = new UsersAPI(dao);
         }
 
         return UsersAPI.instance;
