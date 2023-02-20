@@ -25,7 +25,7 @@ export interface UserBaseClass {
     add(data: UserI): Promise<UsersDTO>;
     update(id: string, newUserData: UserI): Promise<UsersDTO>;
     delete(id: string): Promise<void>;
-    query(options: UserQuery): Promise<UsersDTO[]>;
+    query(options: UserQuery): Promise<UsersDTO[] | UsersDTO>;
     validate(email: string, phone: string): Promise<UsersDTO[]>;
 }
 

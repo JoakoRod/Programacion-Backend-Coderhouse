@@ -15,7 +15,7 @@ export default class ProductsAPI {
   }
 
   static async getInstance(): Promise<ProductsAPI> {
-    if (!this.instance) {
+    if (!ProductsAPI.instance) {
       Logger.info('Inicializando api de productos');
       const dao = await ProductsFactoryDAO.get(Config.PERSISTENCIA);
       ProductsAPI.instance = new ProductsAPI(dao);

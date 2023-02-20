@@ -6,56 +6,20 @@ import {
   UserBaseClass,
   UserQuery,
 } from '../users.interfaces';
+import schema from '../schema/users.schema';
 import createError from 'http-errors';
 
 export default class UserDao implements UserBaseClass {
   private static instance: UserDao;
   private static client: MongoDBClient;
-  private schema = new mongoose.Schema<UserI>(
-    {
-      email: {
-        type: String,
-        required: true,
-        unique: true,
-      },
-      password: {
-        type: String,
-        required: true,
-      },
-      firstName: {
-        type: String,
-        required: true,
-      },
-      lastName: {
-        type: String,
-        required: true,
-      },
-      address: {
-        type: String,
-        required: true,
-      },
-      age: {
-        type: Number,
-        require: true
-      },
-      phone: {
-        type: String,
-        require: true
-      },
-      role: {
-        type: String,
-        default: 'user'
-      }
-    },
-    { versionKey: false }
-  );
-  private users = mongoose.model<UserI>('users', this.schema);
+  
+  private users = mongoose.model<UserI>('users', schema);
 
   static async getInstance(local: boolean = false) {
     if (!UserDao.instance) {
       console.log('Inicializamos DAO Users');
-      await MongoDBClient.getConnection(local);
       UserDao.instance = new UserDao();
+      await MongoDBClient.getConnection(local);
       UserDao.client = await MongoDBClient.getConnection();
     }
     return UserDao.instance;
@@ -117,7 +81,8 @@ export default class UserDao implements UserBaseClass {
   async validate(email: string, phone: string): Promise<UsersDTO[]> {
 
     const result = await this.users.find({ $or: [{ email: email }, { phone: phone }] });
-
-    return result.map((aResult) => new UsersDTO(aResult));
+    const result2 = result.map((aResult) => new UsersDTO(aResult));
+    console.log(result2);
+    return result2
   }
 }

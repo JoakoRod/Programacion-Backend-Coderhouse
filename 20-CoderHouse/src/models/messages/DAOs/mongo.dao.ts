@@ -23,8 +23,8 @@ export default class MessageDao implements MessageBaseClass {
   static async getInstance(local: boolean = false) {
     if (!MessageDao.instance) {
       console.log('Inicializamos DAO Messages');
-      await MongoDBClient.getConnection(local);
       MessageDao.instance = new MessageDao();
+      await MongoDBClient.getConnection(local);
       MessageDao.client = await MongoDBClient.getConnection();
     }
     return MessageDao.instance;

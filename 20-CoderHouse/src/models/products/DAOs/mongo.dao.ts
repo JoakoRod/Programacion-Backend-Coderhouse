@@ -45,8 +45,8 @@ export default class ProductDao implements ProductBaseClass {
   static async getInstance(local: boolean = false) {
     if (!ProductDao.instance) {
       console.log('Inicializamos DAO Products');
-      await MongoDBClient.getConnection(local);
       ProductDao.instance = new ProductDao();
+      await MongoDBClient.getConnection(local);
       ProductDao.client = await MongoDBClient.getConnection();
     }
     return ProductDao.instance;

@@ -1,21 +1,8 @@
 import dotenv from 'dotenv';
-import mongoose from 'mongoose';
-
-mongoose.set('strictQuery', true);
 
 dotenv.config({
     path: './src/config/.env'
 });
-
-export enum PersistenceType {
-    Memoria = 'MEM',
-    FileSystem = 'FS',
-    MYSQL = 'MYSQL',
-    SQLITE3 = 'SQLITE3',
-    LocalMongo = 'LOCAL-MONGO',
-    MongoAtlas = 'MONGO-ATLAS',
-    Firebase = 'FIREBASE',
-}
 
 export default {
     MONGO_ATLAS_URL: process.env.mongo_atlas || 'mongoSRV', //'mongodb+srv://admin:admin@coderhouse.dahey8p.mongodb.net/Entrega18?retryWrites=true&w=majority'
@@ -29,7 +16,6 @@ export default {
             database: 'backend',
         },
     }, */
-    MONGO_LOCAL_URL: process.env.mongo_local,
     secret: process.env.secret || 'asd123',
     secret2: process.env.secret2 || 'fgh456',
     user: process.env.user || 'rahul5@ethereal.email',
@@ -39,6 +25,5 @@ export default {
     myPhone: process.env.myPhone,
     myPhoneWSP: process.env.myPhoneWSP,
     twilioPhoneWSP: process.env.twilioPhoneWSP,
-    twilioPhone: process.env.twilioPhone,
-    PERSISTENCIA: PersistenceType.MongoAtlas,
+    twilioPhone: process.env.twilioPhone
 };
