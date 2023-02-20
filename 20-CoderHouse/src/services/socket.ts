@@ -30,25 +30,26 @@ export function initWsServer(server: http.Server) {
 
     socket.on('seAgregoProducto', async (producto) => {
       //console.log('se carga un producto');
-      /* await productosDao.addProduct(producto); */
+      await productosDao.addProduct(producto);
       socket.broadcast.emit('agregarProducto', (producto));
     });
 
     socket.on('envioMSG', async (msg) => {
       //console.log('llego un mensaje!');
       //guardar mensaje
-      /* messagesDao.addMessage(msg);
-      const user: UserI | any = await usersDao.getUser(msg.user); */
+      messagesDao.addMessage(msg);
+      const user: UserI | any = await usersDao.getUser(msg.user);
 
       const res = {
-        /* email: user.email,
+        email: user.email,
         firstName: user.firstName,
-        lastName: user.lastName, */
+        lastName: user.lastName,
         date: moment().format("DD/MM/YYYY HH:mm:ss"),
         msg: msg.text
       };
 
       //envio msj A TODOS
+      console.log(res)
       io.emit('recibioMSG', (res));
     });
 

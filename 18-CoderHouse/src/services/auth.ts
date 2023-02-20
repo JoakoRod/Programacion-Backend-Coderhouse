@@ -86,6 +86,7 @@ passport.serializeUser((user: any, done) => {
 passport.deserializeUser((userId: string | number, done) => {
     //Notar que recibimos el userId en la funcion (que es lo que mandamos en el done del serializedUser)
     //Buscamos el usuario con ese id y lo retornamos. El resultado va a estar en req.user
+    console.log(userId)
     UserModel.findById(userId).then((user) => {
         return done(null, user);
     })

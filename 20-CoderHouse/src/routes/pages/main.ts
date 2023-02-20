@@ -27,7 +27,7 @@ router.get('/logout', Handler(authController.logout));
 
 //main
 router.get('/', isLoggedInPage, Handler(pageController.load));
-router.post('/', Handler(pageController.guardarProducto));
+router.post('/', isLoggedInPage, Handler(pageController.guardarProducto));
 router.get('/carrito', Handler(pageController.loadCarrito));
 router.post('/carrito', Handler(pageController.compra));
 

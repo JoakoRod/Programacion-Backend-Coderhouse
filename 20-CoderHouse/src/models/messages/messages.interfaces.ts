@@ -1,9 +1,11 @@
+import { UserI } from 'models/users/users.interfaces';
 import mongoose from 'mongoose';
 
 export interface MessageI {
     _id?: string;
     user: mongoose.Schema.Types.ObjectId | string | number,
     text: string
+    updatedAt: string
 }
 
 export interface MessageQuery {
@@ -21,12 +23,14 @@ export interface MessageBaseClass {
 
 export class MessagesDTO {
     id: string;
-    user: string | number | mongoose.Schema.Types.ObjectId;
+    user: string | number | mongoose.Schema.Types.ObjectId | UserI;
     text: string;
+    updatedAt: string;
 
     constructor(data: MessageI) {
         this.user = data.user;
         this.text = data.text;
         this.id = data._id || '';
+        this.updatedAt = data.updatedAt
     }
 }

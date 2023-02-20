@@ -51,7 +51,11 @@ app.engine('hbs', handlebars.engine({
     extname: ".hbs",
     layoutsDir: layoutDirPath,
     defaultLayout: defaultLayerPath,
-    partialsDir: partialDirPath
+    partialsDir: partialDirPath,
+    runtimeOptions: {
+        allowProtoPropertiesByDefault: true,
+        allowProtoMethodsByDefault: true
+    }
 }));
 
 app.use(bodyParser.json())

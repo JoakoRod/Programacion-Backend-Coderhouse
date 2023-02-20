@@ -49,10 +49,4 @@ schema.pre('save', async function (next) {
     next();
 });
 
-schema.methods.isValidPassword = async function (password: string) {
-    const user = this;
-    const compare = await bcrypt.compare(password, user.password);
-    return compare;
-};
-
 export default schema;

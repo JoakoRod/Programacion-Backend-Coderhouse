@@ -49,16 +49,14 @@ export default class MessageDao implements MessageBaseClass {
   }
 
   async getPopulate(populate: string, id?: string): Promise<MessagesDTO[] | MessagesDTO> {
-    let output: MessageI[] = [];
-
     if (id) {
       if (!this.isValid(id))
         throw createError(500, `error con la db, el documento no existe`)
-      const document = await this.messages.findById(id).populate(populate);
-      if (document) return new MessagesDTO(document);
+      const document: any = await this.messages.findById(id).populate(populate);
+      if (document) return document;
       else throw createError(500, `error con la db, el documento no existe`)
     }
-    output = await this.messages.find().populate(populate);
+    const output = await this.messages.find().populate(populate);
     return output.map((aMessage) => new MessagesDTO(aMessage));
   }
 

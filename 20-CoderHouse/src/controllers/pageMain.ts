@@ -19,15 +19,15 @@ mensajesAPI.getInstance().then((instance) => {
 
 const load = async (req: Request | any, res: Response, next: NextFunction) => {
 
-    const mensajes: any = await messagesDao.getMessagePopulate('users');
+    const mensajes: any = await messagesDao.getMessagePopulate('user');
+    
     if (Array.isArray(mensajes)) {
         mensajes.forEach((mensaje: any) => {
-            mensaje.createdAt = moment(mensaje.createdAt).format("DD/MM/YYYY HH:mm:ss");
+            mensaje.updatedAt = moment(mensaje.updatedAt).format("DD/MM/YYYY HH:mm:ss");
         });
     } else {
-        mensajes.createdAt = moment(mensajes.createdAt).format("DD/MM/YYYY HH:mm:ss");
+        mensajes.updatedAt = moment(mensajes.updatedAt).format("DD/MM/YYYY HH:mm:ss");
     }
-
     const datos = {
         productos: await productosDao.getProduct(),
         mostrar: true,
@@ -69,7 +69,7 @@ const compra = async (req: Request | any, res: Response, next: NextFunction) => 
 }
 
 const userId = (req: Request | any, res: Response, next: NextFunction) => {
-    res.send(req.user._id);
+    res.send(req.user.id);
 }
 
 export default {

@@ -25,7 +25,6 @@ const strategyOptions: IStrategyOptionsWithRequest = {
 
 const login = async (req: Request, email: string, password: string, done: Function) => {
     const user = await usersDao.queryUser({ email: email });
-    console.log(user);
     if (user.length > 0 ){
         const compare = await bcrypt.compare(password, user[0].password);
         if (compare == false) {
@@ -84,7 +83,7 @@ export const signUpFunc = new LocalStrategy(strategyOptions, signup);
  */
 passport.serializeUser((user: any, done) => {
     //Notar que vamos a guardar en req.session.passport el id del usuario. nada mas
-    done(null, user.id);
+    done(null, user[0].id);
 });
 
 /**
