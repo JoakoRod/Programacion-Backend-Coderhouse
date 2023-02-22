@@ -12,10 +12,10 @@ router.get('/randoms', (req: Request, res: Response, next: NextFunction) => {
     const cant = req.query.cant || 100; //100.000.000 es mucho
     const arrayNums = listaRandom(Number(cant));
 
-    /* arrayNums.send({ msg: 'random', cant: cant });
+     arrayNums.send({ msg: 'random', cant: cant });
     arrayNums.on('message', array => {
         res.json(array);
-    }) //*
+    }) 
     res.json(arrayNums);
 })
 

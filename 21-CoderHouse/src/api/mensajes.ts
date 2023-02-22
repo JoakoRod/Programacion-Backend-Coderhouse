@@ -1,23 +1,68 @@
-import { Imensajes, mensajesModel } from '../models/mensajes';
-import { denormalize, normalize, schema } from 'normalizr';
-import createError from 'http-errors';
+import { ValidationResult } from 'joi';
+import Config from '../config';
+import { Logger } from '../services/logger';
+import { MessagesFactoryDAO, MessagesDAO } from '../models/messages/messages.factory';
+import { MessageI, MessagesDTO } from '../models/messages/messages.interfaces';
+import { MessageJoiSchema } from '../models/messages/messages.schemas';
+/* import * as util from 'util';
 import fs from 'fs';
 import path from 'path'
-//import * as util from 'util';
+const jsonMensajes = path.join(__dirname, '../data/mensajesNormalizados.json'); */
 
-const jsonMensajes = path.join(__dirname, '../data/mensajesNormalizados.json');
+export default class MessagesAPI {
+    private static instance: MessagesAPI;
+    private messages: MessagesDAO;
 
-const getAll = async () => {
-    try {
-        const mensajes = normalizar(await mensajesModel.find().lean());
+    private constructor(dao: MessagesDAO) {
+        this.messages = dao;
+    }
 
-        //console.log(util.inspect(mensajes, true, 3, true));
-        return mensajes;
-    } catch (error) {
-        throw createError(500, `error con la db ${error}`);
+    static async getInstance(): Promise<MessagesAPI> {
+        if (!this.instance) {
+            const dao = await MessagesFactoryDAO.get(Config.PERSISTENCIA);
+            MessagesAPI.instance = new MessagesAPI(dao);
+        }
+
+        return MessagesAPI.instance;
+    }
+
+    validateSchema(data: any) {
+        const result: ValidationResult = MessageJoiSchema.validate(data);
+
+        if (result.error) {
+            return {
+                valid: false,
+                errors: result.error.details,
+            };
+        }
+
+        return {
+            valid: true,
+        };
+    }
+
+    getMessage(id?: string): Promise<MessagesDTO[] | MessagesDTO> {
+        return this.messages.get(id);
+    }
+
+    getMessagePopulate(populate: string, id?: string): Promise<MessagesDTO[] | MessagesDTO> {
+        return this.messages.getPopulate(populate, id);
+    }
+
+    addMessage(data: MessageI): Promise<MessagesDTO> {
+        return this.messages.add(data);
+    }
+
+    updateMessage(id: string, newMessageData: MessageI): Promise<MessagesDTO> {
+        return this.messages.update(id, newMessageData);
+    }
+
+    deleteMessage(id: string): Promise<void> {
+        return this.messages.delete(id);
     }
 }
 
+/* 
 const getAllNormal = async () => {
     try {
         return await mensajesModel.find().lean();
@@ -32,16 +77,9 @@ const getAllPopulate = async () => {
     } catch (error) {
         throw createError(500, `error con la db ${error}`);
     }
-}
+} */
 
-const save = async (msg: any) => {
-    try {
-        await mensajesModel.create(msg)
-    } catch (error) {
-        throw createError(500, `error con la db ${error}`);
-    }
-}
-
+/* 
 const normalizar = (data: Imensajes) => {
     try {
         const user = new schema.Entity('authors', {}, { idAttribute: 'id' });
@@ -83,9 +121,9 @@ const leerDenormalizadoDesdeArchivo = () => {
     } catch (error) {
         throw createError(500, `error con la db ${error}`);
     }
-}
+} */
 
-export default {
+/* export default {
     getAll,
     getAllNormal, 
     getAllPopulate,
@@ -93,4 +131,4 @@ export default {
     normalizar,
     escribirNormalizado,
     leerDenormalizadoDesdeArchivo
-}
+} */

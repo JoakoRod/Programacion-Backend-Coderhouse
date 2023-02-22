@@ -1,42 +1,17 @@
-/* import { Router, Request, Response, NextFunction } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
 import createError from 'http-errors';
 import passport from 'passport';
 import { isLoggedIn } from '../../middlewares/auth';
+import sessionController from '../../controllers/api/session'
+
 const router = Router();
 
-router.post('/login', passport.authenticate('login'), async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        res.json({ msg: 'Bienvenido!!' })
-    } catch (error) {
-        next(error)
-    }
-})
+router.post('/login', passport.authenticate('login'), sessionController.login)
 
-router.post('/signup', passport.authenticate('signup'), async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        res.json({ msg: 'Bienvenido!!' })
-    } catch (error) {
-        next(error)
-    }
-})
+router.post('/signup', passport.authenticate('signup'), sessionController.signUp)
 
-router.get('/info', isLoggedIn, (req: Request, res: Response) => {
-    res.send({
-        session: req.session,
-        sessionId: req.sessionID,
-        cookies: req.cookies,
-    });
-});
+router.get('/info', isLoggedIn, sessionController.info);
 
-router.post('/logout', (req: Request, res: Response, next: NextFunction) => {
-    try {
-        req.session.destroy((err) => {
-            if (!err) res.send('Logout ok!');
-            else throw createError(500, 'Logout ERROR')
-        });
-    } catch (error) {
-        next(error)
-    }
-});
+router.post('/logout', sessionController.logout);
 
-export default router; */
+export default router;

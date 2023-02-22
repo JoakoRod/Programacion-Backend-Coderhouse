@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import { puerto } from '../index';
+import { puerto } from '../../index';
 import os from 'os';
 
 const info = (req: Request | any, res: Response, next: NextFunction) => {

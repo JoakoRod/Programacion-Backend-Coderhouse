@@ -6,7 +6,9 @@ export const isLoggedIn = (req: any, res: Response, done: NextFunction) => {
 };
 
 export const isLoggedInPage = (req: any, res: Response, done: NextFunction) => {
-  if (!req.isAuthenticated()) return res.redirect('/login');
+  if (!req.isAuthenticated()) {
+    return res.redirect('/login');
+  }
   done();
 };
 

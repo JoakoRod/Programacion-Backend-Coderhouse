@@ -1,39 +1,21 @@
 import mongoose from 'mongoose';
 import config from '../config/index';
-//import knex from 'knex';
 
+export class MongoDBClient {
+    private static client: MongoDBClient;
 
-mongoose.set('strictQuery', true);
+    private constructor() { }
 
-export async function initMongoDB() {
-    try {
-        console.log('conectando a la db');
-        await mongoose.connect(config.MONGO_ATLAS_URL);
+    isValidId(id: string): boolean {
+        return mongoose.isValidObjectId(id);
+    }
 
-        console.log('conexion funcionando!');
-    } catch (error) {
-        console.log(`Error => ${error}`);
-        return error;
+    static async getConnection(local: boolean = false) {
+        if (!MongoDBClient.client) {
+            const srv = local ? config.MONGO_LOCAL_URL! : config.MONGO_ATLAS_URL;
+            await mongoose.connect(srv, {});
+            MongoDBClient.client = new MongoDBClient();
+        }
+        return MongoDBClient.client;
     }
 }
-
-/* 
-export const connectionProducts = knex(config.SQL_CONNECTION);
-
-export function initKnex() {
-    connectionProducts.schema.hasTable('productos').then((exists) => {
-        if (exists) return;
-        console.log('Creamos la tabla productos!');
-
-        return connectionProducts.schema.createTable('productos', async (productosTable) => {
-            productosTable.increments('id').primary();
-            productosTable.string('nombre').notNullable();
-            productosTable.text('descripcion');
-            productosTable.float('codigo').notNullable();
-            productosTable.text('foto');
-            productosTable.float('precio').notNullable();
-            productosTable.bigInteger('stock').notNullable();
-        });
-    });
-}; */
-

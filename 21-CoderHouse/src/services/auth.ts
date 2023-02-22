@@ -1,7 +1,14 @@
 import passport from 'passport';
 import { Request } from 'express';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { UserModel } from '../models/usuarios';
+import { usersAPI } from '../api';
+import { Logger } from './logger';
+import bcrypt from 'bcrypt';
+
+let usersDao: usersAPI;
+usersAPI.getInstance().then((instance) => {
+    usersDao = instance;
+});
 
 interface IStrategyOptionsWithRequest {
     usernameField?: string | undefined;
@@ -17,12 +24,15 @@ const strategyOptions: IStrategyOptionsWithRequest = {
 };
 
 const login = async (req: Request, email: string, password: string, done: Function) => {
-    const user: any = await UserModel.findOne({ email });
-    //si no encuentra el username o si su contrasena (encriptada) no es encontrada
-    if (!user || await user.isValidPassword(password) == false) {
-        return done(null, false, { message: 'Invalid Username/Password' });
+    const user = await usersDao.queryUser({ email: email });
+    if (user.length > 0 ){
+        const compare = await bcrypt.compare(password, user[0].password);
+        if (compare == false) {
+            return done(null, false, { message: 'Invalid Password' });
+        }
+        return done(null, user);
     }
-    return done(null, user);
+    return done(null, false, { message: 'Invalid username' });
 };
 
 const signup = async (req: Request, username: string, password: string, done: Function) => {
@@ -34,14 +44,10 @@ const signup = async (req: Request, username: string, password: string, done: Fu
             return done(null, false, { message: 'Invalid Body Fields' });
         }
 
-        const query = {
-            $or: [{ email: email }, { phone: phone }],
-        };
+        const user = await usersDao.validateUser(email, phone);
 
-        const user = await UserModel.findOne(query);
-
-        if (user) {
-            //logger.info('User already exists');
+        if (user.length > 0) {
+            Logger.info('User already exists');
             return done(null, false, { message: 'User already exists' });
         } else {
             const userData = {
@@ -55,7 +61,7 @@ const signup = async (req: Request, username: string, password: string, done: Fu
                 role: 'user'
             };
 
-            const newUser = await UserModel.create(userData);
+            const newUser = await usersDao.addUser(userData);
 
             return done(null, newUser);
         }
@@ -77,16 +83,16 @@ export const signUpFunc = new LocalStrategy(strategyOptions, signup);
  */
 passport.serializeUser((user: any, done) => {
     //Notar que vamos a guardar en req.session.passport el id del usuario. nada mas
-    done(null, user._id);
+    done(null, user[0].id);
 });
 
 /**
  * DeserializeUser Permite tomar la info que mandamos con el serializeUser para crear el objeto req.user 
  */
-passport.deserializeUser((userId: string | number, done) => {
+passport.deserializeUser((userId: string, done) => {
     //Notar que recibimos el userId en la funcion (que es lo que mandamos en el done del serializedUser)
     //Buscamos el usuario con ese id y lo retornamos. El resultado va a estar en req.user
-    UserModel.findById(userId).then((user) => {
+    usersDao.getUser(userId).then((user) => {
         return done(null, user);
     })
 });

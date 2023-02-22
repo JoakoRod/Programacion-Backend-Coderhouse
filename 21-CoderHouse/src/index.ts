@@ -1,5 +1,4 @@
 import server from './services/server';
-import { initMongoDB, /* initKnex */ } from './services/database';
 import minimist from 'minimist';
 import cluster from 'cluster';
 import os from 'os';
@@ -27,11 +26,6 @@ export const puerto = args.port;
 
 
 async function init() {
-
-  //initKnex();
-  await initMongoDB();
-
-
   const httpServer = server.listen(puerto, () => console.log('Server up en puerto', puerto));
   httpServer.on('error', (err) => console.log('ERROR (posiblemente puerto ocupado)', err));
 }

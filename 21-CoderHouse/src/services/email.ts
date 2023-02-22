@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import { logger } from '../services/logger'
+import { Logger } from '../services/logger'
 import config from '../config/index';
 
 const transporter = nodemailer.createTransport({
@@ -28,9 +28,9 @@ export function mandarMail(to: string, subject: string, text: string) {
         text: text, // plain text body
     }, function (error, info) {
         if (error) {
-            logger.error(error);
+            Logger.error(error);
         } else {
-            logger.info('Email sent: ' + info.response);
+            Logger.info('Email sent: ' + info.response);
         }
     });
 }
