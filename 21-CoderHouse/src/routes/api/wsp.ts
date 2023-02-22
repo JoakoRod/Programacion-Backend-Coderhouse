@@ -6,7 +6,6 @@ const router = Router();
 router.post('/', (req: Request, res: Response, next: NextFunction) => {
     //let message = req.body.body;
     let senderID = req.body.From;
-    console.log(req.body);
 
     mandarWspARemitente('mensaje de prueba', senderID);
 })

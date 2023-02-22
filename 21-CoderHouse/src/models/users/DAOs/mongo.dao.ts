@@ -81,7 +81,6 @@ export default class UserDao implements UserBaseClass {
 
     const result = await this.users.find({ $or: [{ email: email }, { phone: phone }] });
     const result2 = result.map((aResult) => new UsersDTO(aResult));
-    console.log(result2);
     return result2
   }
 }
