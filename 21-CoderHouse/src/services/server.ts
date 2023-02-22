@@ -84,13 +84,15 @@ app.use((req: express.Request, res: express.Response, next: express.NextFunction
 
 app.use('/', mainRouter);
 
-app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
+/* app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
 
     const ruta = req.path;
     const metodo = req.method;
     Logger.warn(`Se intento acceder a ${ruta} con el metodo ${metodo}`);
-    next(createError(501, `ruta '${ruta}' método '${metodo}' no implementada`));
-})
+    res.status(501).json({
+        msg: `ruta '${ruta}' método '${metodo}' no implementada`,
+    });
+}) */
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     Logger.error(`HUBO UN ERROR ${err.message}`);

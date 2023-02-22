@@ -33,10 +33,10 @@ export default class ProductDao implements ProductBaseClass {
 
     if (id) {
       if (!this.isValid(id))
-        throw createError(500, `error con la db, el documento no existe`)
+        throw createError(404, `error con la db, el documento no existe`)
       const document = await this.productos.findById(id);
       if (document) return new ProductsDTO(document);
-      else throw createError(500, `error con la db, el documento no existe`)
+      else throw createError(404, `error con la db, el documento no existe`)
     }
     output = await this.productos.find();
     return output.map((aProduct) => new ProductsDTO(aProduct));

@@ -13,8 +13,7 @@ const getMessage = async (req: Request, res: Response, next: NextFunction) => {
         const id = String(req.query.id)
         res.json(await messagesDao.getMessage(id));
     } catch (error) {
-        createError(500, `Error en la db ${error}`);
-        next();
+        next(error);
     }
 };
 
@@ -24,8 +23,7 @@ const addMessage = async (req: Request, res: Response, next: NextFunction) => {
         await messagesDao.addMessage(msg);
         res.json({ msg: 'ok' });
     } catch (error) {
-        createError(500, `Error en la db ${error}`);
-        next();
+        next(error);
     }
 };
 

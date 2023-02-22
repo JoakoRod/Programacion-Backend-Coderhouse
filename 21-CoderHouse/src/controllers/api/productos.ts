@@ -14,8 +14,7 @@ const getProduct = async (req: Request, res: Response, next: NextFunction) => {
         const id = req.params.id;
         res.json(await productosDao.getProduct(id));
     } catch (error) {
-        createError(500, `Error en la db ${error}`);
-        next();
+        next(error);
     }
 };
 
