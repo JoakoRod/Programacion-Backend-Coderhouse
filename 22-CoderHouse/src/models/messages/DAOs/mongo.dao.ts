@@ -31,8 +31,9 @@ export default class MessageDao implements MessageBaseClass {
     let output: MessageI[] = [];
 
     if (id) {
-      if (!this.isValid(id))
+      if (!this.isValid(id)) {
         throw createError(500, `error con la db, el documento no existe`)
+      }
       const document = await this.messages.findById(id);
       if (document) return new MessagesDTO(document);
       else throw createError(500, `error con la db, el documento no existe`)

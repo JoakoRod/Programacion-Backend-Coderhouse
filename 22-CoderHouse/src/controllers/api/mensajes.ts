@@ -1,6 +1,6 @@
 import { mensajesAPI } from '../../api';
 import { Request, Response, NextFunction } from 'express'
-import createError from 'http-errors';
+
 
 let messagesDao: mensajesAPI;
 
@@ -10,8 +10,12 @@ mensajesAPI.getInstance().then((instance) => {
 
 const getMessage = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const id = String(req.query.id)
-        res.json(await messagesDao.getMessage(id));
+        if (req.query.id){
+            const id = String(req.query.id) 
+            res.json(await messagesDao.getMessage(id));
+        } else {
+            res.json(await messagesDao.getMessage());
+        }
     } catch (error) {
         next(error);
     }
