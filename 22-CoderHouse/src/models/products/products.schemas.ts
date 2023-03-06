@@ -1,6 +1,7 @@
 import Joi from 'joi';
 import mongoose from 'mongoose';
 import { ProductI } from './products.interfaces';
+import { composeWithMongoose } from 'graphql-compose-mongoose';
 
 export const ProductJoiSchema = Joi.object({
   nombre: Joi.string().required(),
@@ -44,3 +45,4 @@ const Productschema = new mongoose.Schema<ProductI>(
 
 
 export const ProductsModel = mongoose.model<ProductI>('productos', Productschema);
+export const ProductGraphQlModel = composeWithMongoose(ProductsModel);

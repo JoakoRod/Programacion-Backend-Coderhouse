@@ -2,6 +2,7 @@ import Joi from 'joi';
 import mongoose from "mongoose";
 import { UserI } from "./users.interfaces";
 import bcrypt from 'bcrypt'
+import { composeWithMongoose } from 'graphql-compose-mongoose';
 
 export const UsersJoiSchema = Joi.object({
   email: Joi.string().required(),
@@ -62,3 +63,4 @@ Userschema.pre('save', async function (next) {
 });
 
 export const UsersModel = mongoose.model<UserI>('users', Userschema);
+export const UserGraphQlModel = composeWithMongoose(UsersModel);

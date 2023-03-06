@@ -1,10 +1,11 @@
 import config from '../config/index'
 import { Logger } from './logger'
+import twilio from 'twilio'
 
 const accountSid = config.accountSid;
 const authToken = config.authToken
 
-const client = require('twilio')(accountSid, authToken, {
+const client = twilio(accountSid, authToken, {
     lazyLoading: true
 });
 
@@ -38,7 +39,7 @@ export async function mandarMsg(msg: string, num: number) {
         const message = await client.messages.create({
             body: msg,
             from: config.twilioPhone!,
-            to: config.myPhone
+            to: config.myPhone!
         })
         Logger.info(message);
     } catch (error) {

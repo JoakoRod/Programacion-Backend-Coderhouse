@@ -1,37 +1,37 @@
 export interface ProductI {
-    _id?: string;
-    nombre: string;
-    descripcion: string;
+    _id?: String;
+    nombre: String;
+    descripcion: String;
     codigo: number;
-    foto: string;
-    precio: number;
-    stock: number;
+    foto: String;
+    precio: Number;
+    stock: Number;
 }
 
 export interface ProductQuery {
-    nombre?: string;
-    precio?: number;
-    stock?: number;
-    codigo?: number;
+    nombre?: String;
+    precio?: Number;
+    stock?: Number;
+    codigo?: Number;
 }
 
 export interface ProductBaseClass {
-    get(id?: string): Promise<ProductsDTO[] | ProductsDTO>;
+    get(id?: String): Promise<ProductsDTO[] | ProductsDTO>;
     add(data: ProductI): Promise<ProductsDTO>;
-    update(id: string, newProductData: ProductI): Promise<ProductsDTO>;
-    delete(id: string): Promise<void>;
+    update(id: String, newProductData: ProductI): Promise<ProductsDTO>;
+    delete(id: String): Promise<void>;
     query(options: ProductQuery): Promise<ProductsDTO[]>;
 }
 
 export class ProductsDTO {
-    id: string;
-    nombre: string;
-    descripcion: string;
-    codigo: number;
-    foto: string;
-    precio: number;
-    hasStock: boolean;
-    stock: number;
+    id: String;
+    nombre: String;
+    descripcion: String;
+    codigo: Number;
+    foto: String;
+    precio: Number;
+    hasStock: Boolean;
+    stock: Number;
 
     constructor(data: ProductI) {
         this.nombre = data.nombre;

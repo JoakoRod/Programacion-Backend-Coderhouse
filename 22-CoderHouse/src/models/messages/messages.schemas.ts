@@ -1,3 +1,4 @@
+import { composeWithMongoose } from 'graphql-compose-mongoose';
 import Joi from 'joi';
 import mongoose from 'mongoose';
 import { MessageI } from './messages.interfaces';
@@ -17,3 +18,4 @@ const messagesSchema = new mongoose.Schema<MessageI>(
 );
 
 export const MessagesModel = mongoose.model<MessageI>('mensajes', messagesSchema);
+export const MessageGraphQlModel = composeWithMongoose(MessagesModel);

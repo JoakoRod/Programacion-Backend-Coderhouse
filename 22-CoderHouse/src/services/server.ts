@@ -19,7 +19,7 @@ import { Logger } from './logger';
 import multer from 'multer';
 import cors from 'cors';
 import { graphqlHTTP } from 'express-graphql';
-import { graphqlRoot, graphqlSchema } from './graphql';
+import { graphqlSchema } from './graphql';
 import { puerto } from '../index'
 
 const upload = multer({ dest: './public/avatars/' });
@@ -87,7 +87,6 @@ app.use((req: express.Request, res: express.Response, next: express.NextFunction
 app.use('/', mainRouter);
 app.use('/graphql', graphqlHTTP({
     schema: graphqlSchema,
-    rootValue: graphqlRoot,
     graphiql: true,
 }));
 
