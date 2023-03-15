@@ -12,4 +12,4 @@ app.use('/', mainRouter);
 app.listen(config().PORT);
 console.log(`Server ok on port ${config().PORT}`);
 
-//deno run --allow-net --allow-read --allow-env index.ts
+//denon start
