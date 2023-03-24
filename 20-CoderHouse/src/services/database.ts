@@ -4,8 +4,6 @@ import config from '../config/index';
 export class MongoDBClient {
     private static client: MongoDBClient;
 
-    private constructor() { }
-
     isValidId(id: string): boolean {
         return mongoose.isValidObjectId(id);
     }
