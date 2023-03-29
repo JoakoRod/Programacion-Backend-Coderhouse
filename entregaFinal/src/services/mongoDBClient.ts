@@ -14,8 +14,4 @@ export default class MongoDBClient {
 		}
 		return MongoDBClient.client;
 	}
-
-	isValidId(id: string): boolean {
-		return mongoose.isValidObjectId(id);
-	}
 }

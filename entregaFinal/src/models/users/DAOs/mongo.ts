@@ -1,29 +1,23 @@
-import MongoDBClient from '../../../services/mongoDBClient';
+import mongoose from 'mongoose';
+import Logger from '../../../services/logger';
+import { ApiError, ErrorStatus } from '../../../services/error';
+import { Userschema } from '../users.schemas';
 import {
   UserI,
   UsersDTO,
-  UserBaseClass,
   UserQuery,
 } from '../users.interfaces';
-import { UsersModel } from '../users.schemas';
-import createError from 'http-errors';
 
-export default class UserDao implements UserBaseClass {
-  private static instance: UserDao;
-  private static client: MongoDBClient;
+export default class UsuariosMongoDAO {
+  _schema = Userschema;
+  _usuarios = mongoose.model('users', this._schema);
 
-  private users = UsersModel;
-
-  static async getInstance() {
-    if (!UserDao.instance) {
-      UserDao.instance = new UserDao();
-      UserDao.client = await MongoDBClient.getConnection();
-    }
-    return UserDao.instance;
+  constructor() {
+    Logger.info('Inicializamos DAO users Mongo');
   }
 
   isValid(id: string): boolean {
-    return UserDao.client.isValidId(id);
+    return mongoose.isValidObjectId(id);
   }
 
   async get(id?: string): Promise<UsersDTO[] | UsersDTO> {
@@ -31,31 +25,31 @@ export default class UserDao implements UserBaseClass {
 
     if (id) {
       if (!this.isValid(id))
-        throw createError(500, `error con la db, el documento no existe`)
-      const document = await this.users.findById(id);
+        throw new ApiError('Documento no existe', ErrorStatus.NotFound);
+      const document = await this._usuarios.findById(id);
       if (document) return new UsersDTO(document);
-      else throw createError(500, `error con la db, el documento no existe`)
+      else throw new ApiError('Documento no existe', ErrorStatus.NotFound);
     }
-    output = await this.users.find();
+    output = await this._usuarios.find();
     return output.map((aUser) => new UsersDTO(aUser));
   }
 
   async add(data: UserI): Promise<UsersDTO> {
-    const newUser = await this.users.create(data);
+    const newUser = await this._usuarios.create(data);
     return new UsersDTO(newUser);
   }
 
   async update(id: string, newUserData: UserI): Promise<UsersDTO> {
-    const result = await this.users.findByIdAndUpdate(id, newUserData, {
+    const result = await this._usuarios.findByIdAndUpdate(id, newUserData, {
       new: true,
     });
     if (!result)
-      throw createError(500, `error con la db, el documento no existe`)
+      throw new ApiError('Documento no existe', ErrorStatus.NotFound);
     return new UsersDTO(result);
   }
 
   async delete(id: string) {
-    await this.users.findByIdAndDelete(id);
+    await this._usuarios.findByIdAndDelete(id);
   }
 
   async query(options: UserQuery): Promise<UsersDTO[]> {
@@ -70,14 +64,14 @@ export default class UserDao implements UserBaseClass {
     if (options.phone) query.phone = options.phone;
     if (options.role) query.role = options.role;
 
-    const result = await this.users.find(query);
+    const result = await this._usuarios.find(query);
 
     return result.map((aResult) => new UsersDTO(aResult));
   }
 
   async validate(email: string, phone: string): Promise<UsersDTO[]> {
 
-    const result = await this.users.find({ $or: [{ email: email }, { phone: phone }] });
+    const result = await this._usuarios.find({ $or: [{ email: email }, { phone: phone }] });
     const result2 = result.map((aResult) => new UsersDTO(aResult));
     return result2
   }

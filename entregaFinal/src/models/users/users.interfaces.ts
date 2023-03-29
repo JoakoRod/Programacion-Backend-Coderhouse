@@ -25,7 +25,7 @@ export interface UserBaseClass {
     add(data: UserI): Promise<UsersDTO>;
     update(id: string, newUserData: UserI): Promise<UsersDTO>;
     delete(id: string): Promise<void>;
-    query(options: UserQuery): Promise<UsersDTO[] | UsersDTO>;
+    query(options: UserQuery): Promise<UsersDTO[]>;
     validate(email: string, phone: string): Promise<UsersDTO[]>;
 }
 
@@ -52,3 +52,7 @@ export class UsersDTO {
         this.id = data._id || '';
     }
 }
+
+
+
+

@@ -3,16 +3,18 @@ import mongoose from "mongoose";
 import { UserI } from "./users.interfaces";
 import bcrypt from 'bcrypt'
 
-export const UsersJoiSchema = Joi.object({
-  email: Joi.string().required(),
-  password: Joi.string().required(),
-  firstName: Joi.string().required(),
-  lastName: Joi.string().required(),
-  address: Joi.number(),
-  age: Joi.number(),
-  phone: Joi.string().required(),
-  role: Joi.string().required()
-});
+export const UsersJoiSchema = (required: boolean) => {
+  return Joi.object({
+    email: required ? Joi.string().required() : Joi.string(),
+    password: required ? Joi.string().required() : Joi.string(),
+    firstName: required ? Joi.string().required() : Joi.string(),
+    lastName: required ? Joi.string().required() : Joi.string(),
+    address: Joi.number(),
+    age: Joi.number(),
+    phone: required ? Joi.string().required() : Joi.string(),
+    role: required ? Joi.string().required() : Joi.string()
+  });
+}
 
 const Userschema = new mongoose.Schema<UserI>(
   {
@@ -61,4 +63,4 @@ Userschema.pre('save', async function (next) {
   next();
 });
 
-export const UsersModel = mongoose.model<UserI>('users', Userschema);
+export { Userschema }

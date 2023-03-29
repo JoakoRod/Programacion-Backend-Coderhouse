@@ -1,6 +1,6 @@
 import Server from "./services/server";
 import config from './config';
-import logger from './services/logger';
+import Logger from './services/logger';
 import mongoDBClient from './services/mongoDBClient';
 import minimist from 'minimist';
 
@@ -23,12 +23,12 @@ const args = minimist(process.argv, optionalArgsObject);
 const port = args.port;
 
 const init = async () => {
-    if (config.PERSISTENCIA === 'MONGO-ATLAS' || config.PERSISTENCIA === 'LOCAL-MONGO' ) await mongoDBClient.getConnection();
+    if (config.PERSISTENCIA === 'MONGO') await mongoDBClient.getConnection();
     const server = Server.listen(port, () => {
-        logger.info(`Servidor escuchando en el puerto ${port}`);
+        Logger.info(`Servidor escuchando en el puerto ${port}`);
     });
 
-    server.on('error', (error) => logger.error(`Error en servidor: ${error}`));
+    server.on('error', (error) => Logger.error(`Error en servidor: ${error}`));
 };
 
 init();

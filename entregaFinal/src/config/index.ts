@@ -14,8 +14,7 @@ export enum PersistenceType {
     FileSystem = 'FS',
     MYSQL = 'MYSQL',
     SQLITE3 = 'SQLITE3',
-    LocalMongo = 'LOCAL-MONGO',
-    MongoAtlas = 'MONGO-ATLAS',
+    MongoAtlas = 'MONGO',
     Firebase = 'FIREBASE',
 }
 
