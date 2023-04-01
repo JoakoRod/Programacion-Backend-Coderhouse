@@ -14,10 +14,10 @@ export default class MessagesAPI {
         if (!MessagesAPI.messagesDAO) MessagesAPI.messagesDAO = MessagesFactoryDAO.get(Config.PERSISTENCIA);
     }
 
-    validateSchema(data: any, required: boolean) {
+    static validateSchema(data: any, required: boolean) {
         const result: ValidationResult = MessageJoiSchema(required).validate(data);
         if (result.error) {
-            throw new ApiError(`Esquema no valido. ${result.error.details}`, ErrorStatus.BadRequest);
+            throw new ApiError(`Esquema no valido. ${result.error}`, ErrorStatus.BadRequest);
         }
     }
 
@@ -34,10 +34,12 @@ export default class MessagesAPI {
     }
 
     addMessage(data: MessageI): Promise<MessagesDTO> {
+        MessagesAPI.validateSchema(data, true);
         return MessagesAPI.messagesDAO.add(data);
     }
 
     updateMessage(id: string, newMessageData: MessageI): Promise<MessagesDTO> {
+        MessagesAPI.validateSchema(newMessageData, false);
         return MessagesAPI.messagesDAO.update(id, newMessageData);
     }
 

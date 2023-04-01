@@ -8,7 +8,7 @@ import {
   MessageQuery,
 } from '../messages.interfaces';
 
-export default class ProductosMongoDAO {
+export default class MensajesMongoDAO {
   _schema = MessagesSchema;
   _mensajes = mongoose.model('mensajes', this._schema);
 

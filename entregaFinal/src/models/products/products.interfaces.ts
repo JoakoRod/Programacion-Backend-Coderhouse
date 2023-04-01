@@ -36,6 +36,7 @@ export class ProductsDTO {
     stock: number;
 
     constructor(data: ProductI) {
+        this.id = data._id || '';
         this.nombre = data.nombre;
         this.descripcion = data.descripcion || '';
         this.codigo = data.codigo;
@@ -43,6 +44,5 @@ export class ProductsDTO {
         this.precio = data.precio;
         this.hasStock = data.stock > 0;
         this.stock = data.stock;
-        this.id = data._id || '';
     }
 }

@@ -30,9 +30,9 @@ export class MessagesDTO {
     updatedAt?: string;
 
     constructor(data: MessageI) {
-        this.user = data.user;
-        this.text = data.text;
         this.id = data._id || '';
         this.updatedAt = data.updatedAt
+        this.user = data.user;
+        this.text = data.text;
     }
 }

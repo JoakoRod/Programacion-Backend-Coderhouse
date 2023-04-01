@@ -40,7 +40,7 @@ const getMessagesUsuario = async (req: Request | any, res: Response, next: NextF
 
 const addMessage = async (req: Request | any, res: Response, next: NextFunction) => {
     try {
-        await mensajesAPI.addMessage({ user: req.user.id, text: req.body.text });
+        await mensajesAPI.addMessage({ user: String(req.user.id), text: req.body.text});
         res.json({ msg: 'ok' });
     } catch (error) {
         next(error);
@@ -49,10 +49,7 @@ const addMessage = async (req: Request | any, res: Response, next: NextFunction)
 
 const putMessage = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const id = req.params.id;
-        const message = req.body;
-
-        await mensajesAPI.updateMessage(id, message);
+        await mensajesAPI.updateMessage(String(req.params.id), req.body);
         res.json({ msg: 'ok' });
 
     } catch (error) {

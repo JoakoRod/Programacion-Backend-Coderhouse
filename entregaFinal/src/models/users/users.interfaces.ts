@@ -41,6 +41,7 @@ export class UsersDTO {
     role: string;
 
     constructor(data: UserI) {
+        this.id = data._id || '';
         this.email = data.email;
         this.password = data.password;
         this.firstName = data.firstName;
@@ -49,7 +50,6 @@ export class UsersDTO {
         this.age = data.age || 0;
         this.phone = data.phone;
         this.role = data.role;
-        this.id = data._id || '';
     }
 }
 

@@ -17,7 +17,7 @@ export default class ProductsAPI {
     const result: ValidationResult = ProductJoiSchema(required).validate(data);
 
     if (result.error) {
-      throw new ApiError(`Esquema no valido. ${result.error.details}`, ErrorStatus.BadRequest);
+      throw new ApiError(`Esquema no valido. ${result.error}`, ErrorStatus.BadRequest);
     }
   }
 
