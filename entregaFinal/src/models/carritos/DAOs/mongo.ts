@@ -8,7 +8,7 @@ import {
   CarritoQuery,
 } from '../carritos.interfaces';
 
-export default class ProductosMongoDAO {
+export default class CarritosMongoDAO {
   _schema = CarritosSchema;
   _mensajes = mongoose.model('carritos', this._schema);
 
@@ -32,6 +32,12 @@ export default class ProductosMongoDAO {
     }
     output = await this._mensajes.find();
     return output.map((aMsg) => new CarritosDTO(aMsg));
+  }
+
+  async getOneByIdUser(id: string): Promise<CarritosDTO> {
+    const document = await this._mensajes.findOne({user: id});
+    if (document) return new CarritosDTO(document);
+    else throw new ApiError('Documento no existe', ErrorStatus.NotFound);
   }
 
   async getPopulate(populate: string, id?: string): Promise<CarritosDTO[] | CarritosDTO> {
@@ -72,8 +78,18 @@ export default class ProductosMongoDAO {
     return new CarritosDTO(result);
   }
 
+  async updateOneByIdUser(id: string, newCarritoData: CarritoI): Promise<CarritosDTO> {
+    const document = await this._mensajes.findOneAndUpdate({user: id}, newCarritoData);
+    if (document) return new CarritosDTO(document);
+    else throw new ApiError('Documento no existe', ErrorStatus.NotFound);
+  }
+
   async delete(id: string) {
     await this._mensajes.findByIdAndDelete(id);
+  }
+
+  async deleteOneByIdUser(id: string) {
+    await this._mensajes.findOneAndDelete({user: id});
   }
 
   async query(options: CarritoQuery): Promise<CarritosDTO[]> {
