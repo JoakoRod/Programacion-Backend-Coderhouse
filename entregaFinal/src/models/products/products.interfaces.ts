@@ -34,6 +34,7 @@ export class ProductsDTO {
     precio: number;
     hasStock: boolean;
     stock: number;
+    categoria: string
 
     constructor(data: ProductI) {
         this.id = data._id || '';
@@ -44,5 +45,6 @@ export class ProductsDTO {
         this.precio = data.precio;
         this.hasStock = data.stock > 0;
         this.stock = data.stock;
+        this.categoria = data.categoria;
     }
 }

@@ -10,6 +10,15 @@ const getProduct = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
+const getProductByCategoria = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const categoria = req.params.categoria;
+        res.json(await productosAPI.queryProduct({ categoria: categoria }));
+    } catch (error) {
+        next(error);
+    }
+};
+
 const addProduct = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const product = req.body;
@@ -25,10 +34,10 @@ const putProduct = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const id = req.params.id;
         const product = req.body;
-    
+
         await productosAPI.updateProduct(id, product);
         res.json({ msg: 'ok' });
-    
+
     } catch (error) {
         next(error);
     }
@@ -49,5 +58,6 @@ export default {
     getProduct,
     addProduct,
     putProduct,
-    deleteProduct
+    deleteProduct,
+    getProductByCategoria
 };

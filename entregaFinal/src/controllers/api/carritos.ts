@@ -39,7 +39,7 @@ const addProducto = async (req: Request | any, res: Response, next: NextFunction
         } else { //si el producto si estaba en el carrito, hay que sumar las cantidades
             carrito!.items[posicion].cantidad += cantidad;
         }
-        const carritoActualizado = await carritosAPI.updateCarrito(carrito!.id, carrito!);
+        const carritoActualizado = await carritosAPI.updateCarrito(carrito!.id, {user: String(carrito?.user), items:carrito!.items, direccion: carrito!.direccion});
         res.json(carritoActualizado);
     } catch (error) {
         next(error);

@@ -38,7 +38,7 @@ export default class CarritosAPI {
     }
 
     updateCarrito(id: string, newCarritoData: CarritoI | CarritosDTO): Promise<CarritosDTO> {
-        //CarritosAPI.validateSchema(newCarritoData, false);
+        CarritosAPI.validateSchema(newCarritoData, false);
         return CarritosAPI.carritosDAO.update(id, newCarritoData);
     }
 
