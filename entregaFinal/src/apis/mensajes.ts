@@ -3,7 +3,7 @@ import Config from '../config';
 import { ApiError, ErrorStatus } from '../services/error';
 import Logger from '../services/logger';
 import MessagesFactoryDAO from '../models/messages/messages.factory';
-import { MessageBaseClass, MessageI, MessagesDTO } from '../models/messages/messages.interfaces';
+import { MessageBaseClass, MessageI, MessageQuery, MessagesDTO } from '../models/messages/messages.interfaces';
 import { MessageJoiSchema } from '../models/messages/messages.schemas';
 
 
@@ -25,8 +25,12 @@ export default class MessagesAPI {
         return MessagesAPI.messagesDAO.get(id);
     }
 
-    getMessagePopulate(populate: string, id?: string): Promise<MessagesDTO[] | MessagesDTO> {
+    getMessagePopulate(populate: string, id?: string | null): Promise<MessagesDTO[] | MessagesDTO | any> {
         return MessagesAPI.messagesDAO.getPopulate(populate, id);
+    }
+
+    getMessageUser(user: string, id?: string): Promise<MessagesDTO[] | MessagesDTO | any> {
+        return MessagesAPI.messagesDAO.getUser(user, id);
     }
 
     addMessage(data: MessageI): Promise<MessagesDTO> {
@@ -39,5 +43,9 @@ export default class MessagesAPI {
 
     deleteMessage(id: string): Promise<void> {
         return MessagesAPI.messagesDAO.delete(id);
+    }
+
+    queryMessage(campos: MessageQuery) {
+        return MessagesAPI.messagesDAO.query(campos);
     }
 }

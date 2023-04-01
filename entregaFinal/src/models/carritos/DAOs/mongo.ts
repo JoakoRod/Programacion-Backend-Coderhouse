@@ -1,40 +1,40 @@
 import mongoose from 'mongoose';
 import Logger from '../../../services/logger';
 import { ApiError, ErrorStatus } from '../../../services/error';
-import { MessagesSchema } from '../messages.schemas';
+import { CarritosSchema } from '../carritos.schemas';
 import {
-  MessageI,
-  MessagesDTO,
-  MessageQuery,
-} from '../messages.interfaces';
+  CarritoI,
+  CarritosDTO,
+  CarritoQuery,
+} from '../carritos.interfaces';
 
 export default class ProductosMongoDAO {
-  _schema = MessagesSchema;
-  _mensajes = mongoose.model('mensajes', this._schema);
+  _schema = CarritosSchema;
+  _mensajes = mongoose.model('carritos', this._schema);
 
   constructor() {
-    Logger.info('Inicializamos DAO messages Mongo');
+    Logger.info('Inicializamos DAO Carritos Mongo');
   }
 
   isValid(id: string): boolean {
     return mongoose.isValidObjectId(id);
   }
 
-  async get(id?: string): Promise<MessagesDTO[] | MessagesDTO> {
-    let output: MessageI[] = [];
+  async get(id?: string): Promise<CarritosDTO[] | CarritosDTO> {
+    let output: CarritoI[] = [];
 
     if (id) {
       if (!this.isValid(id))
         throw new ApiError('Documento no existe', ErrorStatus.NotFound);
       const document = await this._mensajes.findById(id);
-      if (document) return new MessagesDTO(document);
+      if (document) return new CarritosDTO(document);
       else throw new ApiError('Documento no existe', ErrorStatus.NotFound);
     }
     output = await this._mensajes.find();
-    return output.map((aMsg) => new MessagesDTO(aMsg));
+    return output.map((aMsg) => new CarritosDTO(aMsg));
   }
 
-  async getPopulate(populate: string, id?: string): Promise<MessagesDTO[] | MessagesDTO> {
+  async getPopulate(populate: string, id?: string): Promise<CarritosDTO[] | CarritosDTO> {
     if (id) {
       if (!this.isValid(id))
         throw new ApiError('Documento no existe', ErrorStatus.NotFound);
@@ -43,10 +43,10 @@ export default class ProductosMongoDAO {
       else throw new ApiError('Documento no existe', ErrorStatus.NotFound);
     }
     const output = await this._mensajes.find().populate(populate, ['email', 'firstName', 'lastName', 'role' ]).lean();
-    return output.map((aMessage) => new MessagesDTO(aMessage));
+    return output.map((aCarrito) => new CarritosDTO(aCarrito));
   }
 
-  async getUser(userId: string, id?: string): Promise<MessagesDTO[] | MessagesDTO> {
+  async getUser(userId: string, id?: string): Promise<CarritosDTO[] | CarritosDTO> {
     if (id) {
       if (!this.isValid(id))
         throw new ApiError('Documento no existe', ErrorStatus.NotFound);
@@ -55,37 +55,37 @@ export default class ProductosMongoDAO {
       else throw new ApiError('Documento no existe', ErrorStatus.NotFound);
     }
     const output = await this._mensajes.find({user: userId}).lean();
-    return output.map((aMessage) => new MessagesDTO(aMessage));
+    return output.map((aCarrito) => new CarritosDTO(aCarrito));
   }
   
-  async add(data: MessageI): Promise<MessagesDTO> {
-    const newMessage = await this._mensajes.create(data);
-    return new MessagesDTO(newMessage);
+  async add(data: CarritoI): Promise<CarritosDTO> {
+    const newCarrito = await this._mensajes.create(data);
+    return new CarritosDTO(newCarrito);
   }
 
-  async update(id: string, newMessageData: MessageI): Promise<MessagesDTO> {
-    const result = await this._mensajes.findByIdAndUpdate(id, newMessageData, {
+  async update(id: string, newCarritoData: CarritoI): Promise<CarritosDTO> {
+    const result = await this._mensajes.findByIdAndUpdate(id, newCarritoData, {
       new: true,
     });
     if (!result)
       throw new ApiError('Documento no existe', ErrorStatus.NotFound);
-    return new MessagesDTO(result);
+    return new CarritosDTO(result);
   }
 
   async delete(id: string) {
     await this._mensajes.findByIdAndDelete(id);
   }
 
-  async query(options: MessageQuery): Promise<MessagesDTO[]> {
-    let query: MessageQuery = {};
+  async query(options: CarritoQuery): Promise<CarritosDTO[]> {
+    let query: CarritoQuery = {};
 
     if (options.user) query.user = options.user;
-
-    if (options.text) query.text = options.text;
+    if (options.updatedAt) query.updatedAt = options.updatedAt;
+    if (options.direccion) query.direccion = options.direccion;
 
     const result = await this._mensajes.find(query);
 
-    return result.map((aResult) => new MessagesDTO(aResult));
+    return result.map((aResult) => new CarritosDTO(aResult));
   }
 
 }

@@ -63,11 +63,4 @@ export default class ProductosMongoDAO {
 
     return result.map((aResult) => new ProductsDTO(aResult));
   }
-
-  async validate(email: string, phone: string): Promise<ProductsDTO[]> {
-
-    const result = await this._productos.find({ $or: [{ email: email }, { phone: phone }] });
-    const result2 = result.map((aResult) => new ProductsDTO(aResult));
-    return result2
-  }
 }

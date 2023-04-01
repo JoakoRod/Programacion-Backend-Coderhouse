@@ -42,4 +42,5 @@ export default {
     twilioPhoneWSP: process.env.twilioPhoneWSP,
     twilioPhone: process.env.twilioPhone,
     PERSISTENCIA: PersistenceType.MongoAtlas,
+    cookieMaxAge: Number(process.env.cookieMaxAge) || 600
 };

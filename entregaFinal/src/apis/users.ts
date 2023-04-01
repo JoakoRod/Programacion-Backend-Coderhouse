@@ -17,7 +17,7 @@ export default class UsersAPI {
     const result: ValidationResult = UsersJoiSchema(required).validate(data)
 
     if (result.error) {
-      throw new ApiError(`Esquema no valido. ${result.error.details}`, ErrorStatus.BadRequest);
+      throw new ApiError(`Esquema no valido. ${result.error}`, ErrorStatus.BadRequest);
     }
   }
 

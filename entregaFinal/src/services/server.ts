@@ -1,8 +1,10 @@
 import express, { ErrorRequestHandler } from 'express';
+import path from 'path';
 import http from 'http';
 import mainRouter from '../routes';
 import Logger from './logger';
 import { signUpFunc, loginFunc } from './auth';
+import * as handlebars from 'express-handlebars';
 import session from 'express-session';
 import passport from 'passport';
 import MongoStore from 'connect-mongo';
@@ -23,7 +25,7 @@ const StoreOptions = {
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: 600 * 1000,
+        maxAge: config.cookieMaxAge * 1000,
     },
 };
 
@@ -31,14 +33,41 @@ const StoreOptions = {
 const app = express();
 const server = new http.Server(app); //Necesario para poder usar io
 
+const viewsFolderPath = path.resolve(__dirname, '../../views');
+const layoutDirPath = path.resolve(__dirname, '../../views/layouts');
+const defaultLayerPath = path.resolve(__dirname, '../../views/layouts/index.hbs');
+const partialDirPath = path.resolve(__dirname, '../../views/partials');
+
+app.set('view engine', 'hbs');
+app.set('views', viewsFolderPath);
+
+app.engine('hbs', handlebars.engine({
+    extname: ".hbs",
+    layoutsDir: layoutDirPath,
+    defaultLayout: defaultLayerPath,
+    partialsDir: partialDirPath,
+    runtimeOptions: {
+        allowProtoPropertiesByDefault: true,
+        allowProtoMethodsByDefault: true
+    }
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //session
 app.use(session(StoreOptions));
 
+//passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use('login', loginFunc);
+passport.use('signup', signUpFunc);
+
 //cors
 const whiteList = ['https://www.google.com.ar', 'http://localhost:8080', 'https://www.clarin.com', 'http://localhost:3030'];
+
 
 const validateCors = (req: express.Request, callback: Function) => {
     const origin = req.header('Origin');
@@ -52,9 +81,8 @@ const validateCors = (req: express.Request, callback: Function) => {
 
 app.use(cors(validateCors));
 
-//passport
-passport.use('login', loginFunc);
-passport.use('signup', signUpFunc);
+//public
+app.use(express.static('public'));
 
 //rutas
 app.use(mainRouter);
@@ -64,6 +92,7 @@ app.use((req: express.Request, res: express.Response, next: express.NextFunction
     const ruta = req.path;
     const metodo = req.method;
     Logger.warn(`Se intento acceder a ${ruta} con el metodo ${metodo}`);
+    res.status(501).send(`La ruta ${ruta} con el metodo ${metodo} no existe`)
 })
 
 //errores

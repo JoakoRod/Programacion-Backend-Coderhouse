@@ -9,7 +9,7 @@ export const UsersJoiSchema = (required: boolean) => {
     password: required ? Joi.string().required() : Joi.string(),
     firstName: required ? Joi.string().required() : Joi.string(),
     lastName: required ? Joi.string().required() : Joi.string(),
-    address: Joi.number(),
+    address: Joi.string(),
     age: Joi.number(),
     phone: required ? Joi.string().required() : Joi.string(),
     role: required ? Joi.string().required() : Joi.string()

@@ -1,11 +1,10 @@
 import passport from 'passport';
 import { Request } from 'express';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { usersDao } from '../controllers/users';
+import { usuariosAPI } from '../controllers/apis';
 import Logger from './logger';
 import bcrypt from 'bcrypt';
-
-
+import { ApiError, ErrorStatus } from './error';
 
 interface IStrategyOptionsWithRequest {
     usernameField?: string | undefined;
@@ -21,7 +20,7 @@ const strategyOptions: IStrategyOptionsWithRequest = {
 };
 
 const login = async (req: Request, email: string, password: string, done: Function) => {
-    const user = await usersDao.queryUser({ email: email });
+    const user = await usuariosAPI.queryUser({ email: email });
     if (user.length > 0) {
         const compare = await bcrypt.compare(password, user[0].password);
         if (compare == false) {
@@ -38,14 +37,16 @@ const signup = async (req: Request, username: string, password: string, done: Fu
 
         // Nota: Username y password no se verifica porque ya lo hace passport.
         if (!email || !firstName || !lastName || !address || !age || !phone) {
-            return done(null, false, { message: 'Invalid Body Fields' });
+            throw new ApiError('Invalid Body Fields', ErrorStatus.BadRequest);
+            //return done(null, false, { message: 'Invalid Body Fields' });
         }
 
-        const user = await usersDao.validateUser(email, phone);
+        const user = await usuariosAPI.validateUser(email, phone);
 
         if (user.length > 0) {
             Logger.info('User already exists');
-            return done(null, false, { message: 'User already exists' });
+            throw new ApiError('User already exists', ErrorStatus.BadRequest);
+            //return done(null, false, { message: 'User already exists' });
         } else {
             const userData = {
                 email,
@@ -58,7 +59,7 @@ const signup = async (req: Request, username: string, password: string, done: Fu
                 role: 'user'
             };
 
-            const newUser = await usersDao.addUser(userData);
+            const newUser = await usuariosAPI.addUser(userData);
 
             return done(null, newUser);
         }
@@ -66,7 +67,6 @@ const signup = async (req: Request, username: string, password: string, done: Fu
         done(error);
     }
 };
-
 
 export const loginFunc = new LocalStrategy(strategyOptions, login);
 export const signUpFunc = new LocalStrategy(strategyOptions, signup);
@@ -80,7 +80,12 @@ export const signUpFunc = new LocalStrategy(strategyOptions, signup);
  */
 passport.serializeUser((user: any, done) => {
     //Notar que vamos a guardar en req.session.passport el id del usuario. nada mas
-    done(null, user[0].id);
+    if (Array.isArray(user)){
+        done(null, user[0].id);
+    } else {
+        done(null, user.id);
+    }
+    
 });
 
 /**
@@ -89,7 +94,7 @@ passport.serializeUser((user: any, done) => {
 passport.deserializeUser((userId: string, done) => {
     //Notar que recibimos el userId en la funcion (que es lo que mandamos en el done del serializedUser)
     //Buscamos el usuario con ese id y lo retornamos. El resultado va a estar en req.user
-    usersDao.getUser(userId).then((user) => {
+    usuariosAPI.getUser(userId).then((user) => {
         return done(null, user);
     })
 });

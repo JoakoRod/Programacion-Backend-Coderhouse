@@ -5,7 +5,7 @@ export interface MessageI {
     _id?: string;
     user: mongoose.Schema.Types.ObjectId | string | number,
     text: string
-    updatedAt: string
+    updatedAt?: string
 }
 
 export interface MessageQuery {
@@ -14,8 +14,9 @@ export interface MessageQuery {
 }
 
 export interface MessageBaseClass {
+    getUser(user: string, id: string | undefined): Promise<MessagesDTO | MessagesDTO[]>
     get(id?: string): Promise<MessagesDTO[] | MessagesDTO>;
-    getPopulate(populate: string, id: string | undefined): Promise<MessagesDTO | MessagesDTO[]>;
+    getPopulate(populate: string, id: string | undefined | null): Promise<MessagesDTO | MessagesDTO[] | any>;
     add(data: MessageI): Promise<MessagesDTO>;
     update(id: string, newMessageData: MessageI): Promise<MessagesDTO>;
     delete(id: string): Promise<void>;
@@ -26,7 +27,7 @@ export class MessagesDTO {
     id: string;
     user: string | number | mongoose.Schema.Types.ObjectId | UserI["_id"];
     text: string;
-    updatedAt: string;
+    updatedAt?: string;
 
     constructor(data: MessageI) {
         this.user = data.user;
