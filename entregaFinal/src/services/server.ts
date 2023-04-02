@@ -7,6 +7,7 @@ import { signUpFunc, loginFunc } from './auth';
 import * as handlebars from 'express-handlebars';
 import session from 'express-session';
 import passport from 'passport';
+import { initWsServer } from './socket';
 import MongoStore from 'connect-mongo';
 import config from '../config';
 import cors from 'cors';
@@ -106,5 +107,7 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
 };
 
 app.use(errorHandler);
+
+initWsServer(server);
 
 export default server;

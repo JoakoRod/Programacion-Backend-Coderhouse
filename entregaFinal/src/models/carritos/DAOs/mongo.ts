@@ -48,7 +48,7 @@ export default class CarritosMongoDAO {
       if (document) return document;
       else throw new ApiError('Documento no existe', ErrorStatus.NotFound);
     }
-    const output = await this._mensajes.find().populate(populate, ['email', 'firstName', 'lastName', 'role' ]).lean();
+    const output = await this._mensajes.find().populate(populate).lean();
     return output.map((aCarrito) => new CarritosDTO(aCarrito));
   }
 
