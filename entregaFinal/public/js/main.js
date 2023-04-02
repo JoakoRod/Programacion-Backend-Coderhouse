@@ -111,7 +111,7 @@ function añadirMsg(data) {
     const div = document.createElement('div');
     div.className += 'message';
     div.innerHTML = `
-        <p class="meta"><img class="img" src="${document.location.href}avatars/${data.email}" alt="${data.firstName} ${data.lastName}"> ${data.firstName} ${data.lastName}<span> ${data.date}</span></p>
+        <p class="meta"><img class="img" src="${document.location.href}/../avatars/${data.email}" alt="${data.firstName} ${data.lastName}"> ${data.firstName} ${data.lastName}<span> ${data.date}</span></p>
         <p class="text">
             ${data.msg}
         </p>`;
@@ -140,7 +140,7 @@ function agregarProductoAlCarrito(nombre) {
 
 function comprar() {
     const data = JSON.stringify(carrito);
-    fetch('/carrito', {
+    fetch('/productos/orden', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: data,

@@ -1,6 +1,5 @@
 import { ValidationResult } from 'joi';
 import Config from '../config';
-import Logger from '../services/logger';
 import { ApiError, ErrorStatus } from '../services/error';
 import ProductsFactoryDAO from '../models/products/products.factory';
 import { ProductI, ProductsDTO, ProductBaseClass, ProductQuery } from '../models/products/products.interfaces';

@@ -19,7 +19,6 @@ export const Productschema = new mongoose.Schema<ProductI>(
     nombre: {
       type: String,
       required: true,
-      unique: true,
     },
     descripcion: {
       type: String,
@@ -27,7 +26,6 @@ export const Productschema = new mongoose.Schema<ProductI>(
     codigo: {
       type: Number,
       required: true,
-      unique: true,
     },
     foto: {
       type: String,
@@ -41,7 +39,7 @@ export const Productschema = new mongoose.Schema<ProductI>(
       required: true,
     },
     categoria: {
-
+      type: String
     },
   },
   { versionKey: false }

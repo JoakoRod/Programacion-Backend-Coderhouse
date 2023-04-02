@@ -1,7 +1,6 @@
 import { ValidationResult } from 'joi';
 import Config from '../config';
 import { ApiError, ErrorStatus } from '../services/error';
-import Logger from '../services/logger';
 import MessagesFactoryDAO from '../models/messages/messages.factory';
 import { MessageBaseClass, MessageI, MessageQuery, MessagesDTO } from '../models/messages/messages.interfaces';
 import { MessageJoiSchema } from '../models/messages/messages.schemas';

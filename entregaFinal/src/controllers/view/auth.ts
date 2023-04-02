@@ -15,7 +15,7 @@ const authenticate = async (req: Request, res: Response, next: NextFunction) => 
         }
         if (!user) return res.status(401).render('error', { layout: 'error', error: 'Error en el login' });
         req.logIn(user, function (err) {
-            return res.redirect('/');
+            return res.redirect('/productos');
         });
     })(req, res, next);
 }
@@ -27,7 +27,7 @@ const signUp = async (req: Request, res: Response, next: NextFunction) => {
         }
         if (!user) return res.status(401).render('error', { layout: 'error', error: 'Error en la creacion de usuario' });
         mandarMail(config.user, 'nuevo registro', String(JSON.stringify(req.body, null, 2)));
-        return res.redirect('/');
+        return res.redirect('/productos');
     })(req, res, next);
 }
 

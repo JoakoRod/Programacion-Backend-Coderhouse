@@ -8,7 +8,7 @@ export default class MongoDBClient {
 	static async getConnection(local: boolean = false) {
 		if (!MongoDBClient.client) {
 			Logger.info('Estableciendo conexion Mongo')
-			const srv = local ? Config.MONGO_LOCAL_URL! : Config.MONGO_ATLAS_URL;
+			const srv = local ? Config.MONGO_LOCAL_URL! : Config.MONGO_ATLAS_URL!;
 			await mongoose.connect(srv, {});
             MongoDBClient.client = new MongoDBClient();
 		}

@@ -1,4 +1,3 @@
-import Logger from '../services/logger';
 import Config from '../config';
 import UsersFactoryDAO from '../models/users/users.factory';
 import { ValidationResult } from 'joi';

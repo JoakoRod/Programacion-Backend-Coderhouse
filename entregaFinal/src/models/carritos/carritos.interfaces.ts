@@ -18,6 +18,7 @@ export interface CarritoQuery {
 export interface CarritoBaseClass {
     updateOneByIdUser(id: string, newCarritoData: CarritoI | CarritosDTO): Promise<CarritosDTO>;
     getOneByIdUser(id: string): Promise<CarritosDTO>;
+    getOneByIdUserPopulateByProduct(id: string): Promise<CarritosDTO | null>;
     getPopulate(populate: string, id: string | null | undefined): Promise<CarritosDTO | CarritosDTO[] | any>;
     //getUser(user: string, id: string | undefined): Promise<CarritosDTO | CarritosDTO[]>
     get(id?: string): Promise<CarritosDTO[] | CarritosDTO>;

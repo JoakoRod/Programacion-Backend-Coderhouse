@@ -40,6 +40,12 @@ export default class CarritosMongoDAO {
     else throw new ApiError('Documento no existe', ErrorStatus.NotFound);
   }
 
+  async getOneByIdUserPopulateByProduct(id: string): Promise<CarritosDTO> {
+    const document = await this._mensajes.findOne({user: id}).populate('products').lean();
+    if (document) return new CarritosDTO(document);
+    else throw new ApiError('Documento no existe', ErrorStatus.NotFound);
+  }
+
   async getPopulate(populate: string, id?: string): Promise<CarritosDTO[] | CarritosDTO> {
     if (id) {
       if (!this.isValid(id))

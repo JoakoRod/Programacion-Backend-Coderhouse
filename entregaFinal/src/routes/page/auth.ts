@@ -2,6 +2,7 @@ import { Router } from 'express';
 import multer from 'multer';
 import authController from '../../controllers/view/auth';
 import Handler from 'express-async-handler';
+import { isLoggedInPageMenu } from '../../middlewares/auth';
 
 const router = Router();
 
@@ -18,7 +19,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 //rutas
-router.get('/', Handler(authController.renderLogin));
+router.get('/', isLoggedInPageMenu,Handler(authController.renderLogin));
 router.post('/', Handler(authController.authenticate));
 router.post('/signUp', upload.single('avatar'), Handler(authController.signUp));
 router.get('/logout', Handler(authController.logout));

@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 
 //configuracion de mongoose
 mongoose.set('strictQuery', true);
+mongoose.set('strictPopulate', false);
 
 dotenv.config({
     path: './src/config/.env'
@@ -19,7 +20,7 @@ export enum PersistenceType {
 }
 
 export default {
-    MONGO_ATLAS_URL: process.env.mongo_atlas || 'mongoSRV', //'mongodb+srv://admin:admin@coderhouse.dahey8p.mongodb.net/Entrega18?retryWrites=true&w=majority'
+    MONGO_ATLAS_URL: process.env.mongo_atlas, //'mongodb+srv://admin:admin@coderhouse.dahey8p.mongodb.net/EntregaFinal?retryWrites=true&w=majority'
     /* SQL_CONNECTION: {
         client: 'mysql2',
         connection: {

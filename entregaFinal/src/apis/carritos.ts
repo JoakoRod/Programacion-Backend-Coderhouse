@@ -28,6 +28,10 @@ export default class CarritosAPI {
         return CarritosAPI.carritosDAO.getOneByIdUser(id);
     }
 
+    getOneByIdUserPopulateByProductCarrito(id: string): Promise<CarritosDTO | null> {
+        return CarritosAPI.carritosDAO.getOneByIdUserPopulateByProduct(id);
+    }
+
     getCarritoPopulate(populate: string, id?: string): Promise<CarritosDTO[] | CarritosDTO | any> {
         return CarritosAPI.carritosDAO.getPopulate(populate, id);
     }
@@ -37,7 +41,7 @@ export default class CarritosAPI {
         return CarritosAPI.carritosDAO.add(data);
     }
 
-    updateCarrito(id: string, newCarritoData: CarritoI | CarritosDTO): Promise<CarritosDTO> {
+    updateCarrito(id: string, newCarritoData: CarritoI | CarritosDTO | any): Promise<CarritosDTO> {
         CarritosAPI.validateSchema(newCarritoData, false);
         return CarritosAPI.carritosDAO.update(id, newCarritoData);
     }

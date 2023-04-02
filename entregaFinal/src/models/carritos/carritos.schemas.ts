@@ -13,7 +13,7 @@ export const CarritoJoiSchema = (required: boolean) => {
 export const CarritosSchema = new mongoose.Schema<CarritoI>(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'users', required: true, unique: true },
-    items: { type: [{ idProduct: { type: String, required: true, unique: true }, cantidad: Number }], required: true },
+    items: { type: [{ idProduct: { type: String, required: true, ref: 'products' }, cantidad: Number }], required: true },
     direccion: { type: String, required: true }
   },
   { versionKey: false, timestamps: true }

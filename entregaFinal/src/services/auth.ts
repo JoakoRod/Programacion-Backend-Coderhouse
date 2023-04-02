@@ -37,16 +37,16 @@ const signup = async (req: Request, username: string, password: string, done: Fu
 
         // Nota: Username y password no se verifica porque ya lo hace passport.
         if (!email || !firstName || !lastName || !address || !age || !phone) {
-            throw new ApiError('Invalid Body Fields', ErrorStatus.BadRequest);
-            //return done(null, false, { message: 'Invalid Body Fields' });
+            //throw new ApiError('Invalid Body Fields', ErrorStatus.BadRequest);
+            return done(null, false, { message: 'Invalid Body Fields' });
         }
 
         const user = await usuariosAPI.validateUser(email, phone);
 
         if (user.length > 0) {
             Logger.info('User already exists');
-            throw new ApiError('User already exists', ErrorStatus.BadRequest);
-            //return done(null, false, { message: 'User already exists' });
+            //throw new ApiError('User already exists', ErrorStatus.BadRequest);
+            return done(null, false, { message: 'User already exists' });
         } else {
             const userData = {
                 email,

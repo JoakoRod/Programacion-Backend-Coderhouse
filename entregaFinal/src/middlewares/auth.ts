@@ -7,7 +7,14 @@ export const isLoggedIn = (req: any, res: Response, done: NextFunction) => {
 
 export const isLoggedInPage = (req: any, res: Response, done: NextFunction) => {
   if (!req.isAuthenticated()) {
-    return res.redirect('/login');
+    return res.redirect('/');
+  }
+  done();
+};
+
+export const isLoggedInPageMenu = (req: any, res: Response, done: NextFunction) => {
+  if (req.isAuthenticated()) {
+    return res.redirect('/productos');
   }
   done();
 };

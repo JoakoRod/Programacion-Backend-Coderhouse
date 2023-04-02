@@ -33,7 +33,6 @@ export function initWsServer(server: http.Server) {
       };
 
       //envio msj A TODOS
-      console.log(res)
       io.emit('recibioMSG', (res));
     });
 
