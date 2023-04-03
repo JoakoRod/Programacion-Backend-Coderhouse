@@ -3,7 +3,8 @@ import { Request, Response, NextFunction } from 'express'
 
 const getProduct = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const id = req.params.id;
+        let id;
+        if (req.query.id) id = String(req.query.id);
         res.json(await productosAPI.getProduct(id));
     } catch (error) {
         next(error);

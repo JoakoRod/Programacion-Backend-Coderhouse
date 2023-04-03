@@ -9,8 +9,6 @@ router.get('/', Handler(productController.getProduct));
 
 router.get('/:categoria', Handler(productController.getProductByCategoria));
 
-router.get('/:id', Handler(productController.getProduct));
-
 router.post('/', isAdmin,  Handler(productController.addProduct));
 
 router.put('/:id', isAdmin, Handler(productController.putProduct));
